@@ -12,7 +12,7 @@ const Home: NextPage = () => {
 
       <main className="">
         <h1 className="text-3xl font-bold underline">
-          Welcome to Jeremiah and Sarah's wedding site!
+          {`Welcome to Jeremiah and Sarah's wedding site!`}
         </h1>
       </main>
 
