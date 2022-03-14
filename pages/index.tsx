@@ -38,11 +38,19 @@ const Home: NextPage = () => {
           <h2 className="text-md text-rose-600 leading-tight">5:00 PM</h2>
         </div>
         <div className="bg-rose-400 h-screen w-full rounded-bl-full"></div>
-        <div className="h-[calc(100vh/2)] w-full"></div>
-        <div className="h-screen w-full bg-sky-400 rounded-tl-full"></div>
-        <div className="h-screen w-full bg-sky-400 rounded-br-full"></div>
-        <div className="h-[calc(100vh/2)] w-full"></div>
-        <div className="h-screen w-full bg-berry-400 rounded-tr-full"></div>
+        <div className="w-full bg-sky-400">
+          <div className="w-full h-[100vw] bg-white rounded-bl-[300px]"></div>
+        </div>
+        <div className="w-full bg-white">
+          <div className="w-full h-[50vh] bg-sky-400 rounded-tr-[310px]"></div>
+        </div>
+        <div className="w-full bg-lemon-400">
+          <div className="h-[50vh] w-full bg-sky-400 rounded-b-full"></div>
+        </div>
+        <div className="bg-lemon-400 h-[calc(100vh/2)] w-full"></div>
+        <div className="w-full bg-lemon-400">
+          <div className="h-screen w-full bg-berry-400 rounded-tr-full"></div>
+        </div>
         <div className="h-screen w-full bg-berry-400 rounded-bl-full"></div>
         <div className="h-[calc(100vh/2)] w-full"></div>
         <div className="h-screen w-full bg-lemon-400 rounded-t-full"></div>
