@@ -2,8 +2,15 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 
 const Home: NextPage = () => {
+  const testChildren = (
+    <div className="text-center h-full w-full flex flex-col justify-center">
+      <h1 className="text-2xl font-medium leading-loose">Headline</h1>
+      <h2 className="text-md leading-tight opacity-60">Subtitle</h2>
+    </div>
+  )
+
   return (
-    <div className="h-screen selection:text-rose-400 selection:bg-rose-600">
+    <div className="h-screen">
       <Head>
         <title>Jeremiah & Sarah</title>
         <meta name="description" content="Jeremiah & Sarah" />
@@ -23,7 +30,7 @@ const Home: NextPage = () => {
 
       <main className="">
         <Section color="rose" rounded="t" height="screen">
-          <div className="text-center h-screen w-full flex flex-col justify-center">
+          <div className="text-center h-full w-full flex flex-col justify-center">
             <h1 className="text-2xl font-medium text-rose-700 leading-loose">
               Jeremiah & Sarah
             </h1>
@@ -39,17 +46,25 @@ const Home: NextPage = () => {
         </Section>
         <Section color="rose" rounded="bl" height="100vw" />
         <Section bg="sky" color="white" rounded="bl/2" height="100vw" />
-        <Section bg="white" color="sky" rounded="tr/2" height="50vh" />
+        <Section bg="white" color="sky" rounded="tr/2" height="50vh">
+          {testChildren}
+        </Section>
         <Section bg="lemon" color="sky" rounded="b" height="50vh" />
-        <Section color="lemon" height="50vh" />
+        <Section color="lemon" height="50vh"></Section>
         <Section bg="lemon" color="berry" rounded="tr" height="screen" />
-        <Section color="berry" height="screen" rounded="bl" />
+        <Section color="berry" height="screen" rounded="bl">
+          {testChildren}
+        </Section>
         <Section height="50vh" />
-        <Section color="lemon" height="screen" rounded="t" />
+        <Section color="lemon" height="screen" rounded="t">
+          {testChildren}
+        </Section>
         <Section color="lemon" height="screen" rounded="br" />
         <Section height="50vh" />
         <Section color="fog" height="screen" rounded="tl" />
-        <Section color="fog" height="screen" />
+        <Section color="fog" height="screen">
+          {testChildren}
+        </Section>
       </main>
     </div>
   )
@@ -71,6 +86,17 @@ function Section(props: BgProps) {
     sky: 'bg-sky-400',
     rose: 'bg-rose-400',
     white: 'bg-white',
+  }
+
+  const themes: Record<string, string> = {
+    lemon:
+      'bg-lemon-400 text-lemon-700 selection:text-lemon-200 selection:bg-lemon-600',
+    berry:
+      'bg-berry-400 text-berry-700 selection:text-berry-200 selection:bg-berry-600',
+    fog: 'bg-fog-400 text-fog-700 selection:text-fog-200 selection:bg-fog-600',
+    sky: 'bg-sky-400 text-sky-700 selection:text-sky-200 selection:bg-sky-600',
+    rose: 'bg-rose-400 text-rose-700 selection:text-rose-200 selection:bg-rose-600',
+    white: 'bg-white text-black selection:text-black selection:bg-white',
   }
 
   const rounded: Record<string, string> = {
@@ -96,12 +122,12 @@ function Section(props: BgProps) {
   }
 
   const bg = props.bg ? colors[props.bg] : ''
-  const color = props.color ? colors[props.color] : ''
+  const theme = props.color ? themes[props.color] : ''
   const round = props.rounded ? rounded[props.rounded] : ''
 
   return (
     <div className={`w-full ${bg}`}>
-      <div className={`${height[props.height]} w-full ${color} ${round}`}>
+      <div className={`${height[props.height]} w-full ${theme} ${round}`}>
         {props.children}
       </div>
     </div>
