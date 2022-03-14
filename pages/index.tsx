@@ -18,15 +18,13 @@ const Home: NextPage = () => {
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       </Head>
 
-      <nav className="bg-rose-300 w-full justify-end text-rose-700 text-sm font-medium flex gap-6 p-4">
+      <nav className="w-full justify-end text-rose-700 text-sm font-medium flex gap-6 p-4">
         {
           //<a href="/photos">Photos</a>
           // <a href="/things-to-do">Things To Do</a>
         }
         <a href="/registry">Registry</a>
       </nav>
-
-      <div className="select-none absolute bg-rose-300 w-screen h-screen -z-50"></div>
 
       <main className="">
         <Section color="rose" rounded="t" height="screen">
@@ -44,9 +42,9 @@ const Home: NextPage = () => {
             <h2 className="text-md text-rose-600 leading-tight">5:00 PM</h2>
           </div>
         </Section>
-        <Section color="rose" rounded="bl" height="100vw" />
-        <Section bg="sky" color="white" rounded="bl/2" height="100vw" />
-        <Section bg="white" color="sky" rounded="tr/2" height="50vh">
+        <Section bg="berry" color="rose" rounded="bl" height="100vw" />
+        <Section bg="sky" color="berry" rounded="bl/2" height="100vw" />
+        <Section bg="berry" color="sky" rounded="tr/2" height="50vh">
           {testChildren}
         </Section>
         <Section bg="lemon" color="sky" rounded="b" height="50vh" />
@@ -62,9 +60,10 @@ const Home: NextPage = () => {
         <Section color="lemon" height="screen" rounded="br" />
         <Section height="50vh" />
         <Section color="fog" height="50vh" rounded="tl" />
-        <Section color="fog" height="screen">
+        <Section color="fog" height="screen" rounded="b">
           {testChildren}
         </Section>
+        <div className="w-full h-10" />
       </main>
     </div>
   )
