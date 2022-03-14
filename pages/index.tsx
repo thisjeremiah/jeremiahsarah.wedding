@@ -61,7 +61,7 @@ const Home: NextPage = () => {
         </Section>
         <Section color="lemon" height="screen" rounded="br" />
         <Section height="50vh" />
-        <Section color="fog" height="screen" rounded="tl" />
+        <Section color="fog" height="50vh" rounded="tl" />
         <Section color="fog" height="screen">
           {testChildren}
         </Section>
@@ -81,20 +81,20 @@ type BgProps = {
 function Section(props: BgProps) {
   const colors: Record<string, string> = {
     lemon: 'bg-lemon-400',
-    berry: 'bg-berry-400',
+    berry: 'bg-berry-500',
     fog: 'bg-fog-400',
-    sky: 'bg-sky-400',
+    sky: 'bg-sky-500',
     rose: 'bg-rose-400',
     white: 'bg-white',
   }
 
   const themes: Record<string, string> = {
     lemon:
-      'bg-lemon-400 text-lemon-700 selection:text-lemon-200 selection:bg-lemon-600',
+      'bg-lemon-400 text-berry-600 selection:text-berry-200 selection:bg-berry-600',
     berry:
-      'bg-berry-400 text-berry-700 selection:text-berry-200 selection:bg-berry-600',
-    fog: 'bg-fog-400 text-fog-700 selection:text-fog-200 selection:bg-fog-600',
-    sky: 'bg-sky-400 text-sky-700 selection:text-sky-200 selection:bg-sky-600',
+      'bg-berry-500 text-rose-400 selection:text-rose-200 selection:bg-rose-600',
+    fog: 'bg-fog-400 text-sky-600 selection:text-sky-200 selection:bg-sky-600',
+    sky: 'bg-sky-500 text-white selection:text-sky-300 selection:bg-sky-600',
     rose: 'bg-rose-400 text-rose-700 selection:text-rose-200 selection:bg-rose-600',
     white: 'bg-white text-black selection:text-black selection:bg-white',
   }
