@@ -37,7 +37,19 @@ const Home: NextPage = () => {
           <h2 className="text-md text-rose-600 leading-loose">May 20 2023</h2>
           <h2 className="text-md text-rose-600 leading-tight">5:00 PM</h2>
         </div>
-        <div className="bg-rose-400 h-screen w-full"></div>
+        <div className="bg-rose-400 h-screen w-full rounded-bl-full"></div>
+        <div className="h-[calc(100vh/2)] w-full"></div>
+        <div className="h-screen w-full bg-sky-400 rounded-tl-full"></div>
+        <div className="h-screen w-full bg-sky-400 rounded-br-full"></div>
+        <div className="h-[calc(100vh/2)] w-full"></div>
+        <div className="h-screen w-full bg-berry-400 rounded-tr-full"></div>
+        <div className="h-screen w-full bg-berry-400 rounded-bl-full"></div>
+        <div className="h-[calc(100vh/2)] w-full"></div>
+        <div className="h-screen w-full bg-lemon-400 rounded-t-full"></div>
+        <div className="h-screen w-full bg-lemon-400 rounded-br-full"></div>
+        <div className="h-[calc(100vh/2)] w-full"></div>
+        <div className="h-screen w-full bg-fog-400 rounded-tl-full"></div>
+        <div className="h-screen w-full bg-fog-400"></div>
       </main>
     </div>
   )
