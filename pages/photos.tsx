@@ -23,7 +23,12 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
             <h1 className="text-3xl font-medium text-center">Our Photos</h1>
             <p className="text-center text-sm pt-2">
               by{' '}
-              <a className="" href="https://www.wildwhim.com/" target="_blank">
+              <a
+                className=""
+                href="https://www.wildwhim.com/"
+                target="_blank"
+                rel="no-referrer"
+              >
                 Wild Whim
               </a>
             </p>
