@@ -69,7 +69,7 @@ function RegistryGridItem(props: { item: RegistryItem }) {
       <a
         className="flex flex-col w-fit"
         target="_blank"
-        rel="no-referrer"
+        rel="noreferrer"
         href={collectionItemUrl(props.item.id)}
       >
         {children}

@@ -27,7 +27,7 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
                 className=""
                 href="https://www.wildwhim.com/"
                 target="_blank"
-                rel="no-referrer"
+                rel="noreferrer"
               >
                 Wild Whim
               </a>
