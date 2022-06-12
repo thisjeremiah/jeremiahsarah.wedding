@@ -1,7 +1,7 @@
 import cx from 'classnames'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { ImageGallery } from '../components/ImageGallery'
+import { DownloadImage } from '../components/DownloadImage'
 import { Nav } from '../components/Nav'
 import Section from '../components/Section'
 
@@ -41,7 +41,11 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
             )}
           >
             {props.items.map((item) => (
-              <ImageGallery key={item.id} images={[item.src.xlarge]} />
+              <DownloadImage
+                key={item.id}
+                imageUrl={item.src.xlarge}
+                downloadUrl={item.src.full}
+              />
             ))}
           </div>
         </Section>
