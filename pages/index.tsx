@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { Nav } from '../components/Nav'
 import Section from '../components/Section'
 
 const Home: NextPage = () => {
@@ -16,17 +17,9 @@ const Home: NextPage = () => {
         <title>Jeremiah & Sarah</title>
         <meta name="description" content="Jeremiah & Sarah" />
       </Head>
-
-      <nav className="w-full justify-end text-rose-700 text-sm font-medium flex gap-6 p-4">
-        {
-          //<a href="/photos">Photos</a>
-          // <a href="/things-to-do">Things To Do</a>
-        }
-        <a href="/registry">Registry</a>
-      </nav>
-
+      <Nav className="bg-sky-500 text-lemon-200" />
       <main className="">
-        <Section color="rose" rounded="t" height="screen">
+        <Section bg="sky" color="rose" rounded="t" height="screen">
           <div className="text-center h-full w-full flex flex-col justify-center">
             <h1 className="text-2xl font-medium text-rose-700 leading-loose">
               Jeremiah & Sarah

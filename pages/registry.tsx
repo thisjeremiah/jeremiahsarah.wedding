@@ -1,11 +1,13 @@
+import cx from 'classnames'
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { ImageGallery } from '../components/ImageGallery'
+import { Nav } from '../components/Nav'
 import Section from '../components/Section'
 
-// const ZOLA_REGISTRY_KEY = 'j-s-1645330787898'
 const ZOLA_REGISTRY_KEY = 'jeremiahsarahwedding'
-const ZOLA_REGISTRY_URL = 'https://www.zola.com/registry/jeremiahsarahwedding'
-// 'https://www.zola.com/wedding/j-s-1645330787898/registry/'
+const ZOLA_REGISTRY_BASE = 'https://www.zola.com/registry'
+const ZOLA_REGISTRY_URL = ZOLA_REGISTRY_BASE + '/' + ZOLA_REGISTRY_KEY
 
 type RegistryPageProps = {
   items: RegistryItem[]
@@ -18,23 +20,25 @@ const Registry: NextPage<RegistryPageProps> = (props) => {
         <title>Jeremiah & Sarah</title>
         <meta name="description" content="Jeremiah & Sarah" />
       </Head>
-
-      <nav className="w-full justify-end text-rose-700 text-sm font-medium flex gap-6 p-4">
-        {
-          //<a href="/photos">Photos</a>
-          // <a href="/things-to-do">Things To Do</a>
-        }
-        <a href="/registry">Registry</a>
-      </nav>
-
-      <main className="">
-        <Section color="rose" rounded="t" height="screen">
-          <div className="p-8 grid grid-cols-3">
+      <Nav className="bg-rose-400" />
+      <main className="cursor-rose">
+        <Section bg="rose" color="lemon" rounded="tr" height="content">
+          <h1 className="px-8 text-3xl font-medium text-center">
+            Our Registry
+          </h1>
+          <div
+            className={cx(
+              'grid place-items-center pt-10 gap-10',
+              'xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2',
+              'items-start',
+            )}
+          >
             {props.items.map((item) => (
               <RegistryGridItem key={item.id} item={item} />
             ))}
           </div>
         </Section>
+        <Section color="lemon" rounded="bl" height="screen" />
         <div className="w-full h-10" />
       </main>
     </div>
@@ -42,17 +46,35 @@ const Registry: NextPage<RegistryPageProps> = (props) => {
 }
 
 function RegistryGridItem(props: { item: RegistryItem }) {
-  const name = props.item.brand.name
-    ? `${props.item.name} | ${props.item.brand.name}`
-    : props.item.name
+  const price = props.item.cash
+    ? 'Contribute what you wish'
+    : `$${props.item.price}`
 
   return (
-    <a target="_blank" href={ZOLA_REGISTRY_URL}>
-      <img className="w-32" src={props.item.images[0].small} />
-      <p>{name}</p>
-      <p>${props.item.price}</p>
-    </a>
+    <div className="w-64">
+      <ImageGallery
+        className="w-full pb-2"
+        images={props.item.images.map((image) => image.medium)}
+      />
+      {props.item.brand.name
+        ? link(<p className="font-medium text-sm">{props.item.brand.name}</p>)
+        : undefined}
+      {link(<p className="text-sm">{props.item.name}</p>)}
+      <p className="text-sm italic">{price}</p>
+    </div>
   )
+
+  function link(children: React.ReactNode) {
+    return (
+      <a
+        className="flex flex-col w-fit"
+        target="_blank"
+        href={collectionItemUrl(props.item.id)}
+      >
+        {children}
+      </a>
+    )
+  }
 }
 
 type ServerRegistryItem = {
@@ -105,6 +127,7 @@ type RegistryItem = {
   id: string
   name: string
   price: number
+  cash: boolean
   images: RegistryItemImage[]
   brand: { name?: string; description?: string; image_url?: string }
   description: string // TODO
@@ -133,7 +156,8 @@ export async function getServerSideProps() {
   const items: RegistryItem[] = data.default_collection.map((item) => ({
     id: item.item_id,
     name: item.name,
-    price: item.price,
+    price: Math.round(item.price),
+    cash: item.type === 'CASH',
     description: item.description,
     images: item.images,
     brand: {
@@ -148,6 +172,10 @@ export async function getServerSideProps() {
       items,
     },
   }
+}
+
+function collectionItemUrl(collectionItemId: string | number) {
+  return `${ZOLA_REGISTRY_BASE}/collection-item/${collectionItemId}`
 }
 
 export default Registry

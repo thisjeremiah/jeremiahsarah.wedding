@@ -47,6 +47,7 @@ export default function Section(props: BgProps) {
     screen: 'h-screen',
     '50vw': 'h-[50vw]',
     '100vw': 'h-[100vw]',
+    content: 'h-content',
   }
 
   const bg = props.bg ? colors[props.bg] : ''
