@@ -5,7 +5,21 @@ export default function Document() {
     <Html>
       <Head>
         <link rel="icon" href="/favicon.png" />
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="true"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="http://fonts.cdnfonts.com/css/cheltenham-lt"
+          rel="stylesheet"
+        />
+        <link rel="stylesheet" href="https://use.typekit.net/tkq2evd.css" />
       </Head>
       <body>
         <Main />

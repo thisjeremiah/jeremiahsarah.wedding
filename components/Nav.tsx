@@ -13,9 +13,9 @@ export function Nav(props: { className?: string }) {
         //<a href="/photos">Photos</a>
         // <a href="/things-to-do">Things To Do</a>
       }
-      <Link href="/">Home</Link>
-      <Link href="/registry">Registry</Link>
-      <Link href="/photos">Photos</Link>
+      <Link href="/">home</Link>
+      <Link href="/registry">registry</Link>
+      <Link href="/photos">photos</Link>
     </nav>
   )
 }

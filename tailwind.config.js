@@ -80,7 +80,9 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+        sans: ['Work Sans', ...defaultTheme.fontFamily.sans],
+        serif: ['Cheltenham LT', ...defaultTheme.fontFamily.serif],
+        fairplex: ['fairplex-wide', ...defaultTheme.fontFamily.serif],
       },
       colors: colors,
       cursor: {
@@ -100,6 +102,15 @@ module.exports = {
         ),
         ['sky-pointer']: createPointer(colors.sky['800'], colors.sky['200']),
         ['fog-pointer']: createPointer(colors.fog['800'], colors.fog['200']),
+      },
+      keyframes: {
+        shift: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-400vw)' },
+        },
+      },
+      animation: {
+        shift: 'shift 30s linear infinite',
       },
     },
   },

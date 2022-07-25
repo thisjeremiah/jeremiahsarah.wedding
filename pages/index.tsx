@@ -1,5 +1,4 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
 import { Nav } from '../components/Nav'
 import Section from '../components/Section'
 
@@ -13,25 +12,25 @@ const Home: NextPage = () => {
 
   return (
     <div className="h-screen">
-      <Head>
-        <title>Jeremiah & Sarah</title>
-        <meta name="description" content="Jeremiah & Sarah" />
-      </Head>
       <Nav className="bg-sky-500 text-lemon-200" />
       <main className="">
         <Section bg="sky" color="rose" rounded="t" height="screen">
           <div className="text-center h-full w-full flex flex-col justify-center">
-            <h1 className="text-2xl font-medium text-rose-700 leading-loose">
-              Jeremiah & Sarah
+            <h1 className="text-4xl font-serif font-medium text-rose-700 leading-none pb-8">
+              Sarah & <br /> Jeremiah
             </h1>
-            <h2 className="text-md text-rose-600 leading-tight">
+            <h2 className="text-md text-rose-600 leading-tight lowercase">
               1316 State Street
             </h2>
-            <h2 className="text-md text-rose-600 leading-tight">
+            <h2 className="text-md text-rose-600 leading-tight lowercase">
               Santa Barbara, CA 93101
             </h2>
-            <h2 className="text-md text-rose-600 leading-loose">May 20 2023</h2>
-            <h2 className="text-md text-rose-600 leading-tight">5:00 PM</h2>
+            <h2 className="text-md text-rose-600 leading-loose lowercase">
+              May 20 2023
+            </h2>
+            <h2 className="text-md text-rose-600 leading-tight lowercase">
+              5:00 PM
+            </h2>
           </div>
         </Section>
         <Section bg="berry" color="rose" rounded="bl" height="100vw" />

@@ -1,6 +1,5 @@
 import cx from 'classnames'
 import type { NextPage } from 'next'
-import Head from 'next/head'
 import { DownloadImage } from '../components/DownloadImage'
 import { Nav } from '../components/Nav'
 import Section from '../components/Section'
@@ -12,19 +11,17 @@ type PhotosPageProps = {
 const PhotosPage: NextPage<PhotosPageProps> = (props) => {
   return (
     <div className="h-screen">
-      <Head>
-        <title>Jeremiah & Sarah</title>
-        <meta name="description" content="Jeremiah & Sarah" />
-      </Head>
       <Nav className="bg-berry-500 text-lemon-500" />
       <main className="cursor-lemon">
         <Section bg="rose" color="berry" rounded="br" height="content">
           <div className="px-8">
-            <h1 className="text-3xl font-medium text-center">Our Photos</h1>
-            <p className="text-center text-sm pt-2">
+            <h1 className="text-3xl font-medium font-fairplex text-center uppercase">
+              Our Photos
+            </h1>
+            <p className="text-center text-sm pt-2 lowercase">
               by{' '}
               <a
-                className=""
+                className="border-b border-lemon-500 border-solid"
                 href="https://www.wildwhim.com/"
                 target="_blank"
                 rel="noreferrer"

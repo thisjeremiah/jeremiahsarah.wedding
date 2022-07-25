@@ -1,6 +1,5 @@
 import cx from 'classnames'
 import type { NextPage } from 'next'
-import Head from 'next/head'
 import { ImageGallery } from '../components/ImageGallery'
 import { Nav } from '../components/Nav'
 import Section from '../components/Section'
@@ -16,14 +15,10 @@ type RegistryPageProps = {
 const Registry: NextPage<RegistryPageProps> = (props) => {
   return (
     <div className="h-screen">
-      <Head>
-        <title>Jeremiah & Sarah</title>
-        <meta name="description" content="Jeremiah & Sarah" />
-      </Head>
       <Nav className="bg-rose-400" />
       <main className="cursor-rose">
         <Section bg="rose" color="lemon" rounded="tr" height="content">
-          <h1 className="px-8 text-3xl font-medium text-center">
+          <h1 className="px-8 text-3xl font-medium text-center uppercase font-fairplex">
             Our Registry
           </h1>
           <div
@@ -51,23 +46,27 @@ function RegistryGridItem(props: { item: RegistryItem }) {
     : `$${props.item.price}`
 
   return (
-    <div className="w-64">
+    <div className="w-64 lowercase">
       <ImageGallery
-        className="w-full pb-2"
+        className="w-full shadow-lemon-500/20"
         images={props.item.images.map((image) => image.medium)}
       />
-      {props.item.brand.name
-        ? link(<p className="font-medium text-sm">{props.item.brand.name}</p>)
-        : undefined}
-      {link(<p className="text-sm">{props.item.name}</p>)}
-      <p className="text-sm italic">{price}</p>
+      {link(
+        <>
+          {props.item.brand.name ? (
+            <p className="font-medium text-sm">{props.item.brand.name}</p>
+          ) : undefined}
+          <p className="text-sm">{props.item.name} ↗</p>
+          <p className="text-md font-serif">{price}</p>
+        </>,
+      )}
     </div>
   )
 
   function link(children: React.ReactNode) {
     return (
       <a
-        className="flex flex-col w-fit"
+        className="flex flex-col w-fit pt-2"
         target="_blank"
         rel="noreferrer"
         href={collectionItemUrl(props.item.id)}
