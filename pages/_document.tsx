@@ -16,7 +16,7 @@ export default function Document() {
           rel="stylesheet"
         />
         <link
-          href="http://fonts.cdnfonts.com/css/cheltenham-lt"
+          href="https://fonts.cdnfonts.com/css/cheltenham-lt"
           rel="stylesheet"
         />
         <link rel="stylesheet" href="https://use.typekit.net/tkq2evd.css" />
