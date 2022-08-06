@@ -11,9 +11,9 @@ type PhotosPageProps = {
 const PhotosPage: NextPage<PhotosPageProps> = (props) => {
   return (
     <div className="h-screen">
-      <Nav className="bg-berry-500 text-lemon-500" />
+      <Nav className="bg-rose-400 text-berry-500" />
       <main className="cursor-lemon">
-        <Section bg="rose" color="berry" rounded="br" height="content">
+        <Section bg="rose" color="lemon" rounded="tr" height="content">
           <div className="px-8">
             <h1 className="text-3xl font-medium font-fairplex text-center uppercase">
               Our Photos
@@ -21,7 +21,7 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
             <p className="text-center text-sm pt-2 lowercase">
               by{' '}
               <a
-                className="border-b border-lemon-500 border-solid"
+                className="border-b border-rose-500 border-solid"
                 href="https://www.wildwhim.com/"
                 target="_blank"
                 rel="noreferrer"
@@ -46,7 +46,7 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
             ))}
           </div>
         </Section>
-        <Section color="rose" rounded="bl" height="screen" />
+        <Section color="lemon" height="screen" />
         <div className="w-full h-10" />
       </main>
     </div>
@@ -85,7 +85,7 @@ type ServerPhoto = {
   pathXxlarge: string
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const res = await fetch(
     'https://wildwhimphotography.pixieset.com/client/loadphotos/?cuk=sarahandjeremiah&cid=46818157&gs=highlights&fk=&page=1',
     {
@@ -120,6 +120,7 @@ export async function getServerSideProps() {
     props: {
       items,
     },
+    revalidate: 10,
   }
 }
 

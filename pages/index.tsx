@@ -16,9 +16,11 @@ const Home: NextPage = () => {
       <main className="">
         <Section bg="sky" color="rose" rounded="t" height="screen">
           <div className="text-center h-full w-full flex flex-col justify-center">
-            <h1 className="text-4xl font-serif font-medium text-rose-700 leading-none pb-8">
-              Sarah & <br /> Jeremiah
-            </h1>
+            <div className="text-4xl font-serif font-medium text-rose-700 leading-none pb-4 flex justify-center">
+              <h1 className="text-left">
+                Sarah & <br /> Jeremiah
+              </h1>
+            </div>
             <h2 className="text-md text-rose-600 leading-tight lowercase">
               1316 State Street
             </h2>
@@ -33,28 +35,6 @@ const Home: NextPage = () => {
             </h2>
           </div>
         </Section>
-        <Section bg="berry" color="rose" rounded="bl" height="100vw" />
-        <Section bg="sky" color="berry" rounded="bl/2" height="100vw" />
-        <Section bg="berry" color="sky" rounded="tr/2" height="50vh">
-          {testChildren}
-        </Section>
-        <Section bg="lemon" color="sky" rounded="b" height="50vh" />
-        <Section color="lemon" height="50vh"></Section>
-        <Section bg="lemon" color="berry" rounded="tr" height="screen" />
-        <Section color="berry" height="screen" rounded="bl">
-          {testChildren}
-        </Section>
-        <Section height="50vh" />
-        <Section color="lemon" height="screen" rounded="t">
-          {testChildren}
-        </Section>
-        <Section color="lemon" height="screen" rounded="br" />
-        <Section height="50vh" />
-        <Section color="fog" height="50vh" rounded="tl" />
-        <Section color="fog" height="screen" rounded="b">
-          {testChildren}
-        </Section>
-        <div className="w-full h-10" />
       </main>
     </div>
   )
