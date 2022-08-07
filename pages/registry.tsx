@@ -15,16 +15,16 @@ type RegistryPageProps = {
 const Registry: NextPage<RegistryPageProps> = (props) => {
   return (
     <div className="h-screen">
-      <Nav className="bg-rose-400" />
+      <Nav className="bg-white" />
       <main className="cursor-rose">
-        <Section bg="rose" color="lemon" rounded="tr" height="content">
+        <Section bg="white" color="rose" rounded="tr" height="content">
           <h1 className="px-8 text-3xl font-medium text-center uppercase font-fairplex">
             Our Registry
           </h1>
           <div
             className={cx(
               'grid place-items-center pt-10 gap-10',
-              'xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2',
+              '2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2',
               'items-start',
             )}
           >
@@ -33,8 +33,7 @@ const Registry: NextPage<RegistryPageProps> = (props) => {
             ))}
           </div>
         </Section>
-        <Section color="lemon" rounded="bl" height="screen" />
-        <div className="w-full h-10" />
+        <div className="bg-rose-400 w-full h-10" />
       </main>
     </div>
   )
@@ -47,34 +46,25 @@ function RegistryGridItem(props: { item: RegistryItem }) {
 
   return (
     <div className="w-64 lowercase">
-      <ImageGallery
-        className="w-full shadow-lemon-500/20"
-        images={props.item.images.map((image) => image.medium)}
-      />
-      {link(
-        <>
+      <a
+        target="_blank"
+        rel="noreferrer"
+        href={collectionItemUrl(props.item.id)}
+      >
+        <ImageGallery
+          className="w-full shadow-lemon-500/20"
+          images={props.item.images.map((image) => image.medium)}
+        />
+        <div className="pt-1.5 flex flex-col w-fit">
           {props.item.brand.name ? (
             <p className="font-medium text-sm">{props.item.brand.name}</p>
           ) : undefined}
           <p className="text-sm">{props.item.name} ↗</p>
           <p className="text-md font-serif">{price}</p>
-        </>,
-      )}
+        </div>
+      </a>
     </div>
   )
-
-  function link(children: React.ReactNode) {
-    return (
-      <a
-        className="flex flex-col w-fit pt-2"
-        target="_blank"
-        rel="noreferrer"
-        href={collectionItemUrl(props.item.id)}
-      >
-        {children}
-      </a>
-    )
-  }
 }
 
 type ServerRegistryItem = {

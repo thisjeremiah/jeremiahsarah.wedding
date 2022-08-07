@@ -13,7 +13,7 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
     <div className="h-screen">
       <Nav className="bg-rose-400 text-berry-500" />
       <main className="cursor-lemon">
-        <Section bg="rose" color="lemon" rounded="tr" height="content">
+        <Section bg="rose" color="lemon" rounded="tl" height="content">
           <div className="px-8">
             <h1 className="text-3xl font-medium font-fairplex text-center uppercase">
               Our Photos
@@ -30,15 +30,10 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
               </a>
             </p>
           </div>
-          <div
-            className={cx(
-              'grid place-items-center p-8 gap-10',
-              'xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2',
-              'items-start',
-            )}
-          >
+          <div className={cx('masonry sm:masonry-sm md:masonry-md p-8')}>
             {props.items.map((item) => (
               <DownloadImage
+                className="break-inside mb-6"
                 key={item.id}
                 imageUrl={item.src.xlarge}
                 downloadUrl={item.src.full}
@@ -46,12 +41,26 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
             ))}
           </div>
         </Section>
-        <Section color="lemon" height="screen" />
-        <div className="w-full h-10" />
       </main>
     </div>
   )
 }
+
+// <div
+// className={cx(
+// 'grid place-items-center p-8 gap-10',
+// 'xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2',
+// 'items-start',
+// )}
+// >
+// {props.items.map((item) => (
+// <DownloadImage
+// key={item.id}
+// imageUrl={item.src.xlarge}
+// downloadUrl={item.src.full}
+// />
+// ))}
+// </div>
 
 type Photo = {
   id: string
@@ -85,21 +94,40 @@ type ServerPhoto = {
   pathXxlarge: string
 }
 
-export async function getStaticProps() {
-  const res = await fetch(
-    'https://wildwhimphotography.pixieset.com/client/loadphotos/?cuk=sarahandjeremiah&cid=46818157&gs=highlights&fk=&page=1',
-    {
-      headers: {
-        accept: '*/*',
-        'x-requested-with': 'XMLHttpRequest',
-      },
-      body: null,
-      method: 'GET',
+const rootUrl =
+  'https://wildwhimphotography.pixieset.com/client/loadphotos/?cuk=sarahandjeremiah&cid=46818157'
+
+// https://wildwhimphotography.pixieset.com/sarahandjeremiah/color/
+// const highlightsUrl = 'https://wildwhimphotography.pixieset.com/client/loadphotos/?cuk=sarahandjeremiah&cid=46818157&gs=highlights&fk='
+
+// https://wildwhimphotography.pixieset.com/sarahandjeremiah/f/20693267/
+const favoritesUrl = rootUrl + '&fk=20693267'
+
+async function getAllPhotos(
+  page: number = 1,
+  images: ServerPhoto[] = [],
+): Promise<ServerPhoto[]> {
+  const res = await fetch(favoritesUrl + `&page=${page}`, {
+    headers: {
+      accept: '*/*',
+      'x-requested-with': 'XMLHttpRequest',
     },
-  )
+    body: null,
+    method: 'GET',
+  })
   const data = await res.json()
 
-  const images: ServerPhoto[] = JSON.parse(data.content)
+  images.push(...JSON.parse(data.content))
+
+  if (!data.isLastPage) {
+    return getAllPhotos(page + 1, images)
+  }
+
+  return images
+}
+
+export async function getStaticProps() {
+  const images = await getAllPhotos()
 
   const items: Photo[] = images.map((image) => ({
     id: image.id,

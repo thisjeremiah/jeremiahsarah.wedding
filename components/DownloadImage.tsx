@@ -9,7 +9,7 @@ export function DownloadImage(props: {
   return (
     <div className={cx('relative group', props.className)}>
       <img
-        className="w-full rounded-xl pointer-events-none"
+        className="w-full rounded-md pointer-events-none"
         src={props.imageUrl}
       />
       <div

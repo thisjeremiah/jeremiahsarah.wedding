@@ -3,12 +3,12 @@ import { Nav } from '../components/Nav'
 import Section from '../components/Section'
 
 const Home: NextPage = () => {
-  const testChildren = (
-    <div className="text-center h-full w-full flex flex-col justify-center">
-      <h1 className="text-2xl font-medium leading-loose">Headline</h1>
-      <h2 className="text-md leading-tight opacity-60">Subtitle</h2>
-    </div>
-  )
+  // const testChildren = (
+  // <div className="text-center h-full w-full flex flex-col justify-center">
+  // <h1 className="text-2xl font-medium leading-loose">Headline</h1>
+  // <h2 className="text-md leading-tight opacity-60">Subtitle</h2>
+  // </div>
+  // )
 
   return (
     <div className="h-screen">
