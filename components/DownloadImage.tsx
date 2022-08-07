@@ -31,5 +31,6 @@ export function DownloadImage(props: {
 }
 
 function downloadFilename(url: string) {
-  return url.split('/').at(-1)!
+  let result = url.split('/')
+  return result[result.length - 1]
 }
