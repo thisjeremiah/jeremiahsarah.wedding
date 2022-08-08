@@ -1,7 +1,7 @@
 import cx from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
 import type { NextPage } from 'next'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { DownloadImage } from '../components/DownloadImage'
 import { Nav } from '../components/Nav'
 import Section from '../components/Section'
@@ -12,6 +12,22 @@ type PhotosPageProps = {
 
 const PhotosPage: NextPage<PhotosPageProps> = (props) => {
   const [selectedId, setSelectedId] = useState<string | null>(null)
+
+  // preload photos
+  useEffect(() => {
+    Promise.allSettled(
+      props.items.map((item) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image()
+          img.onload = () => resolve(img)
+          img.onerror = img.onabort = () => reject()
+          img.src = item.src.full
+        })
+      }),
+    )
+      .then(() => {})
+      .catch(() => {})
+  }, [props.items])
 
   const selectedItem = useMemo(() => {
     if (selectedId) {
