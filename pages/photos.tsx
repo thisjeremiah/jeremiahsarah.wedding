@@ -15,7 +15,7 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
 
   // preload photos
   useEffect(() => {
-    Promise.allSettled(
+    Promise.all(
       props.items.map((item) => {
         return new Promise((resolve, reject) => {
           const img = new Image()
@@ -90,7 +90,7 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
               <div key={item.id} onClick={() => setSelectedId(item.id)}>
                 <DownloadImage
                   className="break-inside mb-6"
-                  imageUrl={item.src.xlarge}
+                  imageUrl={item.src.large}
                   downloadUrl={item.src.full}
                   width={item.width}
                   height={item.height}

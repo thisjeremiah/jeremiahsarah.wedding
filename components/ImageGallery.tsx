@@ -1,4 +1,5 @@
 import cx from 'classnames'
+import Image from 'next/image'
 import { useState } from 'react'
 
 // ↯
@@ -24,13 +25,15 @@ export function ImageGallery(props: { images: string[]; className?: string }) {
   return (
     <div
       className={cx(
-        'relative rounded-md shadow-md overflow-hidden',
+        'relative rounded-md shadow-md overflow-hidden w-64 h-64',
         props.className,
       )}
     >
-      <img
-        className="w-full rounded-md pointer-events-none select-none"
+      <Image
+        className="rounded-md pointer-events-none select-none"
         src={image}
+        width={256}
+        height={256}
       />
       {props.images.length > 1 ? (
         <div className="absolute bottom-0 pt-6 bg-gradient-to-t from-black/10 to-transparent w-full">
