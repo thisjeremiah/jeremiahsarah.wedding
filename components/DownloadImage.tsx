@@ -5,12 +5,16 @@ export function DownloadImage(props: {
   imageUrl: string
   downloadUrl: string
   className?: string
+  width: number
+  height: number
 }) {
   return (
     <div className={cx('relative group', props.className)}>
       <img
-        className="w-full rounded-md pointer-events-none"
+        className="w-full rounded-md pointer-events-none bg-berry-200 select-none"
         src={props.imageUrl}
+        width={props.width}
+        height={props.height}
       />
       <div
         className={cx(
@@ -22,6 +26,7 @@ export function DownloadImage(props: {
         <a
           href={'/api?url=https:' + props.downloadUrl}
           download={downloadFilename(props.downloadUrl)}
+          onClick={(e) => e.stopPropagation()}
         >
           <DownloadIcon />
         </a>

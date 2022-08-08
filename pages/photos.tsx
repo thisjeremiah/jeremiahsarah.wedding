@@ -1,5 +1,7 @@
 import cx from 'classnames'
+import { AnimatePresence, motion } from 'framer-motion'
 import type { NextPage } from 'next'
+import { useMemo, useState } from 'react'
 import { DownloadImage } from '../components/DownloadImage'
 import { Nav } from '../components/Nav'
 import Section from '../components/Section'
@@ -9,6 +11,39 @@ type PhotosPageProps = {
 }
 
 const PhotosPage: NextPage<PhotosPageProps> = (props) => {
+  const [selectedId, setSelectedId] = useState<string | null>(null)
+
+  const selectedItem = useMemo(() => {
+    if (selectedId) {
+      return props.items.find((item) => item.id === selectedId)!
+    }
+    return null
+  }, [selectedId, props.items])
+
+  const nextItemId = useMemo(() => {
+    if (selectedId) {
+      let index = props.items.findIndex((item) => item.id === selectedId)! + 1
+      if (index >= props.items.length) {
+        return props.items[0].id
+      } else {
+        return props.items[index].id
+      }
+    }
+    return null
+  }, [selectedId, props.items])
+
+  const prevItemId = useMemo(() => {
+    if (selectedId) {
+      let index = props.items.findIndex((item) => item.id === selectedId)! - 1
+      if (index < 0) {
+        return props.items[props.items.length - 1].id
+      } else {
+        return props.items[index].id
+      }
+    }
+    return null
+  }, [selectedId, props.items])
+
   return (
     <div className="h-screen">
       <Nav className="bg-rose-400 text-berry-500" />
@@ -30,16 +65,74 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
               </a>
             </p>
           </div>
-          <div className={cx('masonry sm:masonry-sm md:masonry-md p-8')}>
+          <div
+            className={cx(
+              'masonry sm:masonry-sm md:masonry-md lg:masonry-lg p-8',
+            )}
+          >
             {props.items.map((item) => (
-              <DownloadImage
-                className="break-inside mb-6"
-                key={item.id}
-                imageUrl={item.src.xlarge}
-                downloadUrl={item.src.full}
-              />
+              <div key={item.id} onClick={() => setSelectedId(item.id)}>
+                <DownloadImage
+                  className="break-inside mb-6"
+                  imageUrl={item.src.xlarge}
+                  downloadUrl={item.src.full}
+                  width={item.width}
+                  height={item.height}
+                />
+              </div>
             ))}
           </div>
+          <AnimatePresence>
+            {selectedItem && (
+              <div className="fixed inset-0">
+                <motion.div
+                  onClick={() => setSelectedId(null)}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="grid w-screen h-screen bg-rose-600/80 items-center justify-items-center"
+                >
+                  <AnimatePresence>
+                    <motion.img
+                      onClick={(e) => e.stopPropagation()}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1, transition: { delay: 0 } }}
+                      exit={{ opacity: 0, transition: { delay: 0 } }}
+                      transition={{ duration: 0.2 }}
+                      key={selectedItem.id}
+                      className="row-span-full col-span-full rounded-md pointer-events-auto max-h-[90vh] max-w-[85vw]"
+                      src={selectedItem.src.full}
+                      style={{
+                        aspectRatio: `${selectedItem.width} / ${selectedItem.height}`,
+                      }}
+                    />
+                  </AnimatePresence>
+                  <div
+                    onClick={(e) => {
+                      setSelectedId(nextItemId!)
+                      e.stopPropagation()
+                    }}
+                    className="select-none text-rose-200 cursor-pointer absolute text-2xl left-4 top-[50%]"
+                  >
+                    ←
+                  </div>
+                  <div
+                    onClick={(e) => {
+                      setSelectedId(prevItemId!)
+                      e.stopPropagation()
+                    }}
+                    className="select-none text-rose-200 cursor-pointer absolute text-2xl right-4 top-[50%]"
+                  >
+                    →
+                  </div>
+                  <div className="select-none text-rose-200 cursor-pointer absolute text-3xl top-4 right-4">
+                    ×
+                  </div>
+                </motion.div>
+              </div>
+            )}
+          </AnimatePresence>
         </Section>
       </main>
     </div>
@@ -97,10 +190,6 @@ type ServerPhoto = {
 const rootUrl =
   'https://wildwhimphotography.pixieset.com/client/loadphotos/?cuk=sarahandjeremiah&cid=46818157'
 
-// https://wildwhimphotography.pixieset.com/sarahandjeremiah/color/
-// const highlightsUrl = 'https://wildwhimphotography.pixieset.com/client/loadphotos/?cuk=sarahandjeremiah&cid=46818157&gs=highlights&fk='
-
-// https://wildwhimphotography.pixieset.com/sarahandjeremiah/f/20693267/
 const favoritesUrl = rootUrl + '&fk=20693267'
 
 async function getAllPhotos(

@@ -26,6 +26,10 @@
       column-gap: 1.5em;
       column-count: 3;
     }
+    .masonry-lg {
+      column-gap: 1.5em;
+      column-count: 4;
+    }
     .break-inside {
       break-inside: avoid;
     }
