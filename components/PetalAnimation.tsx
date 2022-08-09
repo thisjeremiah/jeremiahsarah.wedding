@@ -16,42 +16,33 @@ export default function PetalAnimation() {
         init={particlesInit}
         options={{
           detectRetina: true,
-          fullScreen: {
-            zIndex: 1,
-          },
           particles: {
-            color: {
-              value: '#EFC9D1',
-            },
             move: {
-              direction: 'bottom',
+              direction: 'right',
               enable: true,
               outModes: {
                 default: 'out',
               },
               size: true,
-              speed: {
-                min: 0.00001,
-                max: 0.00001,
-              },
+              speed: 0.00001,
             },
             number: {
-              value: 3,
-              density: {
-                enable: true,
-                area: 100,
-              },
+              value: 15,
+              // density: {
+              // enable: true,
+              // area: 100,
+              // },
             },
-            opacity: {
-              value: 1,
-              animation: {
-                enable: false,
-                startValue: 'max',
-                destroy: 'min',
-                speed: 0.01,
-                sync: true,
-              },
-            },
+            // opacity: {
+            // value: 1,
+            // animation: {
+            // enable: false,
+            // startValue: 'max',
+            // destroy: 'min',
+            // speed: 0.0001,
+            // sync: true,
+            // },
+            // },
             rotate: {
               value: {
                 min: 0,
@@ -60,12 +51,12 @@ export default function PetalAnimation() {
               direction: 'random',
               animation: {
                 enable: true,
-                speed: 60,
+                speed: 30,
               },
             },
             tilt: {
               direction: 'random',
-              enable: true,
+              enable: false,
               move: true,
               value: {
                 min: 0,
@@ -91,23 +82,23 @@ export default function PetalAnimation() {
               ],
             },
             size: {
-              value: 8,
+              value: 12,
             },
-            roll: {
-              darken: {
-                enable: true,
-                value: 30,
-              },
-              enlighten: {
-                enable: true,
-                value: 30,
-              },
-              enable: true,
-              speed: {
-                min: 15,
-                max: 25,
-              },
-            },
+            // roll: {
+            // darken: {
+            // enable: true,
+            // value: 30,
+            // },
+            // enlighten: {
+            // enable: true,
+            // value: 30,
+            // },
+            // enable: true,
+            // speed: {
+            // min: 15,
+            // max: 25,
+            // },
+            // },
             wobble: {
               distance: 30,
               enable: true,
