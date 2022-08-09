@@ -28,21 +28,7 @@ export default function PetalAnimation() {
             },
             number: {
               value: 15,
-              // density: {
-              // enable: true,
-              // area: 100,
-              // },
             },
-            // opacity: {
-            // value: 1,
-            // animation: {
-            // enable: false,
-            // startValue: 'max',
-            // destroy: 'min',
-            // speed: 0.0001,
-            // sync: true,
-            // },
-            // },
             rotate: {
               value: {
                 min: 0,
@@ -51,7 +37,7 @@ export default function PetalAnimation() {
               direction: 'random',
               animation: {
                 enable: true,
-                speed: 30,
+                speed: 15,
               },
             },
             tilt: {
@@ -84,28 +70,13 @@ export default function PetalAnimation() {
             size: {
               value: 12,
             },
-            // roll: {
-            // darken: {
-            // enable: true,
-            // value: 30,
-            // },
-            // enlighten: {
-            // enable: true,
-            // value: 30,
-            // },
-            // enable: true,
-            // speed: {
-            // min: 15,
-            // max: 25,
-            // },
-            // },
             wobble: {
-              distance: 30,
+              distance: 18,
               enable: true,
               move: true,
               speed: {
-                min: -15,
-                max: 15,
+                min: -2,
+                max: 2,
               },
             },
           },
