@@ -1,7 +1,7 @@
 import cx from 'classnames'
 import type { NextPage } from 'next'
 import { ImageGallery } from '../components/ImageGallery'
-import { Nav } from '../components/Nav'
+import Layout from '../components/Layout'
 import Section from '../components/Section'
 
 const ZOLA_REGISTRY_KEY = 'jeremiahsarahwedding'
@@ -14,28 +14,25 @@ type RegistryPageProps = {
 
 const Registry: NextPage<RegistryPageProps> = (props) => {
   return (
-    <div className="h-screen">
-      <Nav className="bg-white" />
-      <main className="cursor-rose">
-        <Section bg="white" color="rose" rounded="tr" height="content">
-          <h1 className="px-8 text-3xl font-medium text-center uppercase font-fairplex">
-            Our Registry
-          </h1>
-          <div
-            className={cx(
-              'grid px-11 place-items-center pt-10 gap-10',
-              '2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2',
-              'items-start',
-            )}
-          >
-            {props.items.map((item) => (
-              <RegistryGridItem key={item.id} item={item} />
-            ))}
-          </div>
-        </Section>
-        <div className="bg-rose-400 w-full h-10" />
-      </main>
-    </div>
+    <Layout className="text-berry-500">
+      <Section bg="lemon" color="rose" rounded="tr" height="content">
+        <h1 className="px-8 text-3xl font-medium text-center uppercase font-fairplex pt-16">
+          Our Registry
+        </h1>
+        <div
+          className={cx(
+            'grid px-11 place-items-center pt-10 gap-10',
+            '2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2',
+            'items-start',
+          )}
+        >
+          {props.items.map((item) => (
+            <RegistryGridItem key={item.id} item={item} />
+          ))}
+        </div>
+      </Section>
+      <div className="bg-rose-400 w-full h-10" />
+    </Layout>
   )
 }
 

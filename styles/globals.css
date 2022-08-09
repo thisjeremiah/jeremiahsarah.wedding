@@ -7,6 +7,11 @@
     @apply cursor-default;
   }
 
+  html,
+  body {
+    @apply bg-rose-400;
+  }
+
   a {
     @apply cursor-pointer;
   }
@@ -34,4 +39,9 @@
       break-inside: avoid;
     }
   }
+}
+
+@font-face {
+  font-family: 'Cooper';
+  src: url('Cooper\ Medium\ BT.ttf');
 }

@@ -7,6 +7,7 @@ const colors = {
   sky: 'bg-sky-500',
   rose: 'bg-rose-400',
   white: 'bg-white',
+  cobalt: 'bg-cobalt-400',
 }
 
 const themes = {
@@ -18,6 +19,8 @@ const themes = {
   sky: 'bg-sky-500 text-white selection:text-sky-300 selection:bg-sky-600',
   rose: 'bg-rose-400 text-rose-700 selection:text-rose-200 selection:bg-rose-600',
   white: 'bg-white text-black selection:text-black selection:bg-white',
+  cobalt:
+    'bg-cobalt-500 text-white selection:text-white selection:bg-cobalt-800',
 }
 
 const rounded = {

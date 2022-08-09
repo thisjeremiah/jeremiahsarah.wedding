@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import type { NextPage } from 'next'
 import { useEffect, useMemo, useState } from 'react'
 import { DownloadImage } from '../components/DownloadImage'
-import { Nav } from '../components/Nav'
+import Layout from '../components/Layout'
 import Section from '../components/Section'
 
 type PhotosPageProps = {
@@ -61,97 +61,94 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
   }, [selectedId, props.items])
 
   return (
-    <div className="h-screen">
-      <Nav className="bg-rose-400 text-berry-500" />
-      <main className="cursor-lemon">
-        <Section bg="rose" color="lemon" rounded="tl" height="content">
-          <div className="px-8">
-            <h1 className="text-3xl font-medium font-fairplex text-center uppercase">
-              Our Photos
-            </h1>
-            <p className="text-center text-sm pt-2 lowercase">
-              by{' '}
-              <a
-                className="border-b border-rose-500 border-solid"
-                href="https://www.wildwhim.com/"
-                target="_blank"
-                rel="noreferrer"
+    <Layout className="text-berry-500">
+      <Section bg="rose" color="lemon" rounded="tl" height="content">
+        <div className="px-8 pt-16">
+          <h1 className="text-3xl font-medium font-fairplex text-center uppercase">
+            Our Photos
+          </h1>
+          <p className="text-center text-sm pt-2 lowercase">
+            by{' '}
+            <a
+              className="border-b border-rose-500 border-solid"
+              href="https://www.wildwhim.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Wild Whim
+            </a>
+          </p>
+        </div>
+        <div
+          className={cx(
+            'masonry sm:masonry-sm md:masonry-md lg:masonry-lg p-8',
+          )}
+        >
+          {props.items.map((item) => (
+            <div key={item.id} onClick={() => setSelectedId(item.id)}>
+              <DownloadImage
+                className="break-inside mb-6"
+                imageUrl={item.src.large}
+                downloadUrl={item.src.full}
+                width={item.width}
+                height={item.height}
+              />
+            </div>
+          ))}
+        </div>
+        <AnimatePresence>
+          {selectedItem && (
+            <div className="fixed inset-0">
+              <motion.div
+                onClick={() => setSelectedId(null)}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="grid w-screen h-screen bg-rose-600/80 items-center justify-items-center"
               >
-                Wild Whim
-              </a>
-            </p>
-          </div>
-          <div
-            className={cx(
-              'masonry sm:masonry-sm md:masonry-md lg:masonry-lg p-8',
-            )}
-          >
-            {props.items.map((item) => (
-              <div key={item.id} onClick={() => setSelectedId(item.id)}>
-                <DownloadImage
-                  className="break-inside mb-6"
-                  imageUrl={item.src.large}
-                  downloadUrl={item.src.full}
-                  width={item.width}
-                  height={item.height}
-                />
-              </div>
-            ))}
-          </div>
-          <AnimatePresence>
-            {selectedItem && (
-              <div className="fixed inset-0">
-                <motion.div
-                  onClick={() => setSelectedId(null)}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="grid w-screen h-screen bg-rose-600/80 items-center justify-items-center"
+                <AnimatePresence>
+                  <motion.img
+                    onClick={(e) => e.stopPropagation()}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1, transition: { delay: 0 } }}
+                    exit={{ opacity: 0, transition: { delay: 0 } }}
+                    transition={{ duration: 0.2 }}
+                    key={selectedItem.id}
+                    className="row-span-full col-span-full rounded-md pointer-events-auto max-h-[90vh] max-w-[85vw]"
+                    src={selectedItem.src.full}
+                    style={{
+                      aspectRatio: `${selectedItem.width} / ${selectedItem.height}`,
+                    }}
+                  />
+                </AnimatePresence>
+                <div
+                  onClick={(e) => {
+                    setSelectedId(nextItemId!)
+                    e.stopPropagation()
+                  }}
+                  className="select-none text-rose-200 cursor-pointer absolute text-2xl left-4 top-[50%]"
                 >
-                  <AnimatePresence>
-                    <motion.img
-                      onClick={(e) => e.stopPropagation()}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1, transition: { delay: 0 } }}
-                      exit={{ opacity: 0, transition: { delay: 0 } }}
-                      transition={{ duration: 0.2 }}
-                      key={selectedItem.id}
-                      className="row-span-full col-span-full rounded-md pointer-events-auto max-h-[90vh] max-w-[85vw]"
-                      src={selectedItem.src.full}
-                      style={{
-                        aspectRatio: `${selectedItem.width} / ${selectedItem.height}`,
-                      }}
-                    />
-                  </AnimatePresence>
-                  <div
-                    onClick={(e) => {
-                      setSelectedId(nextItemId!)
-                      e.stopPropagation()
-                    }}
-                    className="select-none text-rose-200 cursor-pointer absolute text-2xl left-4 top-[50%]"
-                  >
-                    ←
-                  </div>
-                  <div
-                    onClick={(e) => {
-                      setSelectedId(prevItemId!)
-                      e.stopPropagation()
-                    }}
-                    className="select-none text-rose-200 cursor-pointer absolute text-2xl right-4 top-[50%]"
-                  >
-                    →
-                  </div>
-                  <div className="select-none text-rose-200 cursor-pointer absolute text-3xl top-4 right-4">
-                    ×
-                  </div>
-                </motion.div>
-              </div>
-            )}
-          </AnimatePresence>
-        </Section>
-      </main>
-    </div>
+                  ←
+                </div>
+                <div
+                  onClick={(e) => {
+                    setSelectedId(prevItemId!)
+                    e.stopPropagation()
+                  }}
+                  className="select-none text-rose-200 cursor-pointer absolute text-2xl right-4 top-[50%]"
+                >
+                  →
+                </div>
+                <div className="select-none text-rose-200 cursor-pointer absolute text-3xl top-4 right-4">
+                  ×
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
+      </Section>
+    </Layout>
   )
 }
 

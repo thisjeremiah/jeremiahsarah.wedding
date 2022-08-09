@@ -1,5 +1,11 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
+// cobalt
+// slate ~~
+// terracotta
+// lemon --
+// fuschia
+
 const colors = {
   rose: {
     DEFAULT: '#E7CABD',
@@ -53,6 +59,19 @@ const colors = {
     800: '#196BC2',
     900: '#134F90',
   },
+  cobalt: {
+    DEFAULT: '#2C3C81',
+    50: '#8D9BD8',
+    100: '#7D8DD3',
+    200: '#5F73C8',
+    300: '#4158BE',
+    400: '#364A9F',
+    500: '#2C3C81',
+    600: '#1E2957',
+    700: '#0F152D',
+    800: '#010204',
+    900: '#000000',
+  },
   fog: {
     DEFAULT: '#D4D1CC',
     50: '#FFFFFF',
@@ -81,7 +100,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Work Sans', ...defaultTheme.fontFamily.sans],
-        serif: ['Cheltenham LT', ...defaultTheme.fontFamily.serif],
+        serif: ['Cooper', ...defaultTheme.fontFamily.serif],
         fairplex: ['fairplex-wide', ...defaultTheme.fontFamily.serif],
       },
       colors: colors,

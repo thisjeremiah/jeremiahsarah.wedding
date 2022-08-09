@@ -1,18 +1,15 @@
 import Link from 'next/link'
 import cx from 'classnames'
 
-export function Nav(props: { className?: string }) {
+export function Nav() {
   return (
     <nav
       className={cx(
-        'w-full justify-end initial:text-rose-700 text-sm font-medium flex gap-6 p-4',
-        props.className,
+        'absolute',
+        'w-full justify-end text-md',
+        'flex gap-6 px-6 py-6',
       )}
     >
-      {
-        //<a href="/photos">Photos</a>
-        // <a href="/things-to-do">Things To Do</a>
-      }
       <Link href="/">home</Link>
       <Link href="/registry">registry</Link>
       <Link href="/photos">photos</Link>
