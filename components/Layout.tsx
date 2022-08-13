@@ -7,7 +7,7 @@ export default function Layout(props: {
   className?: string
 }) {
   return (
-    <div className={cx('min-h-screen', props.className)}>
+    <div className={cx('min-h-screen transition-color', props.className)}>
       <Nav />
       <main>{props.children}</main>
     </div>
