@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { DownloadImage } from '../components/DownloadImage'
 import Layout from '../components/Layout'
 import Section from '../components/Section'
+import Title from '../components/Title'
 
 type PhotosPageProps = {
   items: Photo[]
@@ -63,22 +64,18 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
   return (
     <Layout className="text-berry-500">
       <Section bg="rose" color="lemon" rounded="tl" height="content">
-        <div className="px-8 pt-16">
-          <h1 className="text-3xl font-medium font-fairplex text-center uppercase">
-            Our Photos
-          </h1>
-          <p className="text-center text-sm pt-2 lowercase">
-            by{' '}
-            <a
-              className="border-b border-rose-500 border-solid"
-              href="https://www.wildwhim.com/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Wild Whim
-            </a>
-          </p>
-        </div>
+        <Title>Our Photos</Title>
+        <p className="text-center text-sm pt-2 lowercase">
+          by{' '}
+          <a
+            className="border-b border-rose-500 border-solid"
+            href="https://www.wildwhim.com/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Wild Whim
+          </a>
+        </p>
         <div
           className={cx(
             'masonry sm:masonry-sm md:masonry-md lg:masonry-lg p-8',
@@ -151,22 +148,6 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
     </Layout>
   )
 }
-
-// <div
-// className={cx(
-// 'grid place-items-center p-8 gap-10',
-// 'xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2',
-// 'items-start',
-// )}
-// >
-// {props.items.map((item) => (
-// <DownloadImage
-// key={item.id}
-// imageUrl={item.src.xlarge}
-// downloadUrl={item.src.full}
-// />
-// ))}
-// </div>
 
 type Photo = {
   id: string

@@ -3,6 +3,7 @@ import type { NextPage } from 'next'
 import { ImageGallery } from '../components/ImageGallery'
 import Layout from '../components/Layout'
 import Section from '../components/Section'
+import Title from '../components/Title'
 
 const ZOLA_REGISTRY_KEY = 'jeremiahsarahwedding'
 const ZOLA_REGISTRY_BASE = 'https://www.zola.com/registry'
@@ -16,9 +17,7 @@ const Registry: NextPage<RegistryPageProps> = (props) => {
   return (
     <Layout className="text-berry-500">
       <Section bg="lemon" color="rose" rounded="tr" height="content">
-        <h1 className="px-8 text-3xl font-medium text-center uppercase font-fairplex pt-16">
-          Our Registry
-        </h1>
+        <Title>Our Registry</Title>
         <div
           className={cx(
             'grid px-11 place-items-center pt-10 gap-10',
