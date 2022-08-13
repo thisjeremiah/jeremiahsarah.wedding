@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         <title>sarah & jeremiah</title>
         <meta name="description" content="sarah & jeremiah" />
       </Head>
-      <Transition key={router.route}>
+      <Transition transitionKey={router.route}>
         <Component {...pageProps} />
       </Transition>
     </>

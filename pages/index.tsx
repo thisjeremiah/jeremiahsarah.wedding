@@ -15,12 +15,8 @@ const Home: NextPage = () => {
               Sarah & <br /> Jeremiah
             </h1>
           </div>
-          <h2 className="text-lg leading-tight lowercase">1316 State Street</h2>
-          <h2 className="text-lg leading-tight lowercase">
-            Santa Barbara, CA 93101
-          </h2>
+          <h2 className="text-lg leading-tight lowercase">Santa Barbara, CA</h2>
           <h2 className="text-lg leading-loose lowercase">May 20 2023</h2>
-          <h2 className="text-lg leading-tight lowercase">5:00 PM</h2>
         </div>
       </div>
     </Layout>

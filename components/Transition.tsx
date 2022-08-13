@@ -1,9 +1,12 @@
 import { motion } from 'framer-motion'
 
-export function Transition(props: { key: string; children: React.ReactNode }) {
+export function Transition(props: {
+  transitionKey: string
+  children: React.ReactNode
+}) {
   return (
     <motion.div
-      key={props.key}
+      key={props.transitionKey}
       initial="initial"
       animate="animate"
       variants={{
