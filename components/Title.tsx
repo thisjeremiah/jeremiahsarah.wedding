@@ -6,7 +6,7 @@ export default function Title(props: {
 }) {
   return (
     <h1
-      className={cx(props.className, 'text-3xl text-center font-serif pt-20')}
+      className={cx(props.className, 'text-4xl text-center font-serif pt-20')}
     >
       {props.children}
     </h1>
