@@ -17,15 +17,6 @@ export default function PetalAnimation() {
         options={{
           detectRetina: true,
           particles: {
-            move: {
-              direction: 'right',
-              enable: true,
-              outModes: {
-                default: 'out',
-              },
-              size: true,
-              speed: 0.00001,
-            },
             number: {
               value: 15,
             },
@@ -37,7 +28,7 @@ export default function PetalAnimation() {
               direction: 'random',
               animation: {
                 enable: true,
-                speed: 15,
+                speed: 10,
               },
             },
             tilt: {
@@ -50,7 +41,7 @@ export default function PetalAnimation() {
               },
               animation: {
                 enable: true,
-                speed: 60,
+                speed: 30,
               },
             },
             shape: {
@@ -71,12 +62,12 @@ export default function PetalAnimation() {
               value: 12,
             },
             wobble: {
-              distance: 18,
+              distance: 10,
               enable: true,
               move: true,
               speed: {
-                min: -2,
-                max: 2,
+                min: -1,
+                max: 1,
               },
             },
           },
