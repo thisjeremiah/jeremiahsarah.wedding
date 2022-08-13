@@ -22,6 +22,8 @@ const Schedule: NextPage = () => {
             <div>
               <h2 className="font-serif text-xl">Saturday, May 20, 2023</h2>
               <p className="lowercase text-lg">Villa & Vine</p>
+              <p className="lowercase text-base">Ceremony</p>
+              <p className="lowercase text-base">Dinner and Dancing</p>
             </div>
           </div>
         </div>
