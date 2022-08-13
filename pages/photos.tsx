@@ -87,7 +87,7 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
           {props.items.map((item) => (
             <div key={item.id} onClick={() => setSelectedId(item.id)}>
               <DownloadImage
-                className="break-inside mb-6"
+                className="mb-6"
                 imageUrl={item.src.large}
                 downloadUrl={item.src.full}
                 width={item.width}
