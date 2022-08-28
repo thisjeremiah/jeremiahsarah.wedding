@@ -2,12 +2,11 @@ import cx from 'classnames'
 import type { NextPage } from 'next'
 import { ImageGallery } from '../components/ImageGallery'
 import Layout from '../components/Layout'
-import Section from '../components/Section'
 import Title from '../components/Title'
 
 const ZOLA_REGISTRY_KEY = 'jeremiahsarahwedding'
 const ZOLA_REGISTRY_BASE = 'https://www.zola.com/registry'
-const ZOLA_REGISTRY_URL = ZOLA_REGISTRY_BASE + '/' + ZOLA_REGISTRY_KEY
+// const ZOLA_REGISTRY_URL = ZOLA_REGISTRY_BASE + '/' + ZOLA_REGISTRY_KEY
 
 type RegistryPageProps = {
   items: RegistryItem[]
@@ -15,22 +14,19 @@ type RegistryPageProps = {
 
 const Registry: NextPage<RegistryPageProps> = (props) => {
   return (
-    <Layout className="text-berry-500">
-      <Section bg="lemon" color="rose" rounded="tr" height="content">
-        <Title>Our Registry</Title>
-        <div
-          className={cx(
-            'grid px-11 place-items-center pt-10 gap-10',
-            '2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2',
-            'items-start',
-          )}
-        >
-          {props.items.map((item) => (
-            <RegistryGridItem key={item.id} item={item} />
-          ))}
-        </div>
-      </Section>
-      <div className="bg-rose-400 w-full h-10" />
+    <Layout className="bg-terracotta-500 text-white">
+      <Title>Registry</Title>
+      <div
+        className={cx(
+          'grid px-11 place-items-center py-16 gap-12',
+          '2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2',
+          'items-start',
+        )}
+      >
+        {props.items.map((item) => (
+          <RegistryGridItem key={item.id} item={item} />
+        ))}
+      </div>
     </Layout>
   )
 }
@@ -48,15 +44,15 @@ function RegistryGridItem(props: { item: RegistryItem }) {
         href={collectionItemUrl(props.item.id)}
       >
         <ImageGallery
-          className="w-full shadow-lemon-500/20"
+          className="w-full shadow-terracotta-500/20"
           images={props.item.images.map((image) => image.medium)}
         />
         <div className="pt-1.5 flex flex-col w-fit">
           {props.item.brand.name ? (
-            <p className="font-medium text-sm">{props.item.brand.name}</p>
+            <p className="font-medium text-base">{props.item.brand.name}</p>
           ) : undefined}
-          <p className="text-sm">{props.item.name} ↗</p>
-          <p className="text-md font-serif">{price}</p>
+          <p className="text-base">{props.item.name}&nbsp;↗</p>
+          <p className="text-base">{price}</p>
         </div>
       </a>
     </div>

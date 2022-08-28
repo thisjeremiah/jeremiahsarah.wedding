@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
   return (
     <>
       <Head>
-        <title>sarah & jeremiah</title>
+        <title>Sarah & Jeremiah</title>
         <meta name="description" content="sarah & jeremiah" />
       </Head>
       <Transition transitionKey={router.route}>

@@ -45,10 +45,10 @@ const hotels = [
 
 const Travel: NextPage = () => {
   return (
-    <Layout className="bg-cobalt-600 text-lemon-400">
+    <Layout className="bg-lemon-700 text-white">
       <div className="mx-16 h-full cursor-lemon">
-        <Title className="pb-8">Travel Information</Title>
-        <div className="flex flex-col gap-10 text-left">
+        <Title className="pb-8">Travel</Title>
+        <div className="flex sm:flex-row flex-col gap-10 sm:gap-24 text-left w-full justify-center">
           <div>
             <h2 className="font-serif text-2xl mb-2">Airports</h2>
             <ul className="list-none text-left">

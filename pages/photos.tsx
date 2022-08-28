@@ -2,9 +2,9 @@ import cx from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
 import type { NextPage } from 'next'
 import { useEffect, useMemo, useState } from 'react'
-import { DownloadImage } from '../components/DownloadImage'
+import { DownloadIcon } from '../components/DownloadIcon'
+import { downloadFilename, DownloadImage } from '../components/DownloadImage'
 import Layout from '../components/Layout'
-import Section from '../components/Section'
 import Title from '../components/Title'
 
 type PhotosPageProps = {
@@ -62,9 +62,9 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
   }, [selectedId, props.items])
 
   return (
-    <Layout className="text-berry-500">
-      <Section bg="rose" color="lemon" rounded="tl" height="content">
-        <Title>Our Photos</Title>
+    <Layout className="bg-blossom-400 text-fuschia-500">
+      <div className="">
+        <Title>Photos</Title>
         <p className="text-center text-sm pt-2 lowercase">
           by{' '}
           <a
@@ -112,7 +112,7 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
                     exit={{ opacity: 0, transition: { delay: 0 } }}
                     transition={{ duration: 0.2 }}
                     key={selectedItem.id}
-                    className="row-span-full col-span-full rounded-md pointer-events-auto max-h-[90vh] max-w-[85vw]"
+                    className="row-span-full col-span-full rounded-sm pointer-events-auto max-h-[90vh] max-w-[85vw]"
                     src={selectedItem.src.full}
                     style={{
                       aspectRatio: `${selectedItem.width} / ${selectedItem.height}`,
@@ -140,11 +140,20 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
                 <div className="select-none text-rose-200 cursor-pointer absolute text-3xl top-4 right-4">
                   ×
                 </div>
+                <div className="select-none text-rose-200 cursor-pointer absolute text-3xl bottom-4 left-4">
+                  <a
+                    href={'/api?url=https:' + selectedItem.src.full}
+                    download={downloadFilename(selectedItem.src.full)}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <DownloadIcon />
+                  </a>
+                </div>
               </motion.div>
             </div>
           )}
         </AnimatePresence>
-      </Section>
+      </div>
     </Layout>
   )
 }

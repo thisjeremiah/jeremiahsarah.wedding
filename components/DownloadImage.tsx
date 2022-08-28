@@ -11,7 +11,7 @@ export function DownloadImage(props: {
   return (
     <div className={cx('relative group', props.className)}>
       <img
-        className="w-full rounded-md pointer-events-none bg-berry-200 select-none"
+        className="w-full rounded-sm pointer-events-none bg-berry-200 select-none"
         src={props.imageUrl}
         width={props.width}
         height={props.height}
@@ -24,6 +24,7 @@ export function DownloadImage(props: {
         )}
       >
         <a
+          className="hidden sm:inline"
           href={'/api?url=https:' + props.downloadUrl}
           download={downloadFilename(props.downloadUrl)}
           onClick={(e) => e.stopPropagation()}
@@ -35,7 +36,7 @@ export function DownloadImage(props: {
   )
 }
 
-function downloadFilename(url: string) {
+export function downloadFilename(url: string) {
   let result = url.split('/')
   return result[result.length - 1]
 }

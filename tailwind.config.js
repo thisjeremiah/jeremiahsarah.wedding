@@ -5,8 +5,33 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 // terracotta
 // lemon --
 // fuschia
+// blossom
 
 const colors = {
+  fuschia: {
+    50: '#fcf4f7',
+    100: '#fae8ee',
+    200: '#f2c6d5',
+    300: '#eba4bb',
+    400: '#db6088',
+    500: '#cc1c55',
+    600: '#b8194d',
+    700: '#991540',
+    800: '#7a1133',
+    900: '#640e2a',
+  },
+  blossom: {
+    50: '#fefcfd',
+    100: '#fdfafa',
+    200: '#fbf2f4',
+    300: '#f9e9ed',
+    400: '#f4d9df',
+    500: '#efc9d1',
+    600: '#d7b5bc',
+    700: '#b3979d',
+    800: '#8f797d',
+    900: '#756266',
+  },
   rose: {
     DEFAULT: '#E7CABD',
     50: '#FFFFFF',
@@ -19,6 +44,18 @@ const colors = {
     700: '#C9886B',
     800: '#B96743',
     900: '#8F5034',
+  },
+  terracotta: {
+    50: '#fcf8f6',
+    100: '#f9f1ed',
+    200: '#f0dcd2',
+    300: '#e7c7b6',
+    400: '#d69e80',
+    500: '#c47449',
+    600: '#b06842',
+    700: '#935737',
+    800: '#76462c',
+    900: '#603924',
   },
   berry: {
     DEFAULT: '#D48369',
@@ -94,8 +131,8 @@ module.exports = {
   ],
   theme: {
     cursor: {
-      default: createCursor(colors.rose['800'], colors.rose['200']),
-      pointer: createPointer(colors.rose['800'], colors.rose['200']),
+      default: createCursor(colors.cobalt['600'], 'white'),
+      pointer: createPointer('white', colors.cobalt['600']),
     },
     extend: {
       fontFamily: {

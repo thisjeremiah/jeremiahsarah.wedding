@@ -25,23 +25,21 @@ export function ImageGallery(props: { images: string[]; className?: string }) {
   return (
     <div
       className={cx(
-        'relative rounded-md shadow-md overflow-hidden w-64 h-64',
+        'relative rounded-sm shadow-md overflow-hidden w-64 h-64',
         props.className,
       )}
     >
       <Image
-        className="rounded-md pointer-events-none select-none"
+        className="rounded-sm pointer-events-none select-none"
         src={image}
         width={256}
         height={256}
       />
-      {props.images.length > 1 ? (
+      {false && props.images.length > 1 ? (
         <div className="absolute bottom-0 pt-6 bg-gradient-to-t from-black/10 to-transparent w-full">
           <div
-            className="flex gap-2.5 pl-2 py-2 items-center w-14"
-            onClick={(e) => {
-              e.preventDefault()
-            }}
+            className="flex text-lg p-2 items-center justify-between"
+            onClick={(e) => e.preventDefault()}
           >
             <div
               onClick={() => setNext(-1)}

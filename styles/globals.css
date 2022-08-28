@@ -7,11 +7,6 @@
     @apply cursor-default;
   }
 
-  html,
-  body {
-    @apply bg-rose-400;
-  }
-
   a {
     @apply cursor-pointer;
   }
