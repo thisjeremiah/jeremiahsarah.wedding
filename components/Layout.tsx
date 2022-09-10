@@ -14,8 +14,8 @@ export default function Layout(props: {
 
   return (
     <div className={cx('transition-color h-screen', props.className)}>
-      <Nav />
-      <main>{props.children}</main>
+      <Nav bgColorClassName={props.className} />
+      <main className="relative">{props.children}</main>
     </div>
   )
 }
