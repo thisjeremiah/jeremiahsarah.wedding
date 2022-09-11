@@ -14,7 +14,11 @@ type RegistryPageProps = {
 
 const Registry: NextPage<RegistryPageProps> = (props) => {
   return (
-    <Layout className="bg-terracotta-500 text-white">
+    <Layout
+      navClassName="bg-terracotta-600"
+      navBackdropClassName="bg-terracotta-400/50"
+      className="bg-terracotta-500 text-white cursor-terracotta"
+    >
       <Title>Registry</Title>
       <div
         className={cx(

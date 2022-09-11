@@ -45,8 +45,12 @@ const hotels = [
 
 const Travel: NextPage = () => {
   return (
-    <Layout className="bg-lemon-700 text-white">
-      <div className="mx-16 h-full cursor-lemon">
+    <Layout
+      navBackdropClassName="bg-lemon-400/50"
+      navClassName="bg-lemon-700"
+      className="bg-lemon-700 text-white cursor-lemon"
+    >
+      <div className="mx-16 h-full">
         <Title className="pb-8">Travel</Title>
         <div className="flex sm:flex-row flex-col gap-10 sm:gap-24 text-left w-full justify-center">
           <div>

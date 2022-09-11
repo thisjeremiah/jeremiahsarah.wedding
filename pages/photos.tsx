@@ -12,63 +12,22 @@ type PhotosPageProps = {
 }
 
 const PhotosPage: NextPage<PhotosPageProps> = (props) => {
-  const [selectedId, setSelectedId] = useState<string | null>(null)
-
-  // preload photos
-  useEffect(() => {
-    Promise.all(
-      props.items.map((item) => {
-        return new Promise((resolve, reject) => {
-          const img = new Image()
-          img.onload = () => resolve(img)
-          img.onerror = img.onabort = () => reject()
-          img.src = item.src.full
-        })
-      }),
-    )
-      .then(() => {})
-      .catch(() => {})
-  }, [props.items])
-
-  const selectedItem = useMemo(() => {
-    if (selectedId) {
-      return props.items.find((item) => item.id === selectedId)!
-    }
-    return null
-  }, [selectedId, props.items])
-
-  const nextItemId = useMemo(() => {
-    if (selectedId) {
-      let index = props.items.findIndex((item) => item.id === selectedId)! + 1
-      if (index >= props.items.length) {
-        return props.items[0].id
-      } else {
-        return props.items[index].id
-      }
-    }
-    return null
-  }, [selectedId, props.items])
-
-  const prevItemId = useMemo(() => {
-    if (selectedId) {
-      let index = props.items.findIndex((item) => item.id === selectedId)! - 1
-      if (index < 0) {
-        return props.items[props.items.length - 1].id
-      } else {
-        return props.items[index].id
-      }
-    }
-    return null
-  }, [selectedId, props.items])
+  const { setSelectedId, selectedItem, nextItemId, prevItemId } = usePhotos(
+    props.items,
+  )
 
   return (
-    <Layout className="bg-blossom-400 text-fuschia-500">
+    <Layout
+      navBackdropClassName="bg-blossom-400/50"
+      navClassName="bg-blossom-500"
+      className="bg-blossom-400 text-fuschia-500 cursor-fuschia selection:bg-blossom-200"
+    >
       <div className="">
         <Title>Photos</Title>
         <p className="text-center text-sm pt-2 lowercase">
           by{' '}
           <a
-            className="border-b border-rose-500 border-solid"
+            className="border-b border-current border-solid"
             href="https://www.wildwhim.com/"
             target="_blank"
             rel="noreferrer"
@@ -156,6 +115,59 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
       </div>
     </Layout>
   )
+}
+
+function usePhotos(items: Photo[]) {
+  const [selectedId, setSelectedId] = useState<string | null>(null)
+
+  // preload photos
+  useEffect(() => {
+    Promise.all(
+      items.map((item) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image()
+          img.onload = () => resolve(img)
+          img.onerror = img.onabort = () => reject()
+          img.src = item.src.full
+        })
+      }),
+    )
+      .then(() => {})
+      .catch(() => {})
+  }, [items])
+
+  const selectedItem = useMemo(() => {
+    if (selectedId) {
+      return items.find((item) => item.id === selectedId)!
+    }
+    return null
+  }, [selectedId, items])
+
+  const nextItemId = useMemo(() => {
+    if (selectedId) {
+      let index = items.findIndex((item) => item.id === selectedId)! + 1
+      if (index >= items.length) {
+        return items[0].id
+      } else {
+        return items[index].id
+      }
+    }
+    return null
+  }, [selectedId, items])
+
+  const prevItemId = useMemo(() => {
+    if (selectedId) {
+      let index = items.findIndex((item) => item.id === selectedId)! - 1
+      if (index < 0) {
+        return items[items.length - 1].id
+      } else {
+        return items[index].id
+      }
+    }
+    return null
+  }, [selectedId, items])
+
+  return { selectedItem, nextItemId, prevItemId, setSelectedId }
 }
 
 type Photo = {

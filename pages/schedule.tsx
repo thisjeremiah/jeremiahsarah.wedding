@@ -4,7 +4,11 @@ import Title from '../components/Title'
 
 const Schedule: NextPage = () => {
   return (
-    <Layout className="bg-slate-300 text-cobalt-500">
+    <Layout
+      navBackdropClassName="bg-slate-400/50"
+      navClassName="bg-slate-200"
+      className="bg-slate-300 text-cobalt-500 cursor-slate"
+    >
       <div className="text-center w-full">
         <Title>Schedule</Title>
         <div className="min-h-[20rem] h-[calc(100vh-8.75rem)] sm:h-[calc(100vh-9rem)] flex justify-center items-center pointer-events-none">

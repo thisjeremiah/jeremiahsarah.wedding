@@ -147,7 +147,9 @@ module.exports = {
         lemon: createCursor(colors.lemon['800'], colors.lemon['200']),
         sky: createCursor(colors.sky['800'], colors.sky['200']),
         fog: createCursor(colors.fog['800'], colors.fog['200']),
-        ['rose-pointer']: createPointer(colors.rose['800'], colors.rose['200']),
+        terracotta: createCursor(colors.terracotta['700'], '#ffffff'),
+        fuschia: createCursor(colors.fuschia['700'], colors.fuschia['100']),
+        ['rose-pointer']: createPointer(colors.rose['800'], '#ffffff'),
         ['berry-pointer']: createPointer(
           colors.berry['800'],
           colors.berry['200'],

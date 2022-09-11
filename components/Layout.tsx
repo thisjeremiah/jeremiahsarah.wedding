@@ -5,6 +5,8 @@ import { Nav } from './Nav'
 export default function Layout(props: {
   children: React.ReactNode
   className?: string
+  navClassName?: string
+  navBackdropClassName?: string
 }) {
   useLayoutEffect(() => {
     if (props.className) {
@@ -14,7 +16,10 @@ export default function Layout(props: {
 
   return (
     <div className={cx('transition-color h-screen', props.className)}>
-      <Nav bgColorClassName={props.className} />
+      <Nav
+        backdropClassName={props.navBackdropClassName}
+        className={props.navClassName}
+      />
       <main className="relative">{props.children}</main>
     </div>
   )

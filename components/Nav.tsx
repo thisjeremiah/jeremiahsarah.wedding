@@ -1,19 +1,28 @@
 import cx from 'classnames'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useRouter } from 'next/router'
+import { useLayoutEffect, useMemo, useState } from 'react'
 import Tile from './Tile/Tile'
 
-export function Nav(props: { bgColorClassName?: string }) {
+export function Nav(props: { backdropClassName?: string; className?: string }) {
+  const router = useRouter()
   const [isOpen, setOpen] = useState(false)
+  useDisableBodyScroll(isOpen)
+
+  const currentTile = useMemo(() => {
+    const link = links.find((link) => link.href === router.pathname)
+    if (!link) return '1'
+    return link.icon
+  }, [router.pathname])
 
   return (
     <>
       <nav className="absolute sm:flex hidden w-full justify-end text-md gap-6 p-6 z-10">
-        <Link href="/">home</Link>
-        <Link href="/registry">registry</Link>
-        <Link href="/schedule">schedule</Link>
-        <Link href="/travel">travel</Link>
-        <Link href="/photos">photos</Link>
+        {links.map((link) => (
+          <Link key={link.href} href={link.href}>
+            {link.label}
+          </Link>
+        ))}
       </nav>
       <nav
         onClick={() => {
@@ -22,30 +31,26 @@ export function Nav(props: { bgColorClassName?: string }) {
           }
         }}
         className={cx(
-          'absolute sm:hidden inset-0 z-10',
-          isOpen && 'bg-white/70',
+          'fixed sm:hidden inset-0 z-10',
+          isOpen ? props.backdropClassName : 'pointer-events-none',
         )}
       >
         <button
-          className="absolute top-6 right-6"
-          onClick={() => {
-            setOpen((o) => !o)
-          }}
+          className="absolute top-6 right-6 pointer-events-auto"
+          onClick={() => setOpen((o) => !o)}
         >
-          <Tile className="w-10" tile="7" />
+          <Tile className="w-10" tile={currentTile as any} />
         </button>
         {isOpen && (
           <div
             className={cx(
-              'relative p-4 rounded-lg mt-5 mx-4',
-              isOpen && props.bgColorClassName,
+              'relative p-4 rounded-lg mt-5 mx-4 pointer-events-auto',
+              isOpen && props.className,
             )}
-            onClick={(e) => {
-              e.stopPropagation()
-            }}
+            onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between pb-4">
-              <div className="text-xl">menu</div>
+              <div />
               <div className="">
                 <button
                   onClick={() => setOpen(false)}
@@ -56,11 +61,18 @@ export function Nav(props: { bgColorClassName?: string }) {
               </div>
             </div>
             <div className="relative gap-4 flex flex-col text-xl relative w-fit">
-              <Link href="/">home</Link>
-              <Link href="/registry">registry</Link>
-              <Link href="/schedule">schedule</Link>
-              <Link href="/travel">travel</Link>
-              <Link href="/photos">photos</Link>
+              {links.map((link) => (
+                <Link key={link.href} href={link.href}>
+                  <a
+                    className={cx(
+                      'w-fit border-current',
+                      router.pathname === link.href ? 'border-b-2' : '',
+                    )}
+                  >
+                    {link.label}
+                  </a>
+                </Link>
+              ))}
             </div>
           </div>
         )}
@@ -68,3 +80,20 @@ export function Nav(props: { bgColorClassName?: string }) {
     </>
   )
 }
+const useDisableBodyScroll = (open: boolean) => {
+  useLayoutEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+  }, [open])
+}
+
+const links = [
+  { href: '/', label: 'home', icon: '7' },
+  { href: '/registry', label: 'registry', icon: '2' },
+  { href: '/schedule', label: 'schedule', icon: '3' },
+  { href: '/travel', label: 'travel', icon: '5' },
+  { href: '/photos', label: 'photos', icon: '6' },
+]
