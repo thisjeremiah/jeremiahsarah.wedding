@@ -68,11 +68,15 @@ export function Nav(props: {
           <h1 className="absolute left-0 h-10 text-2xl text-center tracking-wide font-serif w-full items-center leading-[2.5rem]">
             {props.title}
           </h1>
-          <button className="relative" onClick={() => setOpen((o) => !o)}>
+          <button
+            className="flex flex-col relative items-center"
+            onClick={() => setOpen((o) => !o)}
+          >
             <Tile
               className="w-10 border-2 border-transparent"
               tile={currentTile as any}
             />
+            <p className="text-xs">menu</p>
           </button>
         </div>
         {isOpen && (
