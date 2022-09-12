@@ -107,6 +107,7 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
                     onClick={(e) => e.stopPropagation()}
                   >
                     <DownloadIcon />
+                    <p className="inline text-base ml-1">Download Image</p>
                   </a>
                 </div>
               </motion.div>
