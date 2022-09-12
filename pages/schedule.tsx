@@ -5,9 +5,9 @@ import Title from '../components/Title'
 const Schedule: NextPage = () => {
   return (
     <Layout
-      navBackdropClassName="bg-slate-400/50"
-      navClassName="bg-slate-200"
       className="bg-slate-300 text-cobalt-500 cursor-slate"
+      navClassName="bg-slate-200"
+      navBackdropClassName="bg-slate-400/50"
     >
       <div className="text-center w-full">
         <Title>Schedule</Title>
@@ -21,13 +21,6 @@ const Schedule: NextPage = () => {
               <p className="lowercase text-base sm:text-lg">* location tba</p>
               <p className="lowercase text-base sm:text-lg">* time tba</p>
             </div>
-            {
-              // <div className="flex justify-center gap-1">
-              // <Tile type="flower" />
-              // <Tile type="hibiscus" />
-              // <Tile type="flower" />
-              // </div>
-            }
             <div className="w-62">
               <h2 className="font-serif text-lg sm:text-xl">
                 Ceremony & Reception
@@ -43,19 +36,6 @@ const Schedule: NextPage = () => {
       </div>
     </Layout>
   )
-}
-
-const rehearsalInfo = {
-  title: 'Rehearsal Dinner', // (header, serif)
-  date: 'may 19 2023', // (sans serif)
-  location: 'location & time tba', // (sans serif)
-}
-
-const ceremonyInfo = {
-  title: 'Ceremony & Reception',
-  date: 'may 20 2023',
-  location: 'villa & vine, santa barbara, ca',
-  time: 'time tba',
 }
 
 export default Schedule

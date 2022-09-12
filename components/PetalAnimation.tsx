@@ -1,24 +1,47 @@
-import React, { useCallback, useRef } from 'react'
+import cx from 'classnames'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import Particles from 'react-particles'
 import { loadFull } from 'tsparticles'
 import type { Engine } from 'tsparticles-engine'
 
 export default function PetalAnimation() {
-  const ref = useRef<HTMLDivElement>(null)
-
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadFull(engine)
   }, [])
 
+  const timeout = useRef<NodeJS.Timeout>()
+  const [isResize, setResize] = useState(false)
+
+  useEffect(() => {
+    function onResize() {
+      setResize(true)
+
+      if (timeout.current) {
+        clearTimeout(timeout.current)
+      }
+
+      timeout.current = setTimeout(() => setResize(false), 500)
+    }
+
+    window.addEventListener('resize', onResize)
+
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+
   return (
-    <div ref={ref} className="fixed w-screen h-screen">
+    <div
+      className={cx(
+        'fixed w-screen h-screen transition-opacity',
+        isResize ? 'opacity-0' : 'opacity-1',
+      )}
+    >
       <Particles
         init={particlesInit}
         options={{
           detectRetina: true,
           particles: {
             number: {
-              value: 15,
+              value: 22,
             },
             rotate: {
               value: {

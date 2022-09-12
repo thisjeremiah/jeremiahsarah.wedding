@@ -9,7 +9,7 @@ export function Nav(props: { backdropClassName?: string; className?: string }) {
   const [isOpen, setOpen] = useState(false)
   useDisableBodyScroll(isOpen)
 
-  const currentTile = useMemo(() => {
+  const currentTile: any = useMemo(() => {
     const link = links.find((link) => link.href === router.pathname)
     if (!link) return '1'
     return link.icon
@@ -17,13 +17,23 @@ export function Nav(props: { backdropClassName?: string; className?: string }) {
 
   return (
     <>
-      <nav className="absolute sm:flex hidden w-full justify-end text-md gap-6 p-6 z-10">
-        {links.map((link) => (
-          <Link key={link.href} href={link.href}>
-            {link.label}
-          </Link>
-        ))}
-      </nav>
+      <div className="absolute sm:flex hidden z-10 w-full justify-between items-center p-6">
+        <Tile className="w-10" tile={currentTile} />
+        <nav className="flex text-md gap-6">
+          {links.map((link) => (
+            <Link key={link.href} href={link.href}>
+              <a
+                className={cx(
+                  'w-fit border-current',
+                  router.pathname === link.href ? 'border-b-2' : '',
+                )}
+              >
+                {link.label}
+              </a>
+            </Link>
+          ))}
+        </nav>
+      </div>
       <nav
         onClick={() => {
           if (isOpen) {

@@ -15,12 +15,17 @@ export default function Layout(props: {
   }, [])
 
   return (
-    <div className={cx('transition-color h-screen', props.className)}>
+    <div
+      className={cx('relative transition-color min-h-screen', props.className)}
+    >
       <Nav
         backdropClassName={props.navBackdropClassName}
         className={props.navClassName}
       />
-      <main className="relative">{props.children}</main>
+      <main className="relative pb-16">{props.children}</main>
+      <footer className="absolute bottom-0 w-full pl-6 pb-8">
+        <p className="text-center text-sm">made with ♡ in portland, or</p>
+      </footer>
     </div>
   )
 }
