@@ -5,7 +5,6 @@ import { useEffect, useMemo, useState } from 'react'
 import { DownloadIcon } from '../components/DownloadIcon'
 import { downloadFilename, DownloadImage } from '../components/DownloadImage'
 import Layout from '../components/Layout'
-import Title from '../components/Title'
 
 type PhotosPageProps = {
   items: Photo[]
@@ -18,12 +17,12 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
 
   return (
     <Layout
+      title="Photos"
       navBackdropClassName="bg-blossom-400/50"
       navClassName="bg-blossom-500"
       className="bg-blossom-400 text-fuschia-500 cursor-fuschia selection:bg-blossom-200"
     >
-      <div className="">
-        <Title>Photos</Title>
+      <div>
         <p className="text-center text-sm pt-2 lowercase">
           by{' '}
           <a

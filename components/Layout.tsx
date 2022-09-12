@@ -5,6 +5,7 @@ import { Nav } from './Nav'
 export default function Layout(props: {
   children: React.ReactNode
   className?: string
+  title?: string
   navClassName?: string
   navBackdropClassName?: string
 }) {
@@ -19,8 +20,10 @@ export default function Layout(props: {
       className={cx('relative transition-color min-h-screen', props.className)}
     >
       <Nav
+        title={props.title}
         backdropClassName={props.navBackdropClassName}
-        className={props.navClassName}
+        navClassName={props.navClassName}
+        className={props.className}
       />
       <main className="relative pb-16">{props.children}</main>
       <footer className="absolute bottom-0 w-full pl-6 pb-8">

@@ -2,7 +2,6 @@ import cx from 'classnames'
 import type { NextPage } from 'next'
 import { ImageGallery } from '../components/ImageGallery'
 import Layout from '../components/Layout'
-import Title from '../components/Title'
 
 const ZOLA_REGISTRY_KEY = 'jeremiahsarahwedding'
 const ZOLA_REGISTRY_BASE = 'https://www.zola.com/registry'
@@ -15,11 +14,11 @@ type RegistryPageProps = {
 const Registry: NextPage<RegistryPageProps> = (props) => {
   return (
     <Layout
+      title="Registry"
       navClassName="bg-terracotta-600"
       navBackdropClassName="bg-terracotta-400/50"
       className="bg-terracotta-500 text-white cursor-terracotta"
     >
-      <Title>Registry</Title>
       <div
         className={cx(
           'grid px-11 place-items-center py-16 gap-12',

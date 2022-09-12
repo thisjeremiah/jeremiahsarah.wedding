@@ -1,16 +1,15 @@
 import type { NextPage } from 'next'
 import Layout from '../components/Layout'
-import Title from '../components/Title'
 
 const Schedule: NextPage = () => {
   return (
     <Layout
+      title="Schedule"
       className="bg-slate-300 text-cobalt-500 cursor-slate"
       navClassName="bg-slate-200"
       navBackdropClassName="bg-slate-400/50"
     >
       <div className="text-center w-full">
-        <Title>Schedule</Title>
         <div className="min-h-[20rem] h-[calc(100vh-8.75rem)] sm:h-[calc(100vh-9rem)] flex justify-center items-center pointer-events-none">
           <div className="flex flex-col sm:flex-row gap-16 sm:gap-32">
             <div className="w-62">

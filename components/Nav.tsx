@@ -4,7 +4,12 @@ import { useRouter } from 'next/router'
 import { useLayoutEffect, useMemo, useState } from 'react'
 import Tile from './Tile/Tile'
 
-export function Nav(props: { backdropClassName?: string; className?: string }) {
+export function Nav(props: {
+  title?: string
+  backdropClassName?: string
+  navClassName?: string
+  className?: string
+}) {
   const router = useRouter()
   const [isOpen, setOpen] = useState(false)
   useDisableBodyScroll(isOpen)
@@ -17,8 +22,8 @@ export function Nav(props: { backdropClassName?: string; className?: string }) {
 
   return (
     <>
-      <div className="absolute sm:flex hidden z-10 w-full justify-between items-center p-6">
-        <Tile className="w-10" tile={currentTile} />
+      {}
+      <div className="absolute sm:flex hidden z-10 w-full justify-end items-center p-6">
         <nav className="flex text-md gap-6">
           {links.map((link) => (
             <Link key={link.href} href={link.href}>
@@ -34,6 +39,14 @@ export function Nav(props: { backdropClassName?: string; className?: string }) {
           ))}
         </nav>
       </div>
+      {props.title && (
+        <div className="sm:flex hidden w-full justify-center pt-[4.5rem]">
+          <div className="flex items-center gap-3">
+            <Tile className="w-8 text-center" tile={currentTile} />
+            <h1 className="font-serif text-3xl">{props.title}</h1>
+          </div>
+        </div>
+      )}
       <nav
         onClick={() => {
           if (isOpen) {
@@ -42,47 +55,60 @@ export function Nav(props: { backdropClassName?: string; className?: string }) {
         }}
         className={cx(
           'fixed sm:hidden inset-0 z-10',
-          isOpen ? props.backdropClassName : 'pointer-events-none',
+          isOpen ? '' : 'pointer-events-none',
         )}
       >
-        <button
-          className="absolute top-6 right-6 pointer-events-auto"
-          onClick={() => setOpen((o) => !o)}
+        <div
+          className={cx(
+            'items-center justify-between absolute flex top-0 left-0 right-0 pointer-events-auto py-5 px-6',
+            props.title && props.className,
+          )}
         >
-          <Tile className="w-10" tile={currentTile as any} />
-        </button>
-        {isOpen && (
-          <div
-            className={cx(
-              'relative p-4 rounded-lg mt-5 mx-4 pointer-events-auto',
-              isOpen && props.className,
-            )}
-            onClick={(e) => e.stopPropagation()}
+          <div />
+          <h1 className="absolute left-0 h-10 text-2xl text-center font-serif w-full items-center leading-[2.5rem]">
+            {props.title}
+          </h1>
+          <button
+            className="relative _justify-self-end"
+            onClick={() => setOpen((o) => !o)}
           >
-            <div className="flex justify-between pb-4">
-              <div />
-              <div className="">
-                <button
-                  onClick={() => setOpen(false)}
-                  className="text-3xl leading-none"
-                >
-                  ×
-                </button>
-              </div>
-            </div>
-            <div className="relative gap-4 flex flex-col text-xl relative w-fit">
-              {links.map((link) => (
-                <Link key={link.href} href={link.href}>
-                  <a
-                    className={cx(
-                      'w-fit border-current',
-                      router.pathname === link.href ? 'border-b-2' : '',
-                    )}
+            <Tile className="w-10" tile={currentTile as any} />
+          </button>
+        </div>
+        {isOpen && (
+          <div className={cx('fixed inset-0 z-10', props.backdropClassName)}>
+            <div
+              className={cx(
+                'relative px-5 pt-4 pb-6 rounded-lg mt-5 mx-4 pointer-events-auto',
+                'border-current',
+                props.navClassName,
+              )}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex justify-between">
+                <div className="relative gap-4 flex flex-col text-xl relative w-fit pt-2">
+                  {links.map((link) => (
+                    <Link key={link.href} href={link.href}>
+                      <a
+                        className={cx(
+                          'w-fit border-current',
+                          router.pathname === link.href ? 'border-b-2' : '',
+                        )}
+                      >
+                        {link.label}
+                      </a>
+                    </Link>
+                  ))}
+                </div>
+                <div className="">
+                  <button
+                    onClick={() => setOpen(false)}
+                    className="text-3xl leading-none"
                   >
-                    {link.label}
-                  </a>
-                </Link>
-              ))}
+                    ×
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         )}
