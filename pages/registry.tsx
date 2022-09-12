@@ -21,7 +21,7 @@ const Registry: NextPage<RegistryPageProps> = (props) => {
     >
       <div
         className={cx(
-          'grid px-11 place-items-center py-16 gap-12',
+          'grid px-11 place-items-center py-8 gap-12',
           '2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2',
           'items-start',
         )}

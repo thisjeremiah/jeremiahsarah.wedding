@@ -51,7 +51,7 @@ const Travel: NextPage = () => {
       navClassName="bg-lemon-700"
       className="bg-lemon-700 text-white cursor-lemon"
     >
-      <div className="mx-16 h-full">
+      <div className="mx-16 h-full py-16">
         <div className="flex sm:flex-row flex-col gap-10 sm:gap-24 text-left w-full justify-center">
           <div>
             <h2 className="font-serif text-2xl mb-2">Airports</h2>

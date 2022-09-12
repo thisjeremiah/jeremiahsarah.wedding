@@ -32,7 +32,7 @@ export default function PetalAnimation() {
     <div
       className={cx(
         'fixed w-screen h-screen transition-opacity',
-        isResize ? 'opacity-0' : 'opacity-1',
+        isResize ? 'opacity-0' : 'opacity-90',
       )}
     >
       <Particles

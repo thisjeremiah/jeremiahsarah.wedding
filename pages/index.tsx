@@ -11,16 +11,14 @@ const Home: NextPage = () => {
       navClassName="text-white bg-cobalt-600 border-white"
     >
       <PetalAnimation />
-      <div className="relative h-screen z-1">
-        <div className="fixed text-center h-full w-full flex flex-col justify-center">
-          <div className="pb-4 justify-center flex">
-            <div className="w-52">
-              <SarahAndJeremiahTitle />
-            </div>
+      <div className="fixed pointer-events-none z-1 inset-0 text-center h-full w-full flex flex-col justify-center">
+        <div className="pb-4 justify-center flex">
+          <div className="w-52">
+            <SarahAndJeremiahTitle />
           </div>
-          <h2 className="text-lg leading-tight lowercase">Santa Barbara, CA</h2>
-          <h2 className="text-lg leading-loose lowercase">May 20 2023</h2>
         </div>
+        <h2 className="text-lg leading-tight lowercase">Santa Barbara, CA</h2>
+        <h2 className="text-lg leading-loose lowercase">May 20 2023</h2>
       </div>
     </Layout>
   )

@@ -19,7 +19,7 @@ export function DownloadImage(props: {
       <div
         className={cx(
           'group-hover:opacity-100 opacity-0',
-          'text-rose-500 absolute bottom-0 right-0 pr-2 pb-1.5',
+          'text-rose-300 absolute bottom-0 right-0 pr-2 pb-1.5',
           'transition-opacity',
         )}
       >

@@ -1,7 +1,7 @@
 import cx from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
 import type { NextPage } from 'next'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useState } from 'react'
 import { DownloadIcon } from '../components/DownloadIcon'
 import { downloadFilename, DownloadImage } from '../components/DownloadImage'
 import Layout from '../components/Layout'
@@ -14,6 +14,8 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
   const { setSelectedId, selectedItem, nextItemId, prevItemId } = usePhotos(
     props.items,
   )
+
+  useDisableBodyScroll(!!selectedItem)
 
   return (
     <Layout
@@ -53,14 +55,14 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
         </div>
         <AnimatePresence>
           {selectedItem && (
-            <div className="fixed inset-0">
+            <div className="fixed inset-0 z-10">
               <motion.div
                 onClick={() => setSelectedId(null)}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="grid w-screen h-screen bg-rose-600/80 items-center justify-items-center"
+                className="grid w-screen h-screen bg-fuschia-300/60 backdrop-blur-sm items-center justify-items-center"
               >
                 <AnimatePresence>
                   <motion.img
@@ -82,7 +84,7 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
                     setSelectedId(nextItemId!)
                     e.stopPropagation()
                   }}
-                  className="select-none text-rose-200 cursor-pointer absolute text-2xl left-4 top-[50%]"
+                  className="select-none text-rose-200 cursor-pointer absolute text-2xl left-3 sm:left-4 top-[50%]"
                 >
                   ←
                 </div>
@@ -91,14 +93,14 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
                     setSelectedId(prevItemId!)
                     e.stopPropagation()
                   }}
-                  className="select-none text-rose-200 cursor-pointer absolute text-2xl right-4 top-[50%]"
+                  className="select-none text-rose-200 cursor-pointer absolute text-2xl right-3 sm:right-4 top-[50%]"
                 >
                   →
                 </div>
-                <div className="select-none text-rose-200 cursor-pointer absolute text-3xl top-4 right-4">
+                <div className="select-none text-rose-200 cursor-pointer absolute text-3xl top-3 right-3 sm:top-4 sm:right-4">
                   ×
                 </div>
-                <div className="select-none text-rose-200 cursor-pointer absolute text-3xl bottom-4 left-4">
+                <div className="select-none text-rose-200 cursor-pointer absolute text-3xl bottom-3 left-3 sm:bottom-4 sm:left-4">
                   <a
                     href={'/api?url=https:' + selectedItem.src.full}
                     download={downloadFilename(selectedItem.src.full)}
@@ -253,6 +255,16 @@ export async function getStaticProps() {
     },
     revalidate: 10,
   }
+}
+
+const useDisableBodyScroll = (open: boolean) => {
+  useLayoutEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+  }, [open])
 }
 
 export default PhotosPage

@@ -23,7 +23,7 @@ export function Nav(props: {
   return (
     <>
       {}
-      <div className="absolute sm:flex hidden z-10 w-full justify-end items-center p-6">
+      <div className="sm:flex hidden z-10 w-full justify-end items-center p-6">
         <nav className="flex text-md gap-6">
           {links.map((link) => (
             <Link key={link.href} href={link.href}>
@@ -40,10 +40,10 @@ export function Nav(props: {
         </nav>
       </div>
       {props.title && (
-        <div className="sm:flex hidden w-full justify-center pt-[4.5rem]">
-          <div className="flex items-center gap-3">
+        <div className="sm:flex hidden w-full justify-center">
+          <div className="flex flex-col items-center gap-1.5">
             <Tile className="w-8 text-center" tile={currentTile} />
-            <h1 className="font-serif text-3xl">{props.title}</h1>
+            <h1 className="font-serif text-4xl tracking-wide">{props.title}</h1>
           </div>
         </div>
       )}
@@ -60,19 +60,19 @@ export function Nav(props: {
       >
         <div
           className={cx(
-            'items-center justify-between absolute flex top-0 left-0 right-0 pointer-events-auto py-5 px-6',
+            'items-center justify-between absolute flex top-0 left-0 right-0 pointer-events-auto py-3 px-6',
             props.title && props.className,
           )}
         >
           <div />
-          <h1 className="absolute left-0 h-10 text-2xl text-center font-serif w-full items-center leading-[2.5rem]">
+          <h1 className="absolute left-0 h-10 text-2xl text-center tracking-wide font-serif w-full items-center leading-[2.5rem]">
             {props.title}
           </h1>
-          <button
-            className="relative _justify-self-end"
-            onClick={() => setOpen((o) => !o)}
-          >
-            <Tile className="w-10" tile={currentTile as any} />
+          <button className="relative" onClick={() => setOpen((o) => !o)}>
+            <Tile
+              className="w-10 border-2 border-transparent"
+              tile={currentTile as any}
+            />
           </button>
         </div>
         {isOpen && (
@@ -116,6 +116,7 @@ export function Nav(props: {
     </>
   )
 }
+
 const useDisableBodyScroll = (open: boolean) => {
   useLayoutEffect(() => {
     if (open) {
