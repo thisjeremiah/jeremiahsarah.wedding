@@ -4,7 +4,11 @@ import { useState } from 'react'
 
 // ↯
 
-export function ImageGallery(props: { images: string[]; className?: string }) {
+export function ImageGallery(props: {
+  disabled?: boolean
+  images: string[]
+  className?: string
+}) {
   const [curr, setCurr] = useState(0)
 
   function setNext(inc: number = 1) {
@@ -23,18 +27,23 @@ export function ImageGallery(props: { images: string[]; className?: string }) {
   const image = props.images[curr]
 
   return (
-    <div
-      className={cx(
-        'relative rounded-sm shadow-md overflow-hidden w-full h-full',
-        props.className,
-      )}
-    >
-      <Image
-        className="rounded-sm pointer-events-none select-none"
-        src={image}
-        width={256}
-        height={256}
-      />
+    <div className={cx('relative overflow-hidden')}>
+      <div
+        className={cx(
+          'rounded-sm w-fit h-fit -mb-1.5',
+          props.disabled && 'bg-terracotta-600',
+        )}
+      >
+        <Image
+          className={cx(
+            'rounded-sm pointer-events-none select-none',
+            props.disabled && 'opacity-70 grayscale contrast-75',
+          )}
+          src={image}
+          width={256}
+          height={256}
+        />
+      </div>
       {false && props.images.length > 1 ? (
         <div className="absolute bottom-0 pt-6 bg-gradient-to-t from-black/10 to-transparent w-full">
           <div

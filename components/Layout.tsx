@@ -40,9 +40,20 @@ export default function Layout(props: {
       />
       <main className="relative pb-16 pt-20 sm:pt-0">{props.children}</main>
       <footer className="absolute bottom-0 w-full pl-6 pb-6">
-        <p className="text-center text-sm">
-          made with <span className={heartColor}>♡</span> in portland, or
-        </p>
+        <div className="flex w-full justify-center">
+          <div className="group w-fit text-sm">
+            made with{' '}
+            <div
+              className={cx(
+                'inline-block group-hover:animate-heart',
+                heartColor,
+              )}
+            >
+              ♡
+            </div>{' '}
+            in portland, or
+          </div>
+        </div>
       </footer>
     </div>
   )

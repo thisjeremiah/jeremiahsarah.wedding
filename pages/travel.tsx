@@ -54,8 +54,11 @@ const Travel: NextPage = () => {
       <div className="mx-6 sm:mx-16 h-full py-6 sm:py-16">
         <div className="flex lg:flex-row flex-col gap-10 md:gap-16 text-left w-full justify-center items-start">
           <div className="flex lg:flex-[2.5] items-center justify-center lg:pt-2">
-            <div className="w-full lg:max-w-3xl">
+            <div className="hidden sm:block w-full lg:max-w-3xl">
               <Image width={2460} height={1660} src="/travel-map.jpg" />
+            </div>
+            <div className="block sm:hidden w-full">
+              <Image width={1080} height={1185} src="/travel-map-mobile.jpg" />
             </div>
           </div>
           <div className="lg:flex-[1] flex flex-col gap-6 text-left w-full">

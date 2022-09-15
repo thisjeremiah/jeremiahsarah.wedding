@@ -62,17 +62,20 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="grid w-screen h-screen bg-fuschia-300/60 backdrop-blur-sm items-center justify-items-center"
+                className="grid text-fuschia-500 w-screen h-screen bg-fuschia-200/70 items-center justify-items-center"
               >
                 <AnimatePresence>
                   <motion.img
-                    onClick={(e) => e.stopPropagation()}
+                    onClick={(e) => {
+                      setSelectedId(nextItemId!)
+                      e.stopPropagation()
+                    }}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1, transition: { delay: 0 } }}
                     exit={{ opacity: 0, transition: { delay: 0 } }}
                     transition={{ duration: 0.2 }}
                     key={selectedItem.id}
-                    className="row-span-full col-span-full rounded-sm pointer-events-auto max-h-[90vh] max-w-[85vw]"
+                    className="row-span-full col-span-full pointer-events-auto max-h-[90vh] max-w-[85vw]"
                     src={selectedItem.src.full}
                     style={{
                       aspectRatio: `${selectedItem.width} / ${selectedItem.height}`,
@@ -84,7 +87,7 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
                     setSelectedId(nextItemId!)
                     e.stopPropagation()
                   }}
-                  className="select-none text-rose-200 cursor-pointer absolute text-2xl left-3 sm:left-4 top-[50%]"
+                  className="select-none cursor-pointer absolute text-2xl left-3 sm:left-4 top-[50%]"
                 >
                   ←
                 </div>
@@ -93,21 +96,22 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
                     setSelectedId(prevItemId!)
                     e.stopPropagation()
                   }}
-                  className="select-none text-rose-200 cursor-pointer absolute text-2xl right-3 sm:right-4 top-[50%]"
+                  className="select-none cursor-pointer absolute text-2xl right-3 sm:right-4 top-[50%]"
                 >
                   →
                 </div>
-                <div className="select-none text-rose-200 cursor-pointer absolute text-3xl top-3 right-3 sm:top-4 sm:right-4">
+                <div className="select-none cursor-pointer absolute text-3xl top-3 right-3 sm:top-4 sm:right-4">
                   ×
                 </div>
-                <div className="select-none text-rose-200 cursor-pointer absolute text-3xl bottom-3 left-3 sm:bottom-4 sm:left-4">
+                <div className="select-none cursor-pointer absolute text-3xl bottom-3 left-3 sm:bottom-4 sm:left-4">
                   <a
+                    className="flex items-center gap-1"
                     href={'/api?url=https:' + selectedItem.src.full}
                     download={downloadFilename(selectedItem.src.full)}
                     onClick={(e) => e.stopPropagation()}
                   >
                     <DownloadIcon />
-                    <p className="inline text-base ml-1">Download Image</p>
+                    <p className="inline text-base ml-1">Download</p>
                   </a>
                 </div>
               </motion.div>

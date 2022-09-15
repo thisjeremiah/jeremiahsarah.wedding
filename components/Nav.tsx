@@ -1,4 +1,5 @@
 import cx from 'classnames'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useLayoutEffect, useMemo, useState } from 'react'
@@ -20,9 +21,11 @@ export function Nav(props: {
     return link.icon
   }, [router.pathname])
 
+  const { scrollY } = useScroll()
+  const opacity = useTransform(scrollY, (latest) => latest / 100)
+
   return (
     <>
-      {}
       <div className="sm:flex hidden z-10 w-full justify-between items-center p-6">
         <Link href="/">
           <a>
@@ -69,9 +72,11 @@ export function Nav(props: {
           )}
         >
           <div />
-          <h1 className="absolute left-0 h-10 text-2xl text-center tracking-wide font-serif w-full items-center leading-[2.5rem]">
-            {props.title}
-          </h1>
+          {props.title && (
+            <div className="absolute left-0 h-10 text-2xl text-center tracking-wide font-serif w-full items-center leading-[2.5rem]">
+              {props.title}
+            </div>
+          )}
           <button
             className="flex flex-col relative items-center"
             onClick={() => setOpen((o) => !o)}
@@ -82,12 +87,16 @@ export function Nav(props: {
             />
             <p className="text-xs">menu</p>
           </button>
+          <motion.div
+            style={{ opacity }}
+            className="mt-[4.85rem] absolute w-full left-0 h-[2px] bg-current"
+          />
         </div>
         {isOpen && (
           <div className={cx('fixed inset-0 z-10', props.backdropClassName)}>
             <div
               className={cx(
-                'relative px-5 pt-4 pb-6 rounded-lg mt-5 mx-4 pointer-events-auto',
+                'relative px-5 pt-4 pb-6 rounded-lg mt-3 mx-3 pointer-events-auto',
                 'border-current',
                 props.navClassName,
               )}
@@ -137,8 +146,8 @@ const useDisableBodyScroll = (open: boolean) => {
 
 const links = [
   { href: '/', label: 'home', icon: '7' },
-  { href: '/registry', label: 'registry', icon: '2' },
   { href: '/schedule', label: 'schedule', icon: '3' },
-  { href: '/travel', label: 'travel', icon: '5' },
+  { href: '/registry', label: 'registry', icon: '2' },
   { href: '/photos', label: 'photos', icon: '6' },
+  { href: '/travel', label: 'travel', icon: '5' },
 ]

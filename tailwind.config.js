@@ -162,13 +162,13 @@ module.exports = {
         ['fog-pointer']: createPointer(colors.fog['800'], colors.fog['200']),
       },
       keyframes: {
-        shift: {
-          '0%': { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(-400vw)' },
+        heart: {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.333)' },
         },
       },
       animation: {
-        shift: 'shift 30s linear infinite',
+        heart: 'heart 1s cubic-bezier(0, 0, 0.2, 1) infinite',
       },
     },
   },
