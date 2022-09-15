@@ -23,28 +23,32 @@ export function Nav(props: {
   return (
     <>
       {}
-      <div className="sm:flex hidden z-10 w-full justify-end items-center p-6">
+      <div className="sm:flex hidden z-10 w-full justify-between items-center p-6">
+        <Link href="/">
+          <a>
+            <Tile className="w-9 text-center" tile={currentTile} />
+          </a>
+        </Link>
         <nav className="flex text-md gap-6">
-          {links.map((link) => (
-            <Link key={link.href} href={link.href}>
-              <a
-                className={cx(
-                  'w-fit border-current',
-                  router.pathname === link.href ? 'border-b-2' : '',
-                )}
-              >
-                {link.label}
-              </a>
-            </Link>
-          ))}
+          {links
+            .filter((_, i) => i > 0)
+            .map((link) => (
+              <Link key={link.href} href={link.href}>
+                <a
+                  className={cx(
+                    'w-fit border-current',
+                    router.pathname === link.href ? 'border-b-2' : '',
+                  )}
+                >
+                  {link.label}
+                </a>
+              </Link>
+            ))}
         </nav>
       </div>
       {props.title && (
         <div className="sm:flex hidden w-full justify-center">
-          <div className="flex flex-col items-center gap-1.5">
-            <Tile className="w-8 text-center" tile={currentTile} />
-            <h1 className="font-serif text-4xl tracking-wide">{props.title}</h1>
-          </div>
+          <h1 className="font-serif text-4xl tracking-wide">{props.title}</h1>
         </div>
       )}
       <nav

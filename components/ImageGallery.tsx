@@ -25,7 +25,7 @@ export function ImageGallery(props: { images: string[]; className?: string }) {
   return (
     <div
       className={cx(
-        'relative rounded-sm shadow-md overflow-hidden w-64 h-64',
+        'relative rounded-sm shadow-md overflow-hidden w-full h-full',
         props.className,
       )}
     >

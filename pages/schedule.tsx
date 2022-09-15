@@ -10,25 +10,27 @@ const Schedule: NextPage = () => {
       navBackdropClassName="bg-slate-400/50"
     >
       <div className="text-center w-full">
-        <div className="min-h-[20rem] h-[calc(100vh-8.75rem)] sm:h-[calc(100vh-9rem)] flex justify-center items-center pointer-events-none">
+        <div className="min-h-[20rem] h-[calc(100vh-8.75rem)] sm:h-[calc(100vh-12rem)] flex justify-center items-center pointer-events-none">
           <div className="flex flex-col sm:flex-row gap-16 sm:gap-32">
             <div className="w-62">
-              <h2 className="font-serif text-lg sm:text-xl">
+              <h2 className="font-serif text-xl sm:text-2xl pb-0.5">
                 Rehearsal Dinner
               </h2>
-              <p className="lowercase text-base sm:text-lg">may 19 2023</p>
-              <p className="lowercase text-base sm:text-lg">* location tba</p>
-              <p className="lowercase text-base sm:text-lg">* time tba</p>
+              <span className="lowercase text-base sm:text-lg">
+                <p>may 19 2023</p>
+                <p>* location tba</p>
+                <p>* time tba</p>
+              </span>
             </div>
             <div className="w-62">
-              <h2 className="font-serif text-lg sm:text-xl">
+              <h2 className="font-serif text-xl sm:text-2xl pb-0.5">
                 Ceremony & Reception
               </h2>
-              <p className="lowercase text-base sm:text-lg">may 20 2023</p>
-              <p className="lowercase text-base sm:text-lg">
-                villa & vine, santa barbara, ca
-              </p>
-              <p className="lowercase text-base sm:text-lg">* time tba</p>
+              <span className="lowercase text-base sm:text-lg">
+                <p>may 20 2023</p>
+                <p>villa & vine, santa barbara, ca</p>
+                <p>* time tba</p>
+              </span>
             </div>
           </div>
         </div>

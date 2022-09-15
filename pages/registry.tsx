@@ -21,8 +21,12 @@ const Registry: NextPage<RegistryPageProps> = (props) => {
     >
       <div
         className={cx(
-          'grid px-11 place-items-center py-8 gap-12',
-          '2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2',
+          'grid place-items-center',
+          'md:px-11 md:py-8',
+          'sm:px-6 sm:py-8',
+          'px-6 py-4',
+          '2xl:grid-cols-6 xl:grid-cols-5 lg:grid-cols-4 sm:grid-cols-3',
+          'grid-cols-2 gap-6',
           'items-start',
         )}
       >
@@ -40,7 +44,7 @@ function RegistryGridItem(props: { item: RegistryItem }) {
     : `$${props.item.price}`
 
   return (
-    <div className="w-64 lowercase">
+    <div className="lowercase">
       <a
         target="_blank"
         rel="noreferrer"

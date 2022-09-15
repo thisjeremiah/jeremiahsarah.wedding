@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
+import Image from 'next/image'
 import Layout from '../components/Layout'
-import Title from '../components/Title'
 
 const airports = [
   { airport: 'Santa Barbara Airport (SBA)', info: '9 miles from venue' },
@@ -51,34 +51,41 @@ const Travel: NextPage = () => {
       navClassName="bg-lemon-700"
       className="bg-lemon-700 text-white cursor-lemon"
     >
-      <div className="mx-16 h-full py-16">
-        <div className="flex sm:flex-row flex-col gap-10 sm:gap-24 text-left w-full justify-center">
-          <div>
-            <h2 className="font-serif text-2xl mb-2">Airports</h2>
-            <ul className="list-none text-left">
-              {airports.map((airport) => (
-                <li key={airport.airport} className="mb-2">
-                  <p className="text-lg">{airport.airport}</p>
-                  <p className="text-sm">{airport.info}</p>
-                </li>
-              ))}
-            </ul>
+      <div className="mx-6 sm:mx-16 h-full py-6 sm:py-16">
+        <div className="flex lg:flex-row flex-col gap-10 md:gap-16 text-left w-full justify-center items-start">
+          <div className="flex lg:flex-[2.5] items-center justify-center lg:pt-2">
+            <div className="w-full lg:max-w-3xl">
+              <Image width={2460} height={1660} src="/travel-map.jpg" />
+            </div>
           </div>
-          <div>
-            <h2 className="font-serif text-2xl mb-2">Hotels</h2>
-            <ul className="list-none text-left text-lg">
-              {hotels.map((hotel) => (
-                <li key={hotel.name} className="mb-2">
-                  <p className="text-lg">
-                    <a target="_blank" href={hotel.link} rel="noreferrer">
-                      {hotel.name}
-                      {' ↗'}
-                    </a>
-                  </p>
-                  <p className="text-sm">Price: {hotel.cost}</p>
-                </li>
-              ))}
-            </ul>
+          <div className="lg:flex-[1] flex flex-col gap-6 text-left w-full">
+            <div>
+              <h2 className="font-serif text-2xl mb-2">Hotels</h2>
+              <ul className="list-none text-left text-lg">
+                {hotels.map((hotel) => (
+                  <li key={hotel.name} className="mb-2">
+                    <p className="text-lg">
+                      <a target="_blank" href={hotel.link} rel="noreferrer">
+                        {hotel.name}
+                        {' ↗'}
+                      </a>
+                    </p>
+                    <p className="text-sm">Price: {hotel.cost}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h2 className="font-serif text-2xl mb-2">Airports</h2>
+              <ul className="list-none text-left">
+                {airports.map((airport) => (
+                  <li key={airport.airport} className="mb-2">
+                    <p className="text-lg">{airport.airport}</p>
+                    <p className="text-sm">{airport.info}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
