@@ -67,30 +67,34 @@ export function Nav(props: {
       >
         <div
           className={cx(
-            'items-center justify-between absolute flex top-0 left-0 right-0 pointer-events-auto py-3 px-6',
+            'flex flex-col absolute top-0 left-0 right-0 pointer-events-auto',
             props.title && props.className,
           )}
         >
-          <div />
+          <div className="flex items-center justify-between px-6 py-3">
+            <div />
+            {props.title && (
+              <div className="absolute left-0 h-10 text-2xl text-center tracking-wide font-serif w-full items-center leading-[2.5rem]">
+                {props.title}
+              </div>
+            )}
+            <button
+              className="flex flex-col relative items-center"
+              onClick={() => setOpen((o) => !o)}
+            >
+              <Tile
+                className="w-10 border-2 border-transparent"
+                tile={currentTile}
+              />
+              <p className="text-xs">menu</p>
+            </button>
+          </div>
           {props.title && (
-            <div className="absolute left-0 h-10 text-2xl text-center tracking-wide font-serif w-full items-center leading-[2.5rem]">
-              {props.title}
-            </div>
-          )}
-          <button
-            className="flex flex-col relative items-center"
-            onClick={() => setOpen((o) => !o)}
-          >
-            <Tile
-              className="w-10 border-2 border-transparent"
-              tile={currentTile as any}
+            <motion.div
+              style={{ opacity }}
+              className="w-full h-[2px] bg-current"
             />
-            <p className="text-xs">menu</p>
-          </button>
-          <motion.div
-            style={{ opacity }}
-            className="mt-[4.85rem] absolute w-full left-0 h-[2px] bg-current"
-          />
+          )}
         </div>
         {isOpen && (
           <div className={cx('fixed inset-0 z-10', props.backdropClassName)}>
@@ -117,7 +121,7 @@ export function Nav(props: {
                     </Link>
                   ))}
                 </div>
-                <div className="">
+                <div>
                   <button
                     onClick={() => setOpen(false)}
                     className="text-3xl leading-none"
