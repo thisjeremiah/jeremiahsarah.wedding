@@ -27,16 +27,16 @@ export function ImageGallery(props: {
   const image = props.images[curr]
 
   return (
-    <div className={cx('relative overflow-hidden')}>
+    <div className="relative overflow-hidden">
       <div
         className={cx(
-          'rounded-sm w-fit h-fit -mb-1.5',
+          'rounded-sm w-fit flex overflow-hidden',
           props.disabled && 'bg-terracotta-600',
         )}
       >
         <Image
           className={cx(
-            'rounded-sm pointer-events-none select-none',
+            'pointer-events-none select-none',
             props.disabled && 'opacity-70 grayscale contrast-75',
           )}
           src={image}
