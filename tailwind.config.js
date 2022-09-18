@@ -139,6 +139,7 @@ module.exports = {
         sans: ['Work Sans', ...defaultTheme.fontFamily.sans],
         serif: ['Cooper', ...defaultTheme.fontFamily.serif],
         fairplex: ['fairplex-narrow', ...defaultTheme.fontFamily.serif],
+        ['fairplex-wide']: ['fairplex-wide', ...defaultTheme.fontFamily.serif],
       },
       colors: colors,
       cursor: {

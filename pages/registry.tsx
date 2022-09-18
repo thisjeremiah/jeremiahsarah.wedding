@@ -54,19 +54,24 @@ const Registry: NextPage<RegistryPageProps> = (props) => {
         <div className="flex justify-end">
           <div className="flex pb-6 gap-2 items-center">
             <p className="text-base">Sort by:</p>
-            <select
-              onChange={(e) => {
-                setSort(e.currentTarget.value as RegistrySort)
-              }}
-              className="bg-transparent text-base border-[1.5px] rounded p-1 outline-none"
-              value={sort}
-            >
-              {Object.entries(registrySorts).map(([key, value]) => (
-                <option key={key} value={key}>
-                  {value.label}
-                </option>
-              ))}
-            </select>
+            <div className="relative">
+              <select
+                onChange={(e) => {
+                  setSort(e.currentTarget.value as RegistrySort)
+                }}
+                className="[-webkit-appearance:none] [-moz-appearance:none] bg-transparent text-base border-[1.5px] rounded py-1 pl-2 pr-6 outline-none"
+                value={sort}
+              >
+                {Object.entries(registrySorts).map(([key, value]) => (
+                  <option key={key} value={key}>
+                    {value.label}
+                  </option>
+                ))}
+              </select>
+              <div className="absolute w-2 h-3 leading-[0.2rem] text-lg leading-none top-[calc(50%-0.33rem)] right-2.5">
+                ⌄
+              </div>
+            </div>
           </div>
         </div>
         <div
@@ -102,7 +107,7 @@ function RegistryGridItem(props: { item: RegistryItem }) {
             images={props.item.images.map((image) => image.medium)}
           />
           {props.item.purchased && (
-            <div className="text-sm leading-none tracking-wide uppercase absolute top-2 right-2 bg-fuschia-600 py-1 px-2 rounded font-fairplex">
+            <div className="text-sm leading-none tracking-wide uppercase absolute top-2 right-2 bg-fuschia-600 py-1 px-2 rounded font-fairplex-wide font-bold">
               Purchased
             </div>
           )}
@@ -112,7 +117,7 @@ function RegistryGridItem(props: { item: RegistryItem }) {
             <p className="font-medium text-base">{props.item.brand.name}</p>
           ) : undefined}
           <p className="text-base">{props.item.name}&nbsp;↗</p>
-          <p className="text-base text-lemon-400 font-serif">{price}</p>
+          <p className="text-base text-lemon-500">{price}</p>
         </div>
       </a>
     </div>
