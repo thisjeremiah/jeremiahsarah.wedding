@@ -1,6 +1,8 @@
+import Image from 'next/image'
 import React, { useLayoutEffect, useMemo } from 'react'
 import cx from 'classnames'
 import { Nav } from './Nav'
+import { Monogram } from './Monogram'
 
 export default function Layout(props: {
   children: React.ReactNode
@@ -38,9 +40,14 @@ export default function Layout(props: {
         navClassName={props.navClassName}
         className={props.className}
       />
-      <main className="relative pb-16 pt-20 sm:pt-0">{props.children}</main>
+      <main className="relative pb-24 pt-20 sm:pt-0">{props.children}</main>
       <footer className="absolute bottom-0 w-full pl-6 pb-6">
-        <div className="flex w-full justify-center">
+        <div className="flex w-full justify-center flex-col items-center">
+          {props.title && (
+            <div className="w-6 pb-3 -ml-3">
+              <Monogram />
+            </div>
+          )}
           <div className="group w-fit text-sm">
             made with{' '}
             <div

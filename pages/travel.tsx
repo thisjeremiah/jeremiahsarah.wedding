@@ -56,13 +56,13 @@ const Travel: NextPage = () => {
           <div className="flex lg:flex-[2.5] items-center justify-center lg:pt-2">
             <div className="hidden sm:block w-full lg:max-w-3xl select-none">
               <Image
-                src={require('../public/travel-map.jpg')}
+                src={require('../public/travel-map-yellow.jpg')}
                 placeholder="blur"
               />
             </div>
             <div className="block sm:hidden w-full select-none">
               <Image
-                src={require('../public/travel-map-mobile.jpg')}
+                src={require('../public/travel-map-yellow-mobile.jpg')}
                 placeholder="blur"
               />
             </div>
