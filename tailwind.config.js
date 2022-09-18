@@ -131,8 +131,7 @@ module.exports = {
   ],
   theme: {
     cursor: {
-      default: createCursor(colors.cobalt['600'], 'white'),
-      pointer: createPointer('white', colors.cobalt['600']),
+      // pointer: createPointer('white', colors.cobalt['600']),
     },
     extend: {
       fontFamily: {
@@ -143,6 +142,7 @@ module.exports = {
       },
       colors: colors,
       cursor: {
+        cobalt: createCursor(colors.cobalt['600'], 'white'),
         rose: createCursor(colors.rose['800'], colors.rose['200']),
         berry: createCursor(colors.berry['800'], colors.berry['200']),
         lemon: createCursor(colors.lemon['800'], colors.lemon['200']),

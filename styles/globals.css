@@ -3,13 +3,9 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    @apply cursor-default;
-  }
-
-  a {
-    @apply cursor-pointer;
-  }
+  /* a { */
+  /* @apply cursor-pointer; */
+  /* } */
 }
 
 @layer utilities {

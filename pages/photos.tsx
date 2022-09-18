@@ -84,7 +84,7 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
                 </AnimatePresence>
                 <div
                   onClick={(e) => {
-                    setSelectedId(nextItemId!)
+                    setSelectedId(prevItemId!)
                     e.stopPropagation()
                   }}
                   className="select-none cursor-pointer absolute text-2xl left-3 sm:left-4 top-[50%] w-8 h-8 text-center leading-8 bg-fuschia-50 rounded-full"
@@ -93,7 +93,7 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
                 </div>
                 <div
                   onClick={(e) => {
-                    setSelectedId(prevItemId!)
+                    setSelectedId(nextItemId!)
                     e.stopPropagation()
                   }}
                   className="select-none cursor-pointer absolute text-2xl right-3 sm:right-4 top-[50%] bg-fuschia-50 rounded-full w-8 h-8 text-center leading-8"

@@ -34,11 +34,35 @@ const Registry: NextPage<RegistryPageProps> = (props) => {
       return props.items
     } else if (sort === 'priceLowToHigh') {
       const result = [...props.items]
-      result.sort((a, b) => (b.price < a.price ? 1 : -1))
+      result.sort((a, b) => {
+        if (a.cash) {
+          if (b.cash) {
+            return 1
+          } else {
+            return -1
+          }
+        }
+        if (b.cash) {
+          return 1
+        }
+        return b.price < a.price ? 1 : -1
+      })
       return result
     } else {
       const result = [...props.items]
-      result.sort((a, b) => (a.price < b.price ? 1 : -1))
+      result.sort((a, b) => {
+        if (b.cash) {
+          if (a.cash) {
+            return 1
+          } else {
+            return -1
+          }
+        }
+        if (a.cash) {
+          return 1
+        }
+        return a.price < b.price ? 1 : -1
+      })
       return result
     }
   }, [props.items, sort])

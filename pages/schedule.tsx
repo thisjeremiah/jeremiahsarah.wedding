@@ -6,7 +6,7 @@ const Schedule: NextPage = () => {
   return (
     <Layout
       title="Schedule"
-      className="bg-slate-300 text-cobalt-500 cursor-slate selection:bg-white"
+      className="bg-slate-300 text-cobalt-500 cursor-cobalt selection:bg-white"
       navClassName="bg-slate-200"
       navBackdropClassName="bg-slate-400/50"
     >
