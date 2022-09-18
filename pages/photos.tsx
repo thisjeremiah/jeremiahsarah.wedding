@@ -75,7 +75,7 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
                     exit={{ opacity: 0, transition: { delay: 0 } }}
                     transition={{ duration: 0.2 }}
                     key={selectedItem.id}
-                    className="row-span-full col-span-full pointer-events-auto max-h-[90vh] max-w-[85vw]"
+                    className="bg-fuschia-500 row-span-full col-span-full pointer-events-auto max-h-[90vh] max-w-[85vw]"
                     src={selectedItem.src.full}
                     style={{
                       aspectRatio: `${selectedItem.width} / ${selectedItem.height}`,
@@ -87,7 +87,7 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
                     setSelectedId(nextItemId!)
                     e.stopPropagation()
                   }}
-                  className="select-none cursor-pointer absolute text-2xl left-3 sm:left-4 top-[50%]"
+                  className="select-none cursor-pointer absolute text-2xl left-3 sm:left-4 top-[50%] w-8 h-8 text-center leading-8 bg-fuschia-50 rounded-full"
                 >
                   ←
                 </div>
@@ -96,14 +96,14 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
                     setSelectedId(prevItemId!)
                     e.stopPropagation()
                   }}
-                  className="select-none cursor-pointer absolute text-2xl right-3 sm:right-4 top-[50%]"
+                  className="select-none cursor-pointer absolute text-2xl right-3 sm:right-4 top-[50%] bg-fuschia-50 rounded-full w-8 h-8 text-center leading-8"
                 >
                   →
                 </div>
-                <div className="select-none cursor-pointer absolute text-3xl top-3 right-3 sm:top-4 sm:right-4">
+                <div className="select-none cursor-pointer absolute text-3xl top-3 right-3 sm:top-4 sm:right-4 h-8 w-8 rounded-full text-center bg-fuschia-50 leading-8">
                   ×
                 </div>
-                <div className="select-none cursor-pointer absolute text-3xl bottom-3 left-3 sm:bottom-4 sm:left-4">
+                <div className="select-none cursor-pointer absolute text-3xl bottom-3 left-3 sm:bottom-4 sm:left-4 bg-fuschia-50 rounded-full pl-3 pr-4 py-1 ">
                   <a
                     className="flex items-center gap-1"
                     href={'/api?url=https:' + selectedItem.src.full}

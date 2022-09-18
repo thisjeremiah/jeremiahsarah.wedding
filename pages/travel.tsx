@@ -49,16 +49,22 @@ const Travel: NextPage = () => {
       title="Travel"
       navBackdropClassName="bg-lemon-400/50"
       navClassName="bg-lemon-700"
-      className="bg-lemon-700 text-white cursor-lemon"
+      className="bg-lemon-700 text-white cursor-lemon selection:bg-terracotta-500"
     >
       <div className="mx-6 sm:mx-16 h-full py-6 sm:py-16">
         <div className="flex lg:flex-row flex-col gap-10 md:gap-16 text-left w-full justify-center items-start">
           <div className="flex lg:flex-[2.5] items-center justify-center lg:pt-2">
-            <div className="hidden sm:block w-full lg:max-w-3xl">
-              <Image width={2460} height={1660} src="/travel-map.jpg" />
+            <div className="hidden sm:block w-full lg:max-w-3xl select-none">
+              <Image
+                src={require('../public/travel-map.jpg')}
+                placeholder="blur"
+              />
             </div>
-            <div className="block sm:hidden w-full">
-              <Image width={1080} height={1185} src="/travel-map-mobile.jpg" />
+            <div className="block sm:hidden w-full select-none">
+              <Image
+                src={require('../public/travel-map-mobile.jpg')}
+                placeholder="blur"
+              />
             </div>
           </div>
           <div className="lg:flex-[1] flex flex-col gap-6 text-left w-full">

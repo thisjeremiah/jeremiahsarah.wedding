@@ -48,7 +48,7 @@ const Registry: NextPage<RegistryPageProps> = (props) => {
       title="Registry"
       navClassName="bg-terracotta-600"
       navBackdropClassName="bg-terracotta-400/50"
-      className="bg-terracotta-500 text-white cursor-terracotta"
+      className="bg-terracotta-500 text-white cursor-terracotta selection:bg-lemon-700"
     >
       <div className="pb-6 md:px-11 sm:px-6 sm:pt-10 px-6 pt-3">
         <div className="flex justify-end">
@@ -107,7 +107,7 @@ function RegistryGridItem(props: { item: RegistryItem }) {
             images={props.item.images.map((image) => image.medium)}
           />
           {props.item.purchased && (
-            <div className="text-sm leading-none tracking-wide uppercase absolute top-2 right-2 bg-fuschia-600 py-1 px-2 rounded font-fairplex-wide font-bold">
+            <div className="text-sm leading-none tracking-wide uppercase absolute top-2 right-2 bg-fuschia-600 py-1 px-2 rounded font-fairplex-wide font-bold select-none">
               Purchased
             </div>
           )}

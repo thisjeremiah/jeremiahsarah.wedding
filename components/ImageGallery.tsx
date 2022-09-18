@@ -31,7 +31,7 @@ export function ImageGallery(props: {
       <div
         className={cx(
           'rounded-sm w-fit flex overflow-hidden',
-          props.disabled && 'bg-terracotta-600',
+          props.disabled ? 'bg-terracotta-600' : 'bg-terracotta-700',
         )}
       >
         <Image

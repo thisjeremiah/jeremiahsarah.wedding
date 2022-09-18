@@ -6,7 +6,7 @@ const Schedule: NextPage = () => {
   return (
     <Layout
       title="Schedule"
-      className="bg-slate-300 text-cobalt-500 cursor-slate"
+      className="bg-slate-300 text-cobalt-500 cursor-slate selection:bg-white"
       navClassName="bg-slate-200"
       navBackdropClassName="bg-slate-400/50"
     >
@@ -15,8 +15,12 @@ const Schedule: NextPage = () => {
           <div className="flex flex-col sm:flex-row gap-16 sm:gap-32">
             <div className="w-62">
               <div className="w-[16rem] h-[16rem] relative">
-                <Image layout="fill" src="/santa-barbara.jpg" />
-                <div className="absolute flex flex-col items-center justify-center left-[calc(50%-2rem)] w-16 h-16 bg-terracotta-500 top-[-1rem] text-white">
+                <Image
+                  layout="fill"
+                  src={require('../public/santa-barbara.jpg')}
+                  placeholder="blur"
+                />
+                <div className="absolute flex flex-col items-center justify-center left-[calc(50%-2rem)] w-16 h-16 bg-terracotta-500 top-[-1rem] text-white select-none">
                   <div className="text-sm">may</div>
                   <div className="font-serif text-3xl leading-none">19</div>
                 </div>
@@ -32,8 +36,12 @@ const Schedule: NextPage = () => {
             </div>
             <div className="w-62">
               <div className="w-[16rem] h-[16rem] relative">
-                <Image layout="fill" src="/villa-and-vine.jpg" />
-                <div className="absolute flex flex-col items-center justify-center left-[calc(50%-2rem)] w-16 h-16 bg-terracotta-500 top-[-1rem] text-white">
+                <Image
+                  layout="fill"
+                  src={require('../public/villa-and-vine.jpg')}
+                  placeholder="blur"
+                />
+                <div className="absolute flex flex-col items-center justify-center left-[calc(50%-2rem)] w-16 h-16 bg-terracotta-500 top-[-1rem] text-white select-none">
                   <div className="text-sm">may</div>
                   <div className="font-serif text-3xl leading-none">20</div>
                 </div>

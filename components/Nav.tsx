@@ -26,7 +26,7 @@ export function Nav(props: {
 
   return (
     <>
-      <div className="sm:flex hidden z-10 w-full justify-between items-center p-6">
+      <div className="sm:flex relative hidden z-10 w-full justify-between items-center p-6">
         <Link href="/">
           <a>
             <Tile className="w-9 text-center" tile={currentTile} />

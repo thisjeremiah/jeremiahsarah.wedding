@@ -12,7 +12,7 @@ const Home: NextPage = () => {
       navClassName="text-white bg-cobalt-600 border-white"
     >
       <PetalAnimation />
-      <div className="fixed pointer-events-none inset-0 items-center text-center h-full w-full flex flex-col justify-center">
+      <div className="fixed _pointer-events-none inset-0 items-center text-center h-full w-full flex flex-col justify-center">
         <div className="z-1 relative w-[400px] flex sm:flex-row items-center sm:items-end flex-col-reverse justify-between mt-[3rem] sm:mt-[1rem]">
           <div className="flex flex-col justify-end pb-8 text-left">
             <div className="pb-4 justify-center flex">
@@ -21,7 +21,7 @@ const Home: NextPage = () => {
               </div>
             </div>
             <div className="ml-1">
-              <h2 className="text-lg leading-loose lowercase drop-shadow-sm">
+              <h2 className="text-lg leading-tight py-1.5 lowercase drop-shadow-sm">
                 May 20 2023
               </h2>
               <h2 className="text-lg leading-tight lowercase drop-shadow-sm">
@@ -30,8 +30,13 @@ const Home: NextPage = () => {
             </div>
           </div>
           <div className="z-[-3] sm:ml-[-2.39rem] sm:mb-0 -mb-4">
-            <div className="w-60 flex overflow-hidden drop-shadow-sm">
-              <Image src="/engagement-photo.jpg" width={756} height={1058} />
+            <div className="w-60 bg-cobalt-600 flex overflow-hidden drop-shadow-sm">
+              <Image
+                src={require('../public/engagement-photo.jpg')}
+                quality={90}
+                priority
+                placeholder="blur"
+              />
             </div>
           </div>
         </div>
