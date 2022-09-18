@@ -40,3 +40,8 @@
   font-family: 'Cooper';
   src: url('Cooper\ Medium\ BT.ttf');
 }
+
+@font-face {
+  font-family: 'Work Sans';
+  src: url('WorkSansWedding-Regular.ttf');
+}

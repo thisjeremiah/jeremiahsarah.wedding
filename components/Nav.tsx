@@ -51,7 +51,9 @@ export function Nav(props: {
       </div>
       {props.title && (
         <div className="sm:flex hidden w-full justify-center">
-          <h1 className="font-serif text-4xl tracking-wide">{props.title}</h1>
+          <h1 className="font-fairplex small-caps tracking-wider font-black uppercase text-5xl [font-variant:all-small-caps]">
+            {props.title}
+          </h1>
         </div>
       )}
       <nav
@@ -74,7 +76,7 @@ export function Nav(props: {
           <div className="flex items-center justify-between px-6 py-3">
             <div />
             {props.title && (
-              <div className="absolute left-0 h-10 text-2xl text-center tracking-wide font-serif w-full items-center leading-[2.5rem]">
+              <div className="absolute left-0 h-10 text-[2.75rem] text-center w-full items-center leading-[2.5rem] font-fairplex small-caps tracking-wider font-black uppercase [font-variant:all-small-caps]">
                 {props.title}
               </div>
             )}
