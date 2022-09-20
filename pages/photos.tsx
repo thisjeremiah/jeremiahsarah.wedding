@@ -62,7 +62,7 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="grid text-fuschia-500 w-screen h-screen bg-fuschia-200/70 items-center justify-items-center"
+                className="grid text-fuschia-500 w-full h-full bg-fuschia-200/70 items-center justify-items-center"
               >
                 <AnimatePresence>
                   <motion.img
