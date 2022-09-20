@@ -41,10 +41,10 @@ export default function Layout(props: {
         className={props.className}
       />
       <main className="relative pb-24 pt-20 sm:pt-0">{props.children}</main>
-      <footer className="absolute bottom-0 w-full pl-6 pb-6">
+      <footer className="absolute left-0 bottom-0 right-0 px-6 pb-6">
         <div className="flex w-full justify-center flex-col items-center">
           {props.title && (
-            <div className="w-6 pb-3 -ml-3">
+            <div className="w-6 mb-3">
               <Monogram />
             </div>
           )}
