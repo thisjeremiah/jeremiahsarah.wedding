@@ -230,25 +230,28 @@ export async function getStaticProps() {
 
   const data: { default_collection: ServerRegistryItem[] } = await res.json()
 
-  const items: RegistryItem[] = data.default_collection.map((item) => ({
-    id: item.item_id,
-    name: item.name,
-    price: Math.round(item.price),
-    cash: item.type === 'CASH',
-    description: item.description,
-    images: item.images,
-    mostWanted: item.most_wanted,
-    requestedQuantity: item.requested_quantity,
-    purchased:
-      item.contributions.fulfilled ||
-      item.contributions.mark_fulfilled ||
-      item.contributions.show_as_fulfilled,
-    brand: {
-      name: item.brand?.name ?? null,
-      description: item.brand?.description ?? null,
-      image_url: item.brand?.image_url ?? null,
-    },
-  }))
+  const items: RegistryItem[] = data.default_collection
+    // Filter out items that are out of stock
+    .filter((item) => !item.stock_message)
+    .map((item) => ({
+      id: item.item_id,
+      name: item.name,
+      price: Math.round(item.price),
+      cash: item.type === 'CASH',
+      description: item.description,
+      images: item.images,
+      mostWanted: item.most_wanted,
+      requestedQuantity: item.requested_quantity,
+      purchased:
+        item.contributions.fulfilled ||
+        item.contributions.mark_fulfilled ||
+        item.contributions.show_as_fulfilled,
+      brand: {
+        name: item.brand?.name ?? null,
+        description: item.brand?.description ?? null,
+        image_url: item.brand?.image_url ?? null,
+      },
+    }))
 
   return {
     props: {
