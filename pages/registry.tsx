@@ -237,7 +237,7 @@ export async function getStaticProps() {
       id: item.item_id,
       name: item.name,
       price: Math.round(item.price),
-      cash: item.type === 'CASH',
+      cash: item.type === 'CASH' && item.button_cta === 'Contribute',
       description: item.description,
       images: item.images,
       mostWanted: item.most_wanted,
