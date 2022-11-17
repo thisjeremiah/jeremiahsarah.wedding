@@ -16,8 +16,9 @@ const Schedule: NextPage = () => {
             <div className="w-62">
               <div className="w-[16rem] h-[16rem] relative">
                 <Image
+                  alt="La Paloma"
                   layout="fill"
-                  src={require('../public/santa-barbara.jpg')}
+                  src={require('../public/la-paloma.jpg')}
                   placeholder="blur"
                 />
                 <div className="absolute flex flex-col items-center justify-center left-[calc(50%-2rem)] w-16 h-16 bg-terracotta-500 top-[-1rem] text-white select-none">
@@ -30,13 +31,14 @@ const Schedule: NextPage = () => {
               </h2>
               <span className="lowercase text-base sm:text-lg">
                 <p>may 19 2023</p>
-                <p>* location tba</p>
-                <p>* time tba</p>
+                <p>la paloma, santa barbara, ca</p>
+                <p>6pm</p>
               </span>
             </div>
             <div className="w-62">
               <div className="w-[16rem] h-[16rem] relative">
                 <Image
+                  alt="Villa and Vine"
                   layout="fill"
                   src={require('../public/villa-and-vine.jpg')}
                   placeholder="blur"
