@@ -210,7 +210,7 @@ type RegistryItem = {
   purchased: boolean
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const res = await fetch(
     'https://www.zola.com/web-api/v1/registry-collection/search',
     {
@@ -257,7 +257,6 @@ export async function getStaticProps() {
     props: {
       items,
     },
-    revalidate: 10,
   }
 }
 

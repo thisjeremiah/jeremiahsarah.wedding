@@ -1,8 +1,13 @@
 import cx from 'classnames'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import {
+  motion,
+  useIsomorphicLayoutEffect,
+  useScroll,
+  useTransform,
+} from 'framer-motion'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useLayoutEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import Tile from './Tile/Tile'
 
 export function Nav(props: {
@@ -141,7 +146,7 @@ export function Nav(props: {
 }
 
 const useDisableBodyScroll = (open: boolean) => {
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden'
     } else {

@@ -1,7 +1,11 @@
 import cx from 'classnames'
-import { AnimatePresence, motion } from 'framer-motion'
+import {
+  AnimatePresence,
+  motion,
+  useIsomorphicLayoutEffect,
+} from 'framer-motion'
 import type { NextPage } from 'next'
-import { useEffect, useLayoutEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { DownloadIcon } from '../components/DownloadIcon'
 import { downloadFilename, DownloadImage } from '../components/DownloadImage'
 import Layout from '../components/Layout'
@@ -263,7 +267,7 @@ export async function getStaticProps() {
 }
 
 const useDisableBodyScroll = (open: boolean) => {
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden'
     } else {

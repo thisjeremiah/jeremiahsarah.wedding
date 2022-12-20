@@ -1,8 +1,8 @@
-import Image from 'next/image'
-import React, { useLayoutEffect, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import cx from 'classnames'
 import { Nav } from './Nav'
 import { Monogram } from './Monogram'
+import { useIsomorphicLayoutEffect } from 'framer-motion'
 
 export default function Layout(props: {
   children: React.ReactNode
@@ -11,7 +11,7 @@ export default function Layout(props: {
   navClassName?: string
   navBackdropClassName?: string
 }) {
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (props.className) {
       document.querySelector('html')!.className = props.className
     }

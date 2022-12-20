@@ -32,6 +32,7 @@ const Home: NextPage = () => {
           <div className="z-[-3] sm:ml-[-2.39rem] sm:mb-0 -mb-4">
             <div className="w-60 bg-cobalt-600 flex overflow-hidden drop-shadow-sm">
               <Image
+                alt="Engagement Photo"
                 src={require('../public/engagement-photo.jpg')}
                 quality={90}
                 priority
