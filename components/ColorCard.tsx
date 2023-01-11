@@ -1,22 +1,52 @@
 import Tile from './Tile/Tile'
 import cx from 'classnames'
+import { useInView } from 'framer-motion'
+import { useRef, useEffect } from 'react'
+import { useIsMobile } from '../utils/isMobile'
 
 export type ColorCardProps = {
   tile: '1' | '2' | '3' | '4' | '5' | '6' | '7'
   title: string
   description: string
   colorClassName: string
-  onHover?(): void
+  onFocus?(): void
+  onUnfocus?(): void
+  focused?: boolean
 }
 
 export function ColorCard(props: ColorCardProps) {
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, {
+    amount: 'all',
+    margin: '-75px 0px -75px 0px',
+  })
+  const isMobile = useIsMobile()
+
+  useEffect(() => {
+    if (inView) {
+      if (isMobile) {
+        props.onFocus?.()
+      }
+    }
+  }, [inView, isMobile])
+
   return (
     <div
-      onMouseEnter={props.onHover}
+      ref={ref}
+      onMouseEnter={() => {
+        if (!isMobile) {
+          props.onFocus?.()
+        }
+      }}
+      onMouseOver={(e) => {
+        e.preventDefault()
+        e.stopPropagation()
+      }}
       className={cx(
-        'hover:scale-[105%] duration-500 transition transform',
+        props.focused ? 'sm:scale-105 scale-110' : 'scale-100',
+        'duration-500 transition',
         'bg-terracotta-50 bg-opacity-[95%] flex flex-col backdrop:bg-blur rounded-sm selection:bg-white gap-3',
-        'sm:w-80 sm:h-60 sm:p-5 sm:justify-start',
+        'sm:w-80 sm:h-60 sm:p-6 sm:justify-start',
         'w-80 h-80 justify-between p-8',
       )}
     >

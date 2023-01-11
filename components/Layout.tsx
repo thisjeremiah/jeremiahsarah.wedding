@@ -53,8 +53,8 @@ export default function Layout(props: {
               <Monogram />
             </div>
           )}
-          <div className="group w-fit text-sm">
-            made with{' '}
+          <div className="select-none translate-x-[7px] lowercase group w-fit text-sm">
+            Made with{' '}
             <div
               className={cx(
                 'inline-block group-hover:animate-heart',
@@ -63,7 +63,7 @@ export default function Layout(props: {
             >
               ♡
             </div>{' '}
-            in portland, or
+            in Portland, OR
           </div>
         </div>
       </footer>

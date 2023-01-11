@@ -1,26 +1,16 @@
 import type { NextPage } from 'next'
 import { Gradient, normalizeColor } from '../utils/Gradient'
 import Layout from '../components/Layout'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ColorCard, ColorCardProps } from '../components/ColorCard'
 import { animate, useMotionValue } from 'framer-motion'
 import { rgba2hex } from '../utils/utils'
+import { useIsMobile } from '../utils/isMobile'
+import { useWindowScroll } from 'react-use'
 
 const stripHex = (hex: string) => `0x${hex.substring(1)}`
 
-// const hexColors = {
-// magenta: '#cc1c55',
-// blossom: '#efc9d1',
-// tannish: '#e7cabd',
-// terracotta: '#c47449',
-// middleBrown: '#d48369',
-// lemon: '#f1d895',
-// sky: '#92c0f1',
-// cobalt: '#2c3c81',
-// gray: '#d4d1cc',
-// }
-
-const rgbaColors = {
+const colors = {
   magenta: 'rgba(204, 28, 85, 1)',
   blossom: 'rgba(239, 201, 209, 1)',
   tannish: 'rgba(231, 202, 189, 1)',
@@ -32,38 +22,68 @@ const rgbaColors = {
   gray: 'rgba(212, 209, 204, 1)',
 }
 
+const SCROLL_THRESHOLD = 50
+const DEFAULT_TITLE = 'DEFAULT'
+const COLOR_TRANSITION = 1 //
+
+const colorLookup: Record<string, string[]> = {
+  Fuschia: [colors.magenta, colors.blossom, colors.magenta, colors.blossom],
+  Blossom: [colors.blossom, colors.magenta, colors.blossom, colors.magenta],
+  Lemon: [colors.lemon, colors.terracotta, colors.lemon, colors.terracotta],
+  Cobalt: [colors.cobalt, colors.sky, colors.cobalt, colors.sky],
+  Slate: [colors.sky, colors.cobalt, colors.sky, colors.cobalt],
+  Terracotta: [
+    colors.terracotta,
+    colors.lemon,
+    colors.terracotta,
+    colors.lemon,
+  ],
+  [DEFAULT_TITLE]: [colors.sky, colors.blossom, colors.magenta, colors.lemon],
+}
+
 const AttirePage: NextPage = () => {
   let gradient = useRef<Gradient>()
   let canvasRef = useRef<HTMLCanvasElement>(null)
 
-  // const color1 = useMotionValue(rgbaColors.blossom)
-  // const color2 = useMotionValue(rgbaColors.sky)
-  const color1 = useMotionValue(rgbaColors.sky)
-  const color2 = useMotionValue(rgbaColors.lemon)
+  const isMobile = useIsMobile()
+  const { y } = useWindowScroll()
+  const [_focusedTitle, setFocusedTitle] = useState(DEFAULT_TITLE)
+  const focusedTitle =
+    isMobile && y <= SCROLL_THRESHOLD ? DEFAULT_TITLE : _focusedTitle
+
+  const og = colorLookup[focusedTitle]
+
+  const color1 = useMotionValue(og[0])
+  const color2 = useMotionValue(og[1])
+  const color3 = useMotionValue(og[2])
+  const color4 = useMotionValue(og[3])
+
+  useEffect(() => {
+    const og = colorLookup[focusedTitle]
+    animate(color1, og[0], { duration: COLOR_TRANSITION })
+    animate(color2, og[1], { duration: COLOR_TRANSITION })
+    animate(color3, og[2], { duration: COLOR_TRANSITION })
+    animate(color4, og[3], { duration: COLOR_TRANSITION })
+  }, [focusedTitle, color1, color2, color3, color4])
 
   const updateColors = () => {
     if (!gradient.current) return
 
-    const normHex = normalizeColor(rgba2hex(color1.get()))
-    const normHex2 = normalizeColor(rgba2hex(color2.get()))
+    const hex1 = normalizeColor(rgba2hex(color1.get()))
+    const hex2 = normalizeColor(rgba2hex(color2.get()))
+    const hex3 = normalizeColor(rgba2hex(color3.get()))
+    const hex4 = normalizeColor(rgba2hex(color4.get()))
 
-    gradient.current.mesh.material.uniforms.u_baseColor.value = normHex
+    gradient.current.mesh.material.uniforms.u_baseColor.value = hex1
 
-    for (
-      let i = 0;
-      i < gradient.current.mesh.material.uniforms.u_waveLayers.value.length;
-      i++
-    ) {
-      if (i % 2 === 0) {
-        gradient.current.mesh.material.uniforms.u_waveLayers.value[
-          i
-        ].value.color.value = normHex2
-      } else {
-        gradient.current.mesh.material.uniforms.u_waveLayers.value[
-          i
-        ].value.color.value = normHex
-      }
-    }
+    gradient.current.mesh.material.uniforms.u_waveLayers.value[0].value.color.value =
+      hex2
+
+    gradient.current.mesh.material.uniforms.u_waveLayers.value[1].value.color.value =
+      hex3
+
+    gradient.current.mesh.material.uniforms.u_waveLayers.value[2].value.color.value =
+      hex4
   }
 
   color1.onChange(updateColors)
@@ -77,8 +97,8 @@ const AttirePage: NextPage = () => {
     gradient.current.sectionColors = [
       color1.get(),
       color2.get(),
-      color1.get(),
-      color2.get(),
+      color3.get(),
+      color4.get(),
     ]
       .map(rgba2hex)
       .map(normalizeColor)
@@ -88,11 +108,6 @@ const AttirePage: NextPage = () => {
       gradient.current.initGradient(canvasRef.current)
     }
   }, [])
-
-  const setColors = (c1: string, c2: string) => {
-    animate(color1, c1, { duration: 0.75 })
-    animate(color2, c2, { duration: 0.75 })
-  }
 
   return (
     <Layout
@@ -106,17 +121,24 @@ const AttirePage: NextPage = () => {
         className="fixed z-0 inset-0 h-screen w-screen"
         data-transition-in="true"
       />
-      <div className="flex flex-col items-center justify-center w-full">
-        <div className="sm:max-w-xl relative max-w-sm py-8 text-center text-base">
+      <div
+        onMouseOver={() => {
+          if (!isMobile) {
+            setFocusedTitle(DEFAULT_TITLE)
+          }
+        }}
+        className="flex flex-col items-center justify-center w-full"
+      >
+        <div className="sm:max-w-xl relative max-w-sm pt-16 pb-16 sm:pt-8 sm:pb-8 text-center text- text-lg">
           Please join us and wear spring cocktail attire in our wedding colors;
           inspired both by our mixed heritage and the city of Santa Barbara.
         </div>
-        <div className="pt-4 pb-16 max-w-6xl relative flex-wrap flex gap-20 sm:gap-10 items-center justify-center">
+        <div className="px-8 pt-4 pb-20 sm:pb-16 max-w-6xl relative flex-wrap flex gap-20 sm:gap-8 items-center justify-center">
           {colorCards.map((colorCard) => (
             <ColorCard
-              onHover={() => {
-                const [color, color2] = colorLookup[colorCard.title]
-                setColors(color, color2)
+              focused={focusedTitle === colorCard.title}
+              onFocus={() => {
+                setFocusedTitle(colorCard.title)
               }}
               key={colorCard.title}
               {...colorCard}
@@ -126,15 +148,6 @@ const AttirePage: NextPage = () => {
       </div>
     </Layout>
   )
-}
-
-const colorLookup: Record<string, string[]> = {
-  Fuschia: [rgbaColors.magenta, rgbaColors.blossom],
-  Blossom: [rgbaColors.blossom, rgbaColors.magenta],
-  Lemon: [rgbaColors.lemon, rgbaColors.terracotta],
-  Cobalt: [rgbaColors.cobalt, rgbaColors.sky],
-  Slate: [rgbaColors.sky, rgbaColors.cobalt],
-  Terracotta: [rgbaColors.terracotta, rgbaColors.lemon],
 }
 
 const colorCards: ColorCardProps[] = [

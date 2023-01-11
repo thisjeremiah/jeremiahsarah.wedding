@@ -1,12 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
-// cobalt
-// slate ~~
-// terracotta
-// lemon --
-// fuschia
-// blossom
-
 const colors = {
   fuschia: {
     50: '#fcf4f7',
