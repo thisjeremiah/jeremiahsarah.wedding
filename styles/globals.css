@@ -39,3 +39,49 @@
   font-family: 'Work Sans';
   src: url('WorkSansWedding-Regular.ttf');
 }
+
+/* '#cc1c55', magenta */
+/* '#efc9d1', light pink?*/
+/* '#e7cabd', tannish */
+/* '#c47449', terracotta */
+/* '#d48369', middle brown */
+/* '#f1d895', lemon */
+/* '#92c0f1', middle blue */
+/* '#2c3c81', cobalt blue */
+/* '#d4d1cc', light blue */
+
+#gradient-canvas {
+  --magenta: #cc1c55;
+  --blossom: #efc9d1;
+  --tannish: #e7cabd;
+  --terracotta: #c47449;
+  --middle-brown: #d48369;
+  --lemon: #f1d895;
+  --middle-blue: #92c0f1;
+  --cobalt: #2c3c81;
+  --gray: #d4d1cc;
+
+  /* sky and blossom */
+  /* --gradient-color-1: var(--middle-blue); */
+  /* --gradient-color-2: var(--middle-blue); */
+  /* --gradient-color-3: var(--blossom); */
+  /* --gradient-color-4: var(--blossom); */
+
+  /* magenta and blossom */
+  /* --gradient-color-1: var(--magenta); */
+  /* --gradient-color-2: var(--magenta); */
+  /* --gradient-color-3: var(--blossom); */
+  /* --gradient-color-4: var(--blossom); */
+
+  /* cobalt and sky */
+  /* --gradient-color-1: var(--cobalt); */
+  /* --gradient-color-2: var(--cobalt); */
+  /* --gradient-color-3: var(--middle-blue); */
+  /* --gradient-color-4: var(--middle-blue); */
+
+  /* terracotta and lemon */
+  /* --gradient-color-1: var(--terracotta); */
+  /* --gradient-color-2: var(--terracotta); */
+  /* --gradient-color-3: var(--middle-brown); */
+  /* --gradient-color-4: var(--lemon); */
+}

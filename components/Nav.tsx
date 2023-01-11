@@ -55,7 +55,7 @@ export function Nav(props: {
         </nav>
       </div>
       {props.title && (
-        <div className="sm:flex hidden w-full justify-center">
+        <div className="sm:flex hidden w-full justify-center relative z-10">
           <h1 className="font-fairplex small-caps tracking-wider font-black uppercase text-5xl [font-variant:all-small-caps]">
             {props.title}
           </h1>
@@ -75,6 +75,7 @@ export function Nav(props: {
         <div
           className={cx(
             'flex flex-col absolute top-0 left-0 right-0 pointer-events-auto',
+            props.title === 'Attire' && 'backdrop-blur-lg',
             props.title && props.className,
           )}
         >
@@ -158,6 +159,7 @@ const useDisableBodyScroll = (open: boolean) => {
 const links = [
   { href: '/', label: 'home', icon: '7' },
   { href: '/schedule', label: 'schedule', icon: '3' },
+  { href: '/attire', label: 'attire', icon: '1' },
   { href: '/registry', label: 'registry', icon: '2' },
   { href: '/photos', label: 'photos', icon: '6' },
   { href: '/travel', label: 'travel', icon: '5' },

@@ -20,12 +20,17 @@ export default function Layout(props: {
   const heartColor = useMemo(() => {
     if (
       props.title &&
-      ['Registry', 'Schedule', 'Photos'].includes(props.title)
+      ['Registry', 'Schedule', 'Photos', 'Rehearsal Dinner'].includes(
+        props.title,
+      )
     ) {
       return 'text-fuschia-300'
     }
     if (props.title && ['Travel'].includes(props.title)) {
       return 'text-fuschia-200'
+    }
+    if (props.title && ['Attire'].includes(props.title)) {
+      return 'text-white'
     }
     return 'text-rose-500'
   }, [props.title])
@@ -44,7 +49,7 @@ export default function Layout(props: {
       <footer className="absolute left-0 bottom-0 right-0 px-6 pb-6">
         <div className="flex w-full justify-center flex-col items-center">
           {props.title && (
-            <div className="w-6 mb-3">
+            <div className="w-5 mb-3">
               <Monogram />
             </div>
           )}

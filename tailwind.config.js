@@ -174,6 +174,7 @@ module.exports = {
     },
   },
   plugins: [
+    require('@tailwindcss/forms'),
     function ({ addVariant }) {
       addVariant('initial', 'html :where(&)')
     },
