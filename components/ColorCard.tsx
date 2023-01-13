@@ -43,7 +43,7 @@ export function ColorCard(props: ColorCardProps) {
         e.stopPropagation()
       }}
       className={cx(
-        props.focused ? 'sm:scale-105 scale-110' : 'scale-100',
+        props.focused ? 'scale-105' : 'scale-100',
         'duration-500 transition',
         'bg-terracotta-50 bg-opacity-[95%] flex flex-col backdrop:bg-blur rounded-sm selection:bg-white gap-3',
         'sm:w-80 sm:h-60 sm:p-6 sm:justify-start',

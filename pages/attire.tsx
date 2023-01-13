@@ -4,41 +4,64 @@ import Layout from '../components/Layout'
 import { useEffect, useRef, useState } from 'react'
 import { ColorCard, ColorCardProps } from '../components/ColorCard'
 import { animate, useMotionValue } from 'framer-motion'
-import { rgba2hex } from '../utils/utils'
+import { rgba2hex, hexToRGBA } from '../utils/utils'
 import { useIsMobile } from '../utils/isMobile'
 import { useWindowScroll } from 'react-use'
+import { theme } from '../tailwind.config'
+
+const colors = theme.extend.colors
 
 const stripHex = (hex: string) => `0x${hex.substring(1)}`
-
-const colors = {
-  magenta: 'rgba(204, 28, 85, 1)',
-  blossom: 'rgba(239, 201, 209, 1)',
-  tannish: 'rgba(231, 202, 189, 1)',
-  terracotta: 'rgba(196, 116, 73, 1)',
-  middleBrown: 'rgba(212, 131, 105, 1)',
-  lemon: 'rgba(241, 216, 149, 1)',
-  sky: 'rgba(146, 192, 241, 1)',
-  cobalt: 'rgba(44, 60, 129, 1)',
-  gray: 'rgba(212, 209, 204, 1)',
-}
 
 const SCROLL_THRESHOLD = 50
 const DEFAULT_TITLE = 'DEFAULT'
 const COLOR_TRANSITION = 1 //
 
+const h = hexToRGBA
+
 const colorLookup: Record<string, string[]> = {
-  Fuschia: [colors.magenta, colors.blossom, colors.magenta, colors.blossom],
-  Blossom: [colors.blossom, colors.magenta, colors.blossom, colors.magenta],
-  Lemon: [colors.lemon, colors.terracotta, colors.lemon, colors.terracotta],
-  Cobalt: [colors.cobalt, colors.sky, colors.cobalt, colors.sky],
-  Slate: [colors.sky, colors.cobalt, colors.sky, colors.cobalt],
-  Terracotta: [
-    colors.terracotta,
-    colors.lemon,
-    colors.terracotta,
-    colors.lemon,
+  Fuschia: [
+    h(colors.fuschia['500']),
+    h(colors.fuschia['400']),
+    h(colors.fuschia['600']),
+    h(colors.blossom['500']),
   ],
-  [DEFAULT_TITLE]: [colors.sky, colors.blossom, colors.magenta, colors.lemon],
+  Blossom: [
+    h(colors.blossom['500']),
+    h(colors.fuschia['500']),
+    h(colors.blossom['600']),
+    h(colors.blossom['400']),
+  ],
+  Lemon: [
+    h(colors.lemon['400']),
+    h(colors.lemon['600']),
+    h(colors.lemon['500']),
+    h(colors.terracotta['300']),
+  ],
+  Terracotta: [
+    h(colors.terracotta['800']),
+    h(colors.terracotta['400']),
+    h(colors.terracotta['500']),
+    h(colors.berry['600']),
+  ],
+  Cobalt: [
+    h(colors.cobalt['500']),
+    h(colors.cobalt['600']),
+    h(colors.cobalt['400']),
+    h(colors.sky['600']),
+  ],
+  Slate: [
+    h(colors.sky['400']),
+    h(colors.sky['200']),
+    h(colors.sky['500']),
+    h(colors.cobalt['300']),
+  ],
+  [DEFAULT_TITLE]: [
+    h(colors.lemon['500']),
+    h(colors.blossom['500']),
+    h(colors.sky['500']),
+    h(colors.fuschia['500']),
+  ],
 }
 
 const AttirePage: NextPage = () => {
@@ -118,7 +141,7 @@ const AttirePage: NextPage = () => {
     >
       <canvas
         ref={canvasRef}
-        className="fixed z-0 inset-0 h-screen w-screen"
+        className="fixed z-0 inset-0 h-full w-full bg-green-500"
         data-transition-in="true"
       />
       <div
@@ -129,7 +152,7 @@ const AttirePage: NextPage = () => {
         }}
         className="flex flex-col items-center justify-center w-full"
       >
-        <div className="sm:max-w-xl relative max-w-sm pt-16 pb-16 sm:pt-8 sm:pb-8 text-center text- text-lg">
+        <div className="sm:max-w-2xl relative max-w-sm pt-16 pb-16 sm:pt-8 sm:pb-8 text-center text-lg">
           Please join us and wear spring cocktail attire in our wedding colors;
           inspired both by our mixed heritage and the city of Santa Barbara.
         </div>

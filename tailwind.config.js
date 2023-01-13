@@ -133,7 +133,7 @@ module.exports = {
         fairplex: ['fairplex-narrow', ...defaultTheme.fontFamily.serif],
         ['fairplex-wide']: ['fairplex-wide', ...defaultTheme.fontFamily.serif],
       },
-      colors: colors,
+      colors,
       cursor: {
         cobalt: createCursor(colors.cobalt['600'], 'white'),
         rose: createCursor(colors.rose['800'], colors.rose['200']),
