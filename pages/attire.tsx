@@ -130,7 +130,7 @@ const AttirePage: NextPage = () => {
       // @ts-ignore
       gradient.current.initGradient(canvasRef.current)
     }
-  }, [])
+  }, [color1, color2, color3, color4])
 
   return (
     <Layout
@@ -152,7 +152,7 @@ const AttirePage: NextPage = () => {
         }}
         className="flex flex-col items-center justify-center w-full"
       >
-        <div className="sm:max-w-2xl relative max-w-sm pt-16 pb-16 sm:pt-8 sm:pb-8 text-center text-lg">
+        <div className="sm:max-w-2xl relative max-w-sm pt-16 pb-16 sm:pt-8 sm:pb-8 text-center text-lg px-4">
           Please join us and wear spring cocktail attire in our wedding colors;
           inspired both by our mixed heritage and the city of Santa Barbara.
         </div>
@@ -192,14 +192,14 @@ const colorCards: ColorCardProps[] = [
     title: 'Lemon',
     tile: '5',
     description:
-      'Both bright and complementary, this color is reminiscent of lemon candy, yellow poppies, and egg yolks. Yellow serves as the perfect bridge between pastel and neutral.',
+      'Both bright and complementary, this color is reminiscent of lemon candy, yellow poppies, and egg yolks. Yellow serves as a tasteful bridge between pastel and neutral.',
     colorClassName: 'text-lemon-600',
   },
   {
     title: 'Cobalt',
     tile: '7',
     description:
-      'The color of Mexican tiles and freshly dyed Japanese shibori, this color is the perfect hybrid of both of our cultures, as well as the perfect accent to our venue’s cream canvas.',
+      'The color of Mexican tiles and freshly dyed Japanese shibori, this color is the perfect hybrid of both of our cultures, as well as the ideal accent to our venue’s cream canvas.',
     colorClassName: 'text-cobalt-500',
   },
   {

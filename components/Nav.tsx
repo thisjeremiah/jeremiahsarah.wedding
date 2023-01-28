@@ -74,11 +74,16 @@ export function Nav(props: {
       >
         <div
           className={cx(
-            'flex flex-col absolute top-0 left-0 right-0 pointer-events-auto',
-            props.title === 'Attire' && 'backdrop-blur-lg',
+            'relative flex flex-col pointer-events-auto',
             props.title && props.className,
           )}
         >
+          {props.title === 'Attire' && (
+            <motion.div
+              style={{ opacity }}
+              className="absolute top-0 left-0 right-0 backdrop-blur-lg bottom-[2px]"
+            />
+          )}
           <div className="flex items-center justify-between px-6 py-3">
             <div />
             {props.title && (
@@ -108,8 +113,7 @@ export function Nav(props: {
           <div className={cx('fixed inset-0 z-10', props.backdropClassName)}>
             <div
               className={cx(
-                'relative px-5 pt-4 pb-6 rounded-lg mt-3 mx-3 pointer-events-auto',
-                'border-current',
+                'relative px-5 pt-4 pb-6 rounded-lg mt-3 mx-3 pointer-events-auto border-current',
                 props.navClassName,
               )}
               onClick={(e) => e.stopPropagation()}
