@@ -83,7 +83,7 @@ const Registry: NextPage<RegistryPageProps> = (props) => {
                 onChange={(e) => {
                   setSort(e.currentTarget.value as RegistrySort)
                 }}
-                className="[-webkit-appearance:none] [-moz-appearance:none] bg-transparent text-base border-[1.5px] rounded py-1 pl-2 pr-6 outline-none"
+                className="bg-transparent text-base border-[1.5px] rounded py-1 pl-2 pr-6 outline-none border-white focus:ring-transparent focus:border-white text-white bg-none"
                 value={sort}
               >
                 {Object.entries(registrySorts).map(([key, value]) => (
@@ -179,7 +179,7 @@ type ServerRegistryItem = {
   return_policy: string
   delivery_surcharge: number
   discontinued: boolean
-  stock_message: any
+  stock_message?: string
   free_shipping: boolean
   badge_uuid: any
   shipping_zones: any[]
@@ -232,7 +232,25 @@ export async function getServerSideProps() {
 
   const items: RegistryItem[] = data.default_collection
     // Filter out items that are out of stock
-    .filter((item) => !item.stock_message)
+    //  remove out of stock and discontinued
+    //  keep available to ship for later
+    .filter((item) => {
+      // no need to filter, if purchased
+      if (
+        item.contributions.fulfilled ||
+        item.contributions.mark_fulfilled ||
+        item.contributions.show_as_fulfilled
+      )
+        return true
+
+      if (item.stock_message) {
+        let msg = item.stock_message.toLowerCase()
+        if (msg.includes('out of stock')) return false
+        if (msg.includes('discontinued')) return false
+      }
+
+      return true
+    })
     .map((item) => ({
       id: item.item_id,
       name: item.name,
