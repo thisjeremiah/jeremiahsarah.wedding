@@ -1,9 +1,15 @@
 import type { NextPage } from 'next'
+import Link from 'next/link'
 import { useState } from 'react'
 import Layout from '../components/Layout'
 
+async function sleep(ms: number) {
+  return new Promise((res) => setTimeout(res, ms))
+}
+
 const Rehearsal: NextPage = () => {
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
   const [confirmed, setConfirmed] = useState(true)
 
   const toggleConfirmed = () => {
@@ -11,9 +17,14 @@ const Rehearsal: NextPage = () => {
   }
 
   const handleSubmit = async (event: any) => {
+    setSubmitting(true)
+
     event.preventDefault()
 
-    const data = { name: event.target.name.value }
+    const data = {
+      name: event.target.name.value,
+      coming: confirmed,
+    }
 
     const endpoint = '/api/submit?form=rehearsal'
 
@@ -29,6 +40,8 @@ const Rehearsal: NextPage = () => {
 
     const result = await response.json()
 
+    await sleep(1500)
+
     setSubmitted(true)
 
     return result
@@ -37,14 +50,23 @@ const Rehearsal: NextPage = () => {
   return (
     <Layout
       title="Rehearsal Dinner"
-      className="bg-slate-300 text-cobalt-500 cursor-cobalt selection:bg-white"
-      navClassName="bg-slate-200"
-      navBackdropClassName="bg-slate-400/50"
+      className="bg-terracotta-500 text-white cursor-terracotta selection:bg-lemon-700"
+      navClassName="bg-terracotta-600"
+      navBackdropClassName="bg-terracotta-400/50"
     >
       <div className="text-center w-full py-16 sm:py-0">
-        <div className="sm:py-14 sm:min-h-[calc(100vh-15rem)] flex flex-col justify-center items-center">
+        <div className="sm:py-14 min-h-[calc(100vh-19rem)] sm:min-h-[calc(100vh-15rem)] flex flex-col justify-center items-center">
           {submitted ? (
-            <div className="font-serif text-2xl py-2">Thank You!</div>
+            <div>
+              <div className="font-serif text-lemon-400 text-3xl py-2 mb-8">
+                Thanks for letting us know!
+              </div>
+              <Link href="/">
+                <a>
+                  <div>Visit the home page ↗</div>
+                </a>
+              </Link>
+            </div>
           ) : (
             <>
               <span className="lowercase text-base sm:text-lg">
@@ -53,15 +75,15 @@ const Rehearsal: NextPage = () => {
               </span>
               <form
                 onSubmit={handleSubmit}
-                className="text-left flex flex-col w-80"
+                className="text-left flex flex-col w-full sm:w-80 px-10 sm:px-0"
               >
                 <label htmlFor="name" className="lowercase block text-sm my-1">
                   Name(s):
                 </label>
                 <textarea
                   required
-                  className="border-gray-300 bg-slate-100 focus:ring-cobalt-500 rounded px-1 selection:bg-slate-200"
-                  name="Name"
+                  className="border-gray-300 text-terracotta-500 bg-lemon-100 focus:ring-lemon-700 rounded px-2 selection:bg-lemon-400 focus:border-lemon-700"
+                  name="name"
                 />
                 <div className="relative flex items-center mt-3 mb-2">
                   <div className="flex h-5 items-center">
@@ -70,7 +92,7 @@ const Rehearsal: NextPage = () => {
                       name="yes"
                       type="checkbox"
                       checked={confirmed}
-                      className="h-4 w-4 text-cobalt-500 rounded border-gray-300 focus:ring-cobalt-500"
+                      className="h-4 w-4 text-lemon-700 rounded border-gray-300 focus:ring-lemon-700"
                       onChange={toggleConfirmed}
                     />
                   </div>
@@ -85,7 +107,7 @@ const Rehearsal: NextPage = () => {
                       name="no"
                       type="checkbox"
                       checked={!confirmed}
-                      className="h-4 w-4 text-cobalt-500 rounded border-gray-300 focus:ring-cobalt-500"
+                      className="h-4 w-4 text-lemon-700 rounded border-gray-300 focus:ring-lemon-700"
                       onChange={toggleConfirmed}
                     />
                   </div>
@@ -95,9 +117,21 @@ const Rehearsal: NextPage = () => {
                 </div>
                 <button
                   type="submit"
-                  className="self-end lowercase rounded-full text-slate-100 px-3 py-1 text-sm mt-3 bg-cobalt-500 w-fit select-none mt-3"
+                  className="self-end flex items-center mt-3 gap-2 lowercase rounded-full text-slate-100 px-3 py-1 text-sm bg-lemon-700 w-fit select-none"
                 >
-                  Submit
+                  {submitting ? 'Submitting' : 'Submit'}
+                  {submitting ? (
+                    <svg
+                      className="animate-spin h-4 w-4 -mr-1"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"
+                      />
+                    </svg>
+                  ) : null}
                 </button>
               </form>
             </>
