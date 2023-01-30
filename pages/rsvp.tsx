@@ -72,7 +72,7 @@ const Rehearsal: NextPage = () => {
               <span className="lowercase text-base sm:text-lg">
                 <p>La Paloma, Santa Barbara</p>
                 <p>May 19 2023</p>
-                <p className="max-w-[calc(100vw-1rem)] w-[30rem] text-base py-6 text-lemon-300">
+                <p className="max-w-[calc(100vw-1rem)] w-[30rem] text-base py-6 text-white">
                   Ceremony Rehearsal will take place approximately an hour
                   before (time & location TBD), followed by dinner at 6pm
                 </p>
