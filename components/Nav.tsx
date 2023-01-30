@@ -22,7 +22,10 @@ export function Nav(props: {
 
   const currentTile: any = useMemo(() => {
     const link = links.find((link) => link.href === router.pathname)
-    if (!link) return '1'
+    if (!link) {
+      if (router.pathname.includes('rsvp')) return '2'
+      return '1'
+    }
     return link.icon
   }, [router.pathname])
 
@@ -87,7 +90,7 @@ export function Nav(props: {
           <div className="flex items-center justify-between px-6 py-3">
             <div />
             {props.title && (
-              <div className="absolute left-0 h-10 text-[2.75rem] text-center w-full items-center leading-[2.5rem] font-fairplex small-caps tracking-wider font-black uppercase [font-variant:all-small-caps]">
+              <div className="absolute left-0 h-10 text-[2.5rem] text-center w-full items-center leading-[2.5rem] font-fairplex small-caps tracking-wider font-black uppercase [font-variant:all-small-caps]">
                 {props.title}
               </div>
             )}

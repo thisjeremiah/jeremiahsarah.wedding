@@ -13,7 +13,7 @@ const Schedule: NextPage = () => {
       <div className="text-center w-full py-16 sm:py-0">
         <div className="sm:py-14 sm:min-h-[calc(100vh-15rem)] flex justify-center items-center pointer-events-none">
           <div className="flex flex-col sm:flex-row gap-16 sm:gap-32">
-            <div className="w-62">
+            <div className="w-[16rem]">
               <div className="w-[16rem] h-[16rem] relative">
                 <Image
                   alt="La Paloma"
@@ -27,14 +27,20 @@ const Schedule: NextPage = () => {
                 </div>
               </div>
               <h2 className="font-serif text-xl pb-0.5 pt-8">
-                Rehearsal Dinner
+                Rehearsal Dinner{' '}
+                <span className="font-sans italic text-base -ml-[0.25rem]">
+                  *
+                </span>
               </h2>
               <span className="lowercase text-base sm:text-lg">
                 <p>la paloma, santa barbara</p>
                 <p>may 19 2023</p>
+                <p className="text-sm italic mt-2">
+                  * for our wedding party and immediate family
+                </p>
               </span>
             </div>
-            <div className="w-62">
+            <div className="w-[16rem]">
               <div className="w-[16rem] h-[16rem] relative">
                 <Image
                   alt="Villa and Vine"

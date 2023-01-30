@@ -49,7 +49,7 @@ const Rehearsal: NextPage = () => {
 
   return (
     <Layout
-      title="Rehearsal Dinner"
+      title="Rehearsal RSVP"
       className="bg-terracotta-500 text-white cursor-terracotta selection:bg-lemon-700"
       navClassName="bg-terracotta-600"
       navBackdropClassName="bg-terracotta-400/50"
@@ -70,8 +70,12 @@ const Rehearsal: NextPage = () => {
           ) : (
             <>
               <span className="lowercase text-base sm:text-lg">
-                <p>la paloma, santa barbara</p>
-                <p>may 19 2023</p>
+                <p>La Paloma, Santa Barbara</p>
+                <p>May 19 2023</p>
+                <p className="w-[30rem] text-base py-6 text-lemon-300">
+                  Ceremony Rehearsal will take place approximately an hour
+                  before (time & location TBD), followed by dinner at 6pm
+                </p>
               </span>
               <form
                 onSubmit={handleSubmit}
@@ -81,6 +85,7 @@ const Rehearsal: NextPage = () => {
                   Name(s):
                 </label>
                 <textarea
+                  spellCheck="false"
                   required
                   className="border-gray-300 text-terracotta-500 bg-lemon-100 focus:ring-lemon-700 rounded px-2 selection:bg-lemon-400 focus:border-lemon-700"
                   name="name"
