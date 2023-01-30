@@ -72,7 +72,7 @@ const Rehearsal: NextPage = () => {
               <span className="lowercase text-base sm:text-lg">
                 <p>La Paloma, Santa Barbara</p>
                 <p>May 19 2023</p>
-                <p className="max-w-[calc(100vw-1rem)] w-[30rem] text-base py-6 text-white">
+                <p className="max-w-[calc(100vw-3rem)] w-[30rem] text-base py-6 text-white">
                   Ceremony Rehearsal will take place approximately an hour
                   before (time & location TBD), followed by dinner at 6pm
                 </p>
@@ -122,7 +122,7 @@ const Rehearsal: NextPage = () => {
                 </div>
                 <button
                   type="submit"
-                  className="self-end flex items-center mt-3 gap-2 lowercase rounded-full text-slate-100 px-3 py-1 text-sm bg-lemon-700 w-fit select-none"
+                  className="self-center flex items-center mt-3 gap-2 lowercase rounded-full text-slate-100 px-6 py-1 text-base bg-lemon-700 w-fit select-none"
                 >
                   {submitting ? 'Submitting' : 'Submit'}
                   {submitting ? (
