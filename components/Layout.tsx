@@ -10,12 +10,13 @@ export default function Layout(props: {
   title?: string
   navClassName?: string
   navBackdropClassName?: string
+  htmlClassName?: string
 }) {
   useIsomorphicLayoutEffect(() => {
-    if (props.className) {
-      document.querySelector('html')!.className = props.className
+    if (props.htmlClassName) {
+      document.querySelector('html')!.className = props.htmlClassName
     }
-  }, [])
+  }, [props.htmlClassName])
 
   const heartColor = useMemo(() => {
     if (

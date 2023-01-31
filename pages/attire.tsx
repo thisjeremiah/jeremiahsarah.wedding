@@ -65,6 +65,65 @@ const colorLookup: Record<string, string[]> = {
 }
 
 const AttirePage: NextPage = () => {
+  return (
+    <Layout
+      title="Attire"
+      navBackdropClassName=""
+      htmlClassName="bg-white"
+      navClassName="bg-white/30 backdrop-blur-lg text-white"
+      className="text-white selection:bg-white/30"
+    >
+      <AttirePageInner />
+    </Layout>
+  )
+}
+
+const colorCards: ColorCardProps[] = [
+  {
+    title: 'Fuschia',
+    tile: '4',
+    description:
+      'Fun and vibrant, this color is inspired by the trailing bougainvillea that is characteristic of Santa Barbara, and a common adornment of Spanish Revival architecture.',
+    colorClassName: 'text-fuschia-500',
+  },
+  {
+    title: 'Blossom',
+    tile: '6',
+    description:
+      'The color of Japanese sakura petals in springtime Tokyo, blush pink is effervescent and transitional; subtle yet impactful. To us, this is the quintessential color of kawaii.',
+    colorClassName: 'text-blossom-500',
+  },
+  {
+    title: 'Lemon',
+    tile: '5',
+    description:
+      'Both bright and complementary, this color is reminiscent of lemon candy, yellow poppies, and egg yolks. Yellow serves as a tasteful bridge between pastel and neutral.',
+    colorClassName: 'text-lemon-600',
+  },
+  {
+    title: 'Cobalt',
+    tile: '7',
+    description:
+      'The color of Mexican tiles and freshly dyed Japanese shibori, this color is the perfect hybrid of both of our cultures, as well as the ideal accent to our venue’s cream canvas.',
+    colorClassName: 'text-cobalt-500',
+  },
+  {
+    title: 'Slate',
+    tile: '3',
+    description:
+      'A kawaii pastel as well as a soft complement, this gentle blue reminds us of hydrangea flowers and Japanese ceramics.',
+    colorClassName: 'text-slate-400',
+  },
+  {
+    title: 'Terracotta',
+    tile: '2',
+    description:
+      'While seemingly a humble neutral, this warm brown is meant to resemble the clay of floor tiling and serve as a grounded foundation in our diversely colorful palette.',
+    colorClassName: 'text-terracotta-500',
+  },
+]
+
+const AttirePageInner = () => {
   let gradient = useRef<Gradient>()
   let canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -133,12 +192,7 @@ const AttirePage: NextPage = () => {
   }, [color1, color2, color3, color4])
 
   return (
-    <Layout
-      title="Attire"
-      navBackdropClassName=""
-      navClassName="bg-white/30 backdrop-blur-lg text-white"
-      className="text-white selection:bg-white/30"
-    >
+    <>
       <canvas
         ref={canvasRef}
         className="fixed z-0 inset-0 h-full w-full bg-green-500"
@@ -169,53 +223,8 @@ const AttirePage: NextPage = () => {
           ))}
         </div>
       </div>
-    </Layout>
+    </>
   )
 }
-
-const colorCards: ColorCardProps[] = [
-  {
-    title: 'Fuschia',
-    tile: '4',
-    description:
-      'Fun and vibrant, this color is inspired by the trailing bougainvillea that is characteristic of Santa Barbara, and a common adornment of Spanish Revival architecture.',
-    colorClassName: 'text-fuschia-500',
-  },
-  {
-    title: 'Blossom',
-    tile: '6',
-    description:
-      'The color of Japanese sakura petals in springtime Tokyo, blush pink is effervescent and transitional; subtle yet impactful. To us, this is the quintessential color of kawaii.',
-    colorClassName: 'text-blossom-500',
-  },
-  {
-    title: 'Lemon',
-    tile: '5',
-    description:
-      'Both bright and complementary, this color is reminiscent of lemon candy, yellow poppies, and egg yolks. Yellow serves as a tasteful bridge between pastel and neutral.',
-    colorClassName: 'text-lemon-600',
-  },
-  {
-    title: 'Cobalt',
-    tile: '7',
-    description:
-      'The color of Mexican tiles and freshly dyed Japanese shibori, this color is the perfect hybrid of both of our cultures, as well as the ideal accent to our venue’s cream canvas.',
-    colorClassName: 'text-cobalt-500',
-  },
-  {
-    title: 'Slate',
-    tile: '3',
-    description:
-      'A kawaii pastel as well as a soft complement, this gentle blue reminds us of hydrangea flowers and Japanese ceramics.',
-    colorClassName: 'text-slate-400',
-  },
-  {
-    title: 'Terracotta',
-    tile: '2',
-    description:
-      'While seemingly a humble neutral, this warm brown is meant to resemble the clay of floor tiling and serve as a grounded foundation in our diversely colorful palette.',
-    colorClassName: 'text-terracotta-500',
-  },
-]
 
 export default AttirePage

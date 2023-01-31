@@ -10,6 +10,7 @@ const Home: NextPage = () => {
       navBackdropClassName="bg-cobalt-600/50"
       className="bg-cobalt-500 text-white cursor-cobalt selection:bg-blossom-500"
       navClassName="text-white bg-cobalt-600 border-white"
+      htmlClassName="bg-cobalt-500"
     >
       <PetalAnimation />
       <div className="fixed _pointer-events-none inset-0 items-center text-center h-full w-full flex flex-col justify-center">

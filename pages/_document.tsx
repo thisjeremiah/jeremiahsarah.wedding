@@ -24,8 +24,3 @@ export default function Document() {
     </Html>
   )
 }
-
-// <link
-// href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400&display=swap"
-// rel="stylesheet"
-// />

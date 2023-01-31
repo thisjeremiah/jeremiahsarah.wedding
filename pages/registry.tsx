@@ -73,6 +73,7 @@ const Registry: NextPage<RegistryPageProps> = (props) => {
       navClassName="bg-terracotta-600"
       navBackdropClassName="bg-terracotta-400/50"
       className="bg-terracotta-500 text-white cursor-terracotta selection:bg-lemon-700"
+      htmlClassName="bg-terracotta-500"
     >
       <div className="pb-6 md:px-11 sm:px-6 sm:pt-10 px-6 pt-3">
         <div className="flex justify-end">
