@@ -132,7 +132,7 @@ function RegistryGridItem(props: { item: RegistryItem }) {
             images={props.item.images.map((image) => image.medium)}
           />
           {props.item.purchased && (
-            <div className="text-sm leading-none tracking-wide uppercase absolute top-2 right-2 bg-fuschia-600 py-1 px-2 rounded font-fairplex-wide font-bold select-none">
+            <div className="text-sm leading-none tracking-wide uppercase absolute top-2 right-2 bg-fuschia-600 py-1 px-2 text-fuschia-50 rounded font-fairplex-wide font-bold select-none">
               Purchased
             </div>
           )}

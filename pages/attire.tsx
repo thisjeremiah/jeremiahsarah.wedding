@@ -195,7 +195,7 @@ const AttirePageInner = () => {
     <>
       <canvas
         ref={canvasRef}
-        className="fixed z-0 inset-0 h-full w-full bg-green-500"
+        className="fixed z-0 inset-0 h-full w-full"
         data-transition-in="true"
       />
       <div
