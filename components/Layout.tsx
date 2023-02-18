@@ -8,6 +8,7 @@ export default function Layout(props: {
   children: React.ReactNode
   className?: string
   title?: string
+  buttonClassName?: string
   navClassName?: string
   navBackdropClassName?: string
   htmlClassName?: string
@@ -70,6 +71,7 @@ export default function Layout(props: {
         backdropClassName={props.navBackdropClassName}
         navClassName={props.navClassName}
         className={props.className}
+        buttonClassName={props.buttonClassName}
       />
       <main className="relative pb-24 pt-20 sm:pt-0">{props.children}</main>
       {footer}

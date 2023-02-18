@@ -51,6 +51,7 @@ const Travel: NextPage = () => {
       navClassName="bg-lemon-700"
       className="bg-lemon-700 text-white cursor-lemon selection:bg-terracotta-500"
       htmlClassName="bg-lemon-700"
+      buttonClassName="text-lemon-700"
     >
       <div className="mx-6 sm:mx-16 h-full py-6 sm:py-16">
         <div className="flex lg:flex-row flex-col gap-10 md:gap-16 text-left w-full justify-center items-start">

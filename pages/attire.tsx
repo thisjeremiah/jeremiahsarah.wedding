@@ -72,6 +72,7 @@ const AttirePage: NextPage = () => {
       htmlClassName="bg-white"
       navClassName="bg-white/30 backdrop-blur-lg text-white"
       className="text-white selection:bg-white/30"
+      buttonClassName="backdrop-blur-lg bg-white/30"
     >
       <AttirePageInner />
     </Layout>

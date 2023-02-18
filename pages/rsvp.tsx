@@ -53,7 +53,8 @@ const Rehearsal: NextPage = () => {
       className="bg-terracotta-500 text-white cursor-terracotta selection:bg-lemon-700"
       navClassName="bg-terracotta-600"
       navBackdropClassName="bg-terracotta-400/50"
-      htmlClassName="bg-terracotta-600"
+      htmlClassName="bg-terracotta-500"
+      buttonClassName="text-terracotta-500"
     >
       <div className="text-center w-full py-16 sm:py-0">
         <div className="sm:py-14 min-h-[calc(100vh-19rem)] sm:min-h-[calc(100vh-15rem)] flex flex-col justify-center items-center">

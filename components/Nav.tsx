@@ -13,6 +13,7 @@ import Tile from './Tile/Tile'
 export function Nav(props: {
   title?: string
   backdropClassName?: string
+  buttonClassName?: string
   navClassName?: string
   className?: string
 }) {
@@ -40,7 +41,7 @@ export function Nav(props: {
             <Tile className="w-9 text-center" tile={currentTile} />
           </a>
         </Link>
-        <nav className="flex text-md gap-6">
+        <nav className="flex text-md gap-6 h-[1.6rem]">
           {links
             .filter((_, i) => i > 0)
             .map((link) => (
@@ -48,7 +49,11 @@ export function Nav(props: {
                 <a
                   className={cx(
                     'w-fit border-current',
-                    router.pathname === link.href ? 'border-b-2' : '',
+                    router.pathname === link.href &&
+                      !link.button &&
+                      'border-b-2',
+                    link.button && 'bg-white py-1 px-3.5 rounded-full text-sm',
+                    link.button && props.buttonClassName,
                   )}
                 >
                   {link.label}
@@ -170,4 +175,5 @@ const links = [
   { href: '/registry', label: 'registry', icon: '2' },
   { href: '/photos', label: 'photos', icon: '6' },
   { href: '/travel', label: 'travel', icon: '5' },
+  { href: '/song-request', button: true, label: 'request a song!', icon: '3' },
 ]

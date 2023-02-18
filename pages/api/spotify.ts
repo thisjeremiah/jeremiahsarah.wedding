@@ -1,39 +1,60 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-// @ts-ignore
 import SpotifyWebApi from 'spotify-web-api-node'
 
 const SPOTIFY_CLIENT_ID = String(process.env.SPOTIFY_CLIENT_ID)
 const SPOTIFY_CLIENT_SECRET = String(process.env.SPOTIFY_CLIENT_SECRET)
 const SPOTIFY_REFRESH_TOKEN = String(process.env.SPOTIFY_REFRESH_TOKEN)
 
-// https://open.spotify.com/playlist/5BUAHADpsveOZ6SeKzNmbA?si=e96b6149e5d4478c
+const SPOTIFY_PLAYLIST_ID = '5BUAHADpsveOZ6SeKzNmbA'
+
+const REDIRECT_URL = 'http://www.example.com/callback'
 
 const spotifyApi = new SpotifyWebApi({
   clientId: SPOTIFY_CLIENT_ID,
   clientSecret: SPOTIFY_CLIENT_SECRET,
-  redirectUri: 'http://www.example.com/callback',
+  redirectUri: REDIRECT_URL,
   refreshToken: SPOTIFY_REFRESH_TOKEN,
 })
 
-const SPOTIFY_PLAYLIST_ID = '5BUAHADpsveOZ6SeKzNmbA'
+const api = {
+  async init() {
+    const result = await spotifyApi.refreshAccessToken()
+    spotifyApi.setAccessToken(result.body['access_token'])
+  },
+  async getPlaylistTracks() {
+    const data = await spotifyApi.getPlaylistTracks(SPOTIFY_PLAYLIST_ID)
+    return data.body?.items.map((item) => item.track) ?? []
+  },
+  async searchTracks(search: string) {
+    const data = await spotifyApi.searchTracks(search)
+    return data.body?.tracks?.items ?? []
+  },
+  async addTracksToPlaylist(tracks: string[]) {
+    await spotifyApi.addTracksToPlaylist(SPOTIFY_PLAYLIST_ID, tracks, {
+      position: 0,
+    })
+    return {}
+  },
+}
 
-export default async function redirect(
+export default async function endpoint(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const result = await spotifyApi.refreshAccessToken()
+  await api.init()
 
-  spotifyApi.setAccessToken(result.body['access_token'])
-
-  const data = await spotifyApi.searchTracks('track:Heat artist:Mitski')
-
-  const tracks = data.body.tracks.items.map((track: any) => track.uri)
-
-  console.log(tracks)
-
-  await spotifyApi.addTracksToPlaylist(SPOTIFY_PLAYLIST_ID, tracks)
-
-  console.log('Added tracks to playlist!')
-
-  res.status(200).json({})
+  switch (req.query.action) {
+    case 'getPlaylistTracks':
+      return res.status(200).json(await api.getPlaylistTracks())
+    case 'searchTracks':
+      return res
+        .status(200)
+        .json(await api.searchTracks(req.body.search as string))
+    case 'addTracksToPlaylist':
+      return res
+        .status(200)
+        .json(await api.addTracksToPlaylist(req.body.tracks as string[]))
+    default:
+      return res.status(500).json({})
+  }
 }
