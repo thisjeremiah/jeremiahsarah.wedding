@@ -33,8 +33,19 @@ const SongRequest: NextPage = () => {
               />
             </div>
             <div className="flex-1 h-[calc(100%-2rem)]">
-              <div className="text-center font-serif text-xl pb-2 text-white tracking-wide">
-                The Playlist
+              <div className="flex justify-between items-baseline text-white w-full">
+                <div className="font-serif tracking-wide text-lg pb-2 tracking-wide">
+                  The Playlist
+                </div>
+                <div className="text-base font-sans lowercase">
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://open.spotify.com/playlist/5BUAHADpsveOZ6SeKzNmbA?si=a38148380c624675"
+                  >
+                    {'Listen on Spotify'}&nbsp;↗
+                  </a>
+                </div>
               </div>
               <div className="border-2 border-white/30 md:h-full rounded-xl h-[75vh]">
                 <div className="overflow-y-scroll h-full p-3 gradient-mask-b-0">

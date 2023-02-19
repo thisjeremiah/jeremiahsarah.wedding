@@ -30,8 +30,11 @@ export function RequestSongForm(props: {
   return (
     <div className="h-full">
       <form onSubmit={handleSubmit} className="text-left flex flex-col w-full">
-        <label htmlFor="name" className="lowercase block mb-2">
-          Type in your favorite artist or song:
+        <label
+          htmlFor="name"
+          className="font-serif tracking-wide block text-lg mb-2"
+        >
+          Type In Your Favorite Artist Or Song
         </label>
         <div className="w-full relative">
           <input
@@ -66,7 +69,7 @@ export function RequestSongForm(props: {
       </form>
       {tracks.length ? (
         <>
-          <div className="lowercase text-left pt-4 pb-2">Search Results:</div>
+          <div className="lowercase text-left pt-4 pb-2">Search Results</div>
           <div className="border-2 border-white/30 h-[75vh] md:h-[calc(100%-9.6rem)] rounded-xl">
             <div className="h-full overflow-y-scroll p-3 gradient-mask-b-0">
               <SongList
