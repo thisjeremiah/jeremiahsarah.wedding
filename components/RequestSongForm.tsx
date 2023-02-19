@@ -5,6 +5,8 @@ import { SongList } from './SongList'
 export function RequestSongForm(props: {
   refetchPlaylistTracks(): Promise<any>
   requestedTrackUris?: string[]
+  onPlayToggle?(track: SpotifyApi.TrackObjectFull): void
+  playingTrackUri?: string
 }) {
   const [tracks, setTracks] = useState<SpotifyApi.TrackObjectFull[]>([])
   const [search, setSearch] = useState('')
@@ -77,6 +79,8 @@ export function RequestSongForm(props: {
                 showRequestStatus
                 onRequestTrack={onRequestTrack}
                 requestedTrackUris={props.requestedTrackUris}
+                onPlayToggle={props.onPlayToggle}
+                playingTrackUri={props.playingTrackUri}
               />
             </div>
           </div>

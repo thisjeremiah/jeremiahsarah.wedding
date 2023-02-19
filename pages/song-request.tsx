@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import { useEffect, useState } from 'react'
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
 import Layout from '../components/Layout'
 import { RequestSongForm } from '../components/RequestSongForm'
@@ -7,9 +8,36 @@ import { getPlaylistTracks } from '../utils/spotifyApi'
 
 const queryClient = new QueryClient()
 
+const audio: HTMLAudioElement =
+  typeof window === 'undefined' ? (null as any) : new Audio()
+
 const SongRequest: NextPage = () => {
   const { data, refetch } = useQuery('getPlaylistTracks', getPlaylistTracks)
   const playlistTracks: SpotifyApi.TrackObjectFull[] = data ?? []
+  const [playingTrackUri, setPlayingTrackUri] = useState<string | undefined>()
+
+  useEffect(() => {
+    if (audio) {
+      audio.onended = () => {
+        setPlayingTrackUri(undefined)
+      }
+    }
+  }, [])
+
+  const onPlayToggle = (track: SpotifyApi.TrackObjectFull) => {
+    if (playingTrackUri === track.uri) {
+      // is playing
+      audio.pause()
+      audio.src = ''
+      setPlayingTrackUri(undefined)
+    } else {
+      // is not playing
+      audio.pause()
+      audio.src = track.preview_url!
+      audio.play()
+      setPlayingTrackUri(track.uri)
+    }
+  }
 
   return (
     <Layout
@@ -28,6 +56,8 @@ const SongRequest: NextPage = () => {
           <div className="w-full h-full flex-col md:flex-row flex gap-10 justify-evenly p-8">
             <div className="flex-1">
               <RequestSongForm
+                onPlayToggle={onPlayToggle}
+                playingTrackUri={playingTrackUri}
                 requestedTrackUris={playlistTracks.map((track) => track.uri)}
                 refetchPlaylistTracks={refetch}
               />
@@ -49,7 +79,11 @@ const SongRequest: NextPage = () => {
               </div>
               <div className="border-2 border-white/30 md:h-full rounded-xl h-[75vh]">
                 <div className="overflow-y-scroll h-full p-3 gradient-mask-b-0">
-                  <SongList tracks={playlistTracks} />
+                  <SongList
+                    onPlayToggle={onPlayToggle}
+                    playingTrackUri={playingTrackUri}
+                    tracks={playlistTracks}
+                  />
                 </div>
               </div>
             </div>
