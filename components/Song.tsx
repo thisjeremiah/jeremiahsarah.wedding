@@ -16,6 +16,10 @@ export function Song({
 }) {
   const image = track.album.images[1]
 
+  const playPreview = () => {
+    // track.
+  }
+
   return (
     <div
       className={cx(
@@ -27,6 +31,7 @@ export function Song({
         <div className="flex items-center justify-center select-none shrink-0">
           <Image
             className="rounded"
+            onClick={playPreview}
             src={image.url}
             width={50}
             height={50}
@@ -37,7 +42,7 @@ export function Song({
           <div
             className={cx(
               variant ? 'text-white/90' : 'text-white/80',
-              'text-base select-none font-bold text-left',
+              'text-base select-none text-left',
             )}
           >
             {track.name}
@@ -45,7 +50,7 @@ export function Song({
           <div
             className={cx(
               variant ? 'text-white/90' : 'text-white/80',
-              'text-sm select-none font-bold text-left',
+              'text-sm select-none text-left',
             )}
           >
             {track.artists.map((artist) => artist.name).join(', ')}
