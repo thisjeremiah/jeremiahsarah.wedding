@@ -133,7 +133,12 @@ export function Nav(props: {
                       <a
                         className={cx(
                           'w-fit border-current',
-                          router.pathname === link.href ? 'border-b-2' : '',
+                          router.pathname === link.href &&
+                            !link.button &&
+                            'border-b-2',
+                          link.button &&
+                            'bg-white py-1 px-3.5 rounded-full text-base self-center',
+                          link.button && props.buttonClassName,
                         )}
                       >
                         {link.label}

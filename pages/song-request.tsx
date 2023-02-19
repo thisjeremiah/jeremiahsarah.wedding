@@ -17,10 +17,11 @@ const SongRequest: NextPage = () => {
       className="bg-cobalt-500 text-white cursor-cobalt selection:bg-lemon-700"
       navClassName="bg-cobalt-600"
       navBackdropClassName="bg-cobalt-400/50"
-      htmlClassName="bg-cobalt-600"
+      htmlClassName="bg-cobalt-500"
+      buttonClassName="text-cobalt-500"
     >
       <div className="w-full flex justify-center md:h-[calc(100vh-17rem)]">
-        <div className="w-full max-w-[60rem]">
+        <div className="w-full max-w-[60rem] pb-8">
           <p className="text-center w-full lowercase text-base pt-3 text-white">
             Request a song to play on the dance floor!
           </p>
@@ -35,8 +36,8 @@ const SongRequest: NextPage = () => {
               <div className="text-center font-serif text-xl pb-2 text-white tracking-wide">
                 The Playlist
               </div>
-              <div className="border-2 border-white/30 md:h-full rounded-xl h-[20rem]">
-                <div className="overflow-y-scroll h-full p-2 gradient-mask-b-0">
+              <div className="border-2 border-white/30 md:h-full rounded-xl h-[75vh]">
+                <div className="overflow-y-scroll h-full p-3 gradient-mask-b-0">
                   <SongList tracks={playlistTracks} />
                 </div>
               </div>
