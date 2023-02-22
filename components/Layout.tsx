@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react'
+import Head from 'next/head'
 import cx from 'classnames'
 import { Nav } from './Nav'
 import { Monogram } from './Monogram'
-import { useIsomorphicLayoutEffect } from 'framer-motion'
 
 export default function Layout(props: {
   children: React.ReactNode
@@ -11,14 +11,8 @@ export default function Layout(props: {
   buttonClassName?: string
   navClassName?: string
   navBackdropClassName?: string
-  htmlClassName?: string
+  themeColor?: string
 }) {
-  useIsomorphicLayoutEffect(() => {
-    if (props.htmlClassName) {
-      document.querySelector('html')!.className = props.htmlClassName
-    }
-  }, [props.htmlClassName])
-
   const heartColor = useMemo(() => {
     if (
       props.title &&
@@ -66,6 +60,9 @@ export default function Layout(props: {
     <div
       className={cx('relative transition-color min-h-screen', props.className)}
     >
+      <Head>
+        <meta name="theme-color" content={props.themeColor} />
+      </Head>
       <Nav
         title={props.title}
         backdropClassName={props.navBackdropClassName}

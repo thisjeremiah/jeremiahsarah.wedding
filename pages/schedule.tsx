@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import Layout from '../components/Layout'
+import { slate } from 'tailwindcss/colors'
 
 const Schedule: NextPage = () => {
   return (
@@ -8,7 +9,7 @@ const Schedule: NextPage = () => {
       title="Schedule"
       className="bg-slate-300 text-cobalt-500 cursor-cobalt selection:bg-white"
       navClassName="bg-slate-200"
-      htmlClassName="bg-slate-300"
+      themeColor={slate[300]}
       navBackdropClassName="bg-slate-400/50"
     >
       <div className="text-center w-full py-16 sm:py-0">

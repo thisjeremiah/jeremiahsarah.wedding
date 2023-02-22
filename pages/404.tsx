@@ -7,7 +7,7 @@ const Page404: NextPage = () => {
       navClassName="bg-black"
       navBackdropClassName="bg-black/50"
       className="bg-black text-white selection:bg-rose-500 cursor-default"
-      htmlClassName="bg-black"
+      themeColor="black"
       buttonClassName="text-black"
     >
       <div className="fixed inset-0 h-screen pointer-events-none">

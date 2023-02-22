@@ -9,67 +9,12 @@ import { useIsMobile } from '../utils/isMobile'
 import { useWindowScroll } from 'react-use'
 import { theme } from '../tailwind.config'
 
-const colors = theme.extend.colors
-
-const stripHex = (hex: string) => `0x${hex.substring(1)}`
-
-const SCROLL_THRESHOLD = 50
-const DEFAULT_TITLE = 'DEFAULT'
-const COLOR_TRANSITION = 1 //
-
-const h = hexToRGBA
-
-const colorLookup: Record<string, string[]> = {
-  Fuschia: [
-    h(colors.fuschia['500']),
-    h(colors.fuschia['400']),
-    h(colors.fuschia['600']),
-    h(colors.blossom['500']),
-  ],
-  Blossom: [
-    h(colors.blossom['500']),
-    h(colors.fuschia['500']),
-    h(colors.blossom['600']),
-    h(colors.blossom['400']),
-  ],
-  Lemon: [
-    h(colors.lemon['400']),
-    h(colors.lemon['600']),
-    h(colors.lemon['500']),
-    h(colors.terracotta['300']),
-  ],
-  Terracotta: [
-    h(colors.terracotta['800']),
-    h(colors.terracotta['400']),
-    h(colors.terracotta['500']),
-    h(colors.berry['600']),
-  ],
-  Cobalt: [
-    h(colors.cobalt['500']),
-    h(colors.cobalt['600']),
-    h(colors.cobalt['400']),
-    h(colors.sky['600']),
-  ],
-  Slate: [
-    h(colors.sky['400']),
-    h(colors.sky['200']),
-    h(colors.sky['500']),
-    h(colors.cobalt['300']),
-  ],
-  [DEFAULT_TITLE]: [
-    h(colors.lemon['500']),
-    h(colors.blossom['500']),
-    h(colors.sky['500']),
-    h(colors.fuschia['500']),
-  ],
-}
-
 const AttirePage: NextPage = () => {
   return (
     <Layout
       title="Attire"
       navBackdropClassName=""
-      htmlClassName="bg-white"
+      themeColor="white"
       navClassName="bg-white/30 backdrop-blur-lg text-white"
       className="text-white selection:bg-white/30"
       buttonClassName="backdrop-blur-lg bg-white/30"
@@ -226,6 +171,61 @@ const AttirePageInner = () => {
       </div>
     </>
   )
+}
+
+const colors = theme.extend.colors
+
+const stripHex = (hex: string) => `0x${hex.substring(1)}`
+
+const SCROLL_THRESHOLD = 50
+const DEFAULT_TITLE = 'DEFAULT'
+const COLOR_TRANSITION = 1 //
+
+const h = hexToRGBA
+
+const colorLookup: Record<string, string[]> = {
+  Fuschia: [
+    h(colors.fuschia['500']),
+    h(colors.fuschia['400']),
+    h(colors.fuschia['600']),
+    h(colors.blossom['500']),
+  ],
+  Blossom: [
+    h(colors.blossom['500']),
+    h(colors.fuschia['500']),
+    h(colors.blossom['600']),
+    h(colors.blossom['400']),
+  ],
+  Lemon: [
+    h(colors.lemon['400']),
+    h(colors.lemon['600']),
+    h(colors.lemon['500']),
+    h(colors.terracotta['300']),
+  ],
+  Terracotta: [
+    h(colors.terracotta['800']),
+    h(colors.terracotta['400']),
+    h(colors.terracotta['500']),
+    h(colors.berry['600']),
+  ],
+  Cobalt: [
+    h(colors.cobalt['500']),
+    h(colors.cobalt['600']),
+    h(colors.cobalt['400']),
+    h(colors.sky['600']),
+  ],
+  Slate: [
+    h(colors.sky['400']),
+    h(colors.sky['200']),
+    h(colors.sky['500']),
+    h(colors.cobalt['300']),
+  ],
+  [DEFAULT_TITLE]: [
+    h(colors.lemon['500']),
+    h(colors.blossom['500']),
+    h(colors.sky['500']),
+    h(colors.fuschia['500']),
+  ],
 }
 
 export default AttirePage

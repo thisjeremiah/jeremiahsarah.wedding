@@ -1,16 +1,19 @@
 import cx from 'classnames'
 import type { NextPage } from 'next'
 import { useMemo, useState } from 'react'
+import {
+  dehydrate,
+  Hydrate,
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from 'react-query'
 import { ImageGallery } from '../components/ImageGallery'
 import Layout from '../components/Layout'
+import { theme } from '../tailwind.config.js'
 
 const ZOLA_REGISTRY_KEY = 'jeremiahsarahwedding'
 const ZOLA_REGISTRY_BASE = 'https://www.zola.com/registry'
-// const ZOLA_REGISTRY_URL = ZOLA_REGISTRY_BASE + '/' + ZOLA_REGISTRY_KEY
-
-type RegistryPageProps = {
-  items: RegistryItem[]
-}
 
 const registrySorts = {
   featured: {
@@ -26,14 +29,23 @@ const registrySorts = {
 
 type RegistrySort = keyof typeof registrySorts
 
-const Registry: NextPage<RegistryPageProps> = (props) => {
+const emptyArr: [] = []
+
+const Registry: NextPage = () => {
+  const result = useQuery('getRegistryItems', getRegistryItems, {
+    refetchOnWindowFocus: true,
+    refetchInterval: 60_000,
+    refetchOnMount: 'always',
+  })
+  const items = result.data ?? emptyArr
+
   const [sort, setSort] = useState<RegistrySort>('featured')
 
-  const items = useMemo(() => {
+  const sortedItems = useMemo(() => {
     if (sort === 'featured') {
-      return props.items
+      return items
     } else if (sort === 'priceLowToHigh') {
-      const result = [...props.items]
+      const result = [...items]
       result.sort((a, b) => {
         if (a.cash) {
           if (b.cash) {
@@ -49,7 +61,7 @@ const Registry: NextPage<RegistryPageProps> = (props) => {
       })
       return result
     } else {
-      const result = [...props.items]
+      const result = [...items]
       result.sort((a, b) => {
         if (b.cash) {
           if (a.cash) {
@@ -65,7 +77,7 @@ const Registry: NextPage<RegistryPageProps> = (props) => {
       })
       return result
     }
-  }, [props.items, sort])
+  }, [items, sort])
 
   return (
     <Layout
@@ -73,7 +85,7 @@ const Registry: NextPage<RegistryPageProps> = (props) => {
       navClassName="bg-terracotta-600"
       navBackdropClassName="bg-terracotta-400/50"
       className="bg-terracotta-500 text-white cursor-terracotta selection:bg-lemon-700"
-      htmlClassName="bg-terracotta-500"
+      themeColor={theme.extend.colors.terracotta[500]}
       buttonClassName="text-terracotta-500 bg-white"
     >
       <div className="pb-6 md:px-11 sm:px-6 sm:pt-10 px-6 pt-3">
@@ -106,7 +118,7 @@ const Registry: NextPage<RegistryPageProps> = (props) => {
             '2xl:grid-cols-6 xl:grid-cols-5 lg:grid-cols-4 sm:grid-cols-3 grid-cols-2',
           )}
         >
-          {items.map((item) => (
+          {sortedItems.map((item) => (
             <RegistryGridItem key={item.id} item={item} />
           ))}
         </div>
@@ -212,7 +224,20 @@ type RegistryItem = {
   purchased: boolean
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
+  const client = new QueryClient()
+
+  await client.prefetchQuery('getRegistryItems', getRegistryItems)
+
+  return {
+    props: {
+      dehydratedState: dehydrate(client),
+    },
+    revalidate: 10,
+  }
+}
+
+export async function getRegistryItems() {
   const res = await fetch(
     'https://www.zola.com/web-api/v1/registry-collection/search',
     {
@@ -273,15 +298,20 @@ export async function getServerSideProps() {
       },
     }))
 
-  return {
-    props: {
-      items,
-    },
-  }
+  return items
 }
 
 function collectionItemUrl(collectionItemId: string | number) {
   return `${ZOLA_REGISTRY_BASE}/collection-item/${collectionItemId}`
 }
 
-export default Registry
+export default function RegistryWrapper(pageProps: any) {
+  const [queryClient] = useState(() => new QueryClient())
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Hydrate state={pageProps.dehydratedState} />
+      <Registry />
+    </QueryClientProvider>
+  )
+}

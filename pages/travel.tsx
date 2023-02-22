@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import Layout from '../components/Layout'
+import { theme } from '../tailwind.config.js'
 
 const airports = [
   { airport: 'Santa Barbara Airport (SBA)', info: '9 miles from venue' },
@@ -50,7 +51,7 @@ const Travel: NextPage = () => {
       navBackdropClassName="bg-lemon-400/50"
       navClassName="bg-lemon-700"
       className="bg-lemon-700 text-white cursor-lemon selection:bg-terracotta-500"
-      htmlClassName="bg-lemon-700"
+      themeColor={theme.extend.colors.lemon[700]}
       buttonClassName="text-lemon-700"
     >
       <div className="mx-6 sm:mx-16 h-full py-6 sm:py-16">

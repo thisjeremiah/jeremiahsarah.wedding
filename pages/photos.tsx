@@ -9,6 +9,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { DownloadIcon } from '../components/DownloadIcon'
 import { downloadFilename, DownloadImage } from '../components/DownloadImage'
 import Layout from '../components/Layout'
+import { theme } from '../tailwind.config.js'
 
 type PhotosPageProps = {
   items: Photo[]
@@ -27,7 +28,7 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
       navBackdropClassName="bg-blossom-400/50"
       navClassName="bg-blossom-500"
       className="bg-blossom-400 text-fuschia-500 cursor-fuschia selection:bg-blossom-200"
-      htmlClassName="bg-blossom-400"
+      themeColor={theme.extend.colors.blossom[400]}
     >
       <div>
         <p className="text-center text-sm pt-2 lowercase">

@@ -1,7 +1,9 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
-import { Transition } from '../components/Transition'
+// import { Transition } from '../components/Transition'
+// <Transition transitionKey={router.route}>
+// </Transition>
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   return (
@@ -10,9 +12,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         <title>Sarah & Jeremiah</title>
         <meta name="description" content="sarah & jeremiah" />
       </Head>
-      <Transition transitionKey={router.route}>
-        <Component {...pageProps} />
-      </Transition>
+      <Component {...pageProps} />
     </>
   )
 }

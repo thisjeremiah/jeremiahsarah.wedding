@@ -1,18 +1,27 @@
 import type { NextPage } from 'next'
 import { useEffect, useState } from 'react'
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
+import {
+  dehydrate,
+  Hydrate,
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from 'react-query'
 import Layout from '../components/Layout'
 import { RequestSongForm } from '../components/RequestSongForm'
 import { SongList } from '../components/SongList'
 import { getPlaylistTracks } from '../utils/spotifyApi'
-
-const queryClient = new QueryClient()
+import { theme } from '../tailwind.config.js'
 
 const audio: HTMLAudioElement =
   typeof window === 'undefined' ? (null as any) : new Audio()
 
 const SongRequest: NextPage = () => {
-  const { data, refetch } = useQuery('getPlaylistTracks', getPlaylistTracks)
+  const { data, refetch } = useQuery('getPlaylistTracks', getPlaylistTracks, {
+    refetchOnWindowFocus: true,
+    refetchInterval: 60_000,
+    refetchOnMount: 'always',
+  })
   const playlistTracks: SpotifyApi.TrackObjectFull[] = data ?? []
   const [playingTrackUri, setPlayingTrackUri] = useState<string | undefined>()
 
@@ -45,14 +54,16 @@ const SongRequest: NextPage = () => {
       className="bg-cobalt-500 text-white cursor-cobalt selection:bg-lemon-700"
       navClassName="bg-cobalt-600"
       navBackdropClassName="bg-cobalt-400/50"
-      htmlClassName="bg-cobalt-500"
+      themeColor={theme.extend.colors.cobalt[500]}
       buttonClassName="text-cobalt-500"
     >
       <div className="w-full flex justify-center md:h-[calc(100vh-17rem)]">
-        <div className="w-full max-w-[60rem] pb-8">
-          <p className="text-center w-full lowercase text-base pt-3 text-white">
-            Request a song to play on the dance floor!
-          </p>
+        <div className="w-full max-w-[60rem] pb-20 sm:pb-8">
+          <div className="flex items-center justify-center text-center w-full lowercase text-base pt-8 sm:pt-3 text-white">
+            <p className="w-[calc(100vw-8rem)]">
+              Request a song to play on the dance floor!
+            </p>
+          </div>
           <div className="w-full h-full flex-col md:flex-row flex gap-10 justify-evenly p-8">
             <div className="flex-1">
               <RequestSongForm
@@ -94,9 +105,25 @@ const SongRequest: NextPage = () => {
   )
 }
 
-export default function SongRequestWrapper() {
+export async function getStaticProps() {
+  const client = new QueryClient()
+
+  await client.prefetchQuery('getPlaylistTracks', getPlaylistTracks)
+
+  return {
+    props: {
+      dehydratedState: dehydrate(client),
+    },
+    revalidate: 10,
+  }
+}
+
+export default function SongRequestWrapper(pageProps: any) {
+  const [queryClient] = useState(() => new QueryClient())
+
   return (
     <QueryClientProvider client={queryClient}>
+      <Hydrate state={pageProps.dehydratedState} />
       <SongRequest />
     </QueryClientProvider>
   )

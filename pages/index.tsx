@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Layout from '../components/Layout'
 import PetalAnimation from '../components/PetalAnimation'
 import SarahAndJeremiahTitle from '../components/SarahAndJeremiahTitle'
+import { theme } from '../tailwind.config.js'
 
 const Home: NextPage = () => {
   return (
@@ -10,7 +11,7 @@ const Home: NextPage = () => {
       navBackdropClassName="bg-cobalt-600/50"
       className="bg-cobalt-500 text-white cursor-cobalt selection:bg-blossom-500"
       navClassName="text-white bg-cobalt-600 border-white"
-      htmlClassName="bg-cobalt-500"
+      themeColor={theme.extend.colors.cobalt[500]}
       buttonClassName="text-cobalt-500 bg-white"
     >
       <PetalAnimation />
