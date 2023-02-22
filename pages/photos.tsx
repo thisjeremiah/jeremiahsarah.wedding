@@ -29,6 +29,7 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
       navClassName="bg-blossom-500"
       className="bg-blossom-400 text-fuschia-500 cursor-fuschia selection:bg-blossom-200"
       themeColor={theme.extend.colors.blossom[400]}
+      buttonClassName="bg-white"
     >
       <div>
         <p className="text-center text-sm pt-2 lowercase">

@@ -54,7 +54,7 @@ const Rehearsal: NextPage = () => {
       className="bg-terracotta-500 text-white cursor-terracotta selection:bg-lemon-700"
       navClassName="bg-terracotta-600"
       navBackdropClassName="bg-terracotta-400/50"
-      buttonClassName="text-terracotta-500"
+      buttonClassName="bg-white text-terracotta-500"
       themeColor={theme.extend.colors.terracotta[500]}
     >
       <div className="text-center w-full py-16 sm:py-0">

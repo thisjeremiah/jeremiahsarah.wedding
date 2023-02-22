@@ -52,7 +52,7 @@ export function Nav(props: {
                     router.pathname === link.href &&
                       !link.button &&
                       'border-b-2',
-                    link.button && 'bg-white py-1 px-3.5 rounded-full text-sm',
+                    link.button && 'py-1 px-3.5 rounded-full text-sm',
                     link.button && props.buttonClassName,
                   )}
                 >

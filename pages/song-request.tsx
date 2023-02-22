@@ -55,7 +55,7 @@ const SongRequest: NextPage = () => {
       navClassName="bg-cobalt-600"
       navBackdropClassName="bg-cobalt-400/50"
       themeColor={theme.extend.colors.cobalt[500]}
-      buttonClassName="text-cobalt-500"
+      buttonClassName="bg-white text-cobalt-500"
     >
       <div className="w-full flex justify-center md:h-[calc(100vh-17rem)]">
         <div className="w-full max-w-[60rem] pb-20 sm:pb-8">

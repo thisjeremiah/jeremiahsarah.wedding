@@ -11,6 +11,7 @@ const Schedule: NextPage = () => {
       navClassName="bg-slate-200"
       themeColor={slate[300]}
       navBackdropClassName="bg-slate-400/50"
+      buttonClassName="bg-white"
     >
       <div className="text-center w-full py-16 sm:py-0">
         <div className="sm:py-14 sm:min-h-[calc(100vh-15rem)] flex justify-center items-center pointer-events-none">
