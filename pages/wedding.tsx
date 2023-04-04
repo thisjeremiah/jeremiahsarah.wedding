@@ -102,7 +102,7 @@ const Wedding: NextPage = () => {
                     />
                   </div>
                   <label htmlFor="yes" className="ml-2 text-sm lowercase">
-                    Yes, I will be there
+                    Will attend
                   </label>
                 </div>
                 <div className="relative flex items-center">
@@ -117,9 +117,20 @@ const Wedding: NextPage = () => {
                     />
                   </div>
                   <label htmlFor="no" className="ml-2 text-sm lowercase">
-                    {`No, I won't be able to make it`}
+                    Unable to attend
                   </label>
                 </div>
+                <label
+                  htmlFor="dietary"
+                  className="lowercase block text-sm my-1 pt-2"
+                >
+                  Any dietary needs?
+                </label>
+                <textarea
+                  spellCheck="false"
+                  className="mb-2 border-gray-300 text-cobalt-500 bg-lemon-100 focus:ring-lemon-700 rounded px-2 selection:bg-lemon-400 focus:border-lemon-700"
+                  name="dietary"
+                />
                 <button
                   type="submit"
                   className="self-center flex items-center mt-3 gap-2 lowercase rounded-full text-slate-100 px-6 py-1 text-base bg-lemon-700 w-fit select-none"

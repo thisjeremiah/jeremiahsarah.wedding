@@ -43,6 +43,7 @@ export default async function submit(
         fields: {
           Name: req.body.name,
           Coming: req.body.coming,
+          ['Dietary Needs']: req.body.dietary,
         },
       },
     ])
