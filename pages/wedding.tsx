@@ -25,6 +25,7 @@ const Wedding: NextPage = () => {
     const data = {
       name: event.target.name.value,
       coming: confirmed,
+      dietary: event.target.dietary.value,
     }
 
     const endpoint = '/api/submit?form=wedding'
