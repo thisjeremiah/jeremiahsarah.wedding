@@ -4,7 +4,7 @@ import Particles from 'react-particles'
 import { loadFull } from 'tsparticles'
 import type { Engine } from 'tsparticles-engine'
 
-export default function PetalAnimation() {
+export default function PetalAnimation(props: { isProjectionArt?: boolean }) {
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadFull(engine)
   }, [])
@@ -28,6 +28,9 @@ export default function PetalAnimation() {
     return () => window.removeEventListener('resize', onResize)
   }, [])
 
+  const numParticles = props.isProjectionArt ? 40 : 22
+  const particleSize = props.isProjectionArt ? 20 : 12
+
   return (
     <div
       className={cx(
@@ -41,7 +44,7 @@ export default function PetalAnimation() {
           detectRetina: true,
           particles: {
             number: {
-              value: 22,
+              value: numParticles,
             },
             rotate: {
               value: {
@@ -82,7 +85,7 @@ export default function PetalAnimation() {
               ],
             },
             size: {
-              value: 12,
+              value: particleSize,
             },
             wobble: {
               distance: 10,

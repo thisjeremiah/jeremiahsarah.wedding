@@ -16,9 +16,13 @@ export default function Layout(props: {
   const heartColor = useMemo(() => {
     if (
       props.title &&
-      ['Registry', 'Schedule', 'Photos', 'Rehearsal Dinner'].includes(
-        props.title,
-      )
+      [
+        'Registry',
+        'Schedule',
+        'Photos',
+        'Rehearsal Dinner',
+        'Wedding RSVP',
+      ].includes(props.title)
     ) {
       return 'text-fuschia-300'
     }
