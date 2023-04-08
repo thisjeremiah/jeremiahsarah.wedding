@@ -41,8 +41,6 @@ const Rehearsal: NextPage = () => {
 
     const result = await response.json()
 
-    await sleep(1500)
-
     setSubmitted(true)
 
     return result

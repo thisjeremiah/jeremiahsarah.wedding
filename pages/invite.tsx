@@ -2,7 +2,6 @@ import type { NextPage } from 'next'
 import Link from 'next/link'
 import { useState } from 'react'
 import Layout from '../components/Layout'
-import { theme } from '../tailwind.config.js'
 
 async function sleep(ms: number) {
   return new Promise((res) => setTimeout(res, ms))
@@ -42,8 +41,6 @@ const WeddingInvite: NextPage = () => {
 
     const result = await response.json()
 
-    await sleep(1500)
-
     setSubmitted(true)
 
     return result
@@ -56,13 +53,13 @@ const WeddingInvite: NextPage = () => {
       navClassName="bg-slate-200"
       navBackdropClassName="bg-slate-400/50"
       buttonClassName="bg-white"
-      themeColor={theme.extend.colors.sky[500]}
+      themeColor={'#cbd5e1'}
     >
       <div className="text-center w-full py-16 sm:py-0">
         <div className="sm:py-14 min-h-[calc(100vh-19rem)] sm:min-h-[calc(100vh-15rem)] flex flex-col justify-center items-center">
           {submitted ? (
             <div>
-              <div className="font-serif text-cobalt-500 text-3xl py-2 mb-8">
+              <div className="font-serif text-cobalt-500 mx-2 text-3xl py-2 mb-8">
                 Thanks for letting us know!
               </div>
               <Link href="/">
