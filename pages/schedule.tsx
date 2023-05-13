@@ -37,7 +37,7 @@ const Schedule: NextPage = () => {
               </h2>
               <span className="lowercase text-base sm:text-lg">
                 <p>la paloma, santa barbara</p>
-                <p>may 19 2023</p>
+                <p>may 19 2023, 6pm</p>
                 <p className="text-sm italic mt-2">* for our wedding party</p>
               </span>
             </div>
@@ -59,7 +59,7 @@ const Schedule: NextPage = () => {
               </h2>
               <span className="lowercase text-base sm:text-lg">
                 <p>villa & vine, santa barbara</p>
-                <p>may 20 2023</p>
+                <p>may 20 2023, 5pm</p>
               </span>
             </div>
           </div>

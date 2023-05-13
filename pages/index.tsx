@@ -15,7 +15,7 @@ const Home: NextPage = () => {
       buttonClassName="text-cobalt-500 bg-white"
     >
       <PetalAnimation />
-      <div className="fixed _pointer-events-none inset-0 items-center text-center h-full w-full flex flex-col justify-center">
+      <div className="fixed inset-0 items-center text-center h-full w-full flex flex-col justify-center">
         <div className="z-1 relative w-[400px] flex sm:flex-row items-center sm:items-end flex-col-reverse justify-between mt-[3rem] sm:mt-[1rem]">
           <div className="flex flex-col justify-end pb-8 text-left">
             <div className="pb-4 justify-center flex">
