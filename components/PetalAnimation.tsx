@@ -28,8 +28,36 @@ export default function PetalAnimation(props: { isProjectionArt?: boolean }) {
     return () => window.removeEventListener('resize', onResize)
   }, [])
 
-  const numParticles = props.isProjectionArt ? 40 : 22
-  const particleSize = props.isProjectionArt ? 20 : 12
+  const numParticles = props.isProjectionArt ? 50 : 22
+  const particleSize = props.isProjectionArt ? 18 : 12
+  const additionalConfig = props.isProjectionArt
+    ? ({
+        move: {
+          direction: 'right',
+          enable: true,
+          outModes: {
+            default: 'out',
+          },
+          size: true,
+          speed: {
+            min: 1,
+            max: 3,
+          },
+        },
+        roll: {
+          enable: true,
+          value: {
+            min: 0,
+            max: 360,
+          },
+          duration: 'random',
+          animation: {
+            enable: true,
+            speed: 10,
+          },
+        },
+      } as const)
+    : {}
 
   return (
     <div
@@ -46,6 +74,7 @@ export default function PetalAnimation(props: { isProjectionArt?: boolean }) {
             number: {
               value: numParticles,
             },
+            ...additionalConfig,
             rotate: {
               value: {
                 min: 0,
