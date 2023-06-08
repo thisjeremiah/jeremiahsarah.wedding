@@ -1,23 +1,24 @@
+'use client'
+
 import cx from 'classnames'
 import {
   AnimatePresence,
   motion,
   useIsomorphicLayoutEffect,
 } from 'framer-motion'
-import type { NextPage } from 'next'
 import { useEffect, useMemo, useState } from 'react'
-import { DownloadIcon } from '../components/DownloadIcon'
-import { downloadFilename, DownloadImage } from '../components/DownloadImage'
-import Layout from '../components/Layout'
-import { theme } from '../tailwind.config.js'
+import { DownloadIcon } from '../../components/DownloadIcon'
+import { downloadFilename, DownloadImage } from '../../components/DownloadImage'
+import Layout from '../../components/Layout'
+import { theme } from '../../tailwind.config.js'
 
 type PhotosPageProps = {
-  items: Photo[]
+  photos: Photo[]
 }
 
-const PhotosPage: NextPage<PhotosPageProps> = (props) => {
+export default function PhotosPage(props: PhotosPageProps) {
   const { setSelectedId, selectedItem, nextItemId, prevItemId } = usePhotos(
-    props.items,
+    props.photos,
   )
 
   useDisableBodyScroll(!!selectedItem)
@@ -48,7 +49,7 @@ const PhotosPage: NextPage<PhotosPageProps> = (props) => {
             'masonry sm:masonry-sm md:masonry-md lg:masonry-lg p-8',
           )}
         >
-          {props.items.map((item) => (
+          {props.photos.map((item) => (
             <div key={item.id} onClick={() => setSelectedId(item.id)}>
               <DownloadImage
                 className="mb-6"
@@ -183,7 +184,7 @@ function usePhotos(items: Photo[]) {
   return { selectedItem, nextItemId, prevItemId, setSelectedId }
 }
 
-type Photo = {
+export type Photo = {
   id: string
   isPrivate: boolean
   height: number
@@ -198,77 +199,6 @@ type Photo = {
   }
 }
 
-type ServerPhoto = {
-  id: string
-  idhash: string
-  name: string
-  isPrivate: boolean
-  height: string
-  width: number
-  maxHeight: number
-  maxWidth: number
-  pathThumb: string
-  pathSmall: string
-  pathMedium: string
-  pathLarge: string
-  pathXlarge: string
-  pathXxlarge: string
-}
-
-const rootUrl =
-  'https://wildwhimphotography.pixieset.com/client/loadphotos/?cuk=sarahandjeremiah&cid=46818157'
-
-const favoritesUrl = rootUrl + '&fk=20693267'
-
-async function getAllPhotos(
-  page: number = 1,
-  images: ServerPhoto[] = [],
-): Promise<ServerPhoto[]> {
-  const res = await fetch(favoritesUrl + `&page=${page}`, {
-    headers: {
-      accept: '*/*',
-      'x-requested-with': 'XMLHttpRequest',
-    },
-    body: null,
-    method: 'GET',
-  })
-  const data = await res.json()
-
-  images.push(...JSON.parse(data.content))
-
-  if (!data.isLastPage) {
-    return getAllPhotos(page + 1, images)
-  }
-
-  return images
-}
-
-export async function getStaticProps() {
-  const images = await getAllPhotos()
-
-  const items: Photo[] = images.map((image) => ({
-    id: image.id,
-    isPrivate: image.isPrivate,
-    height: Number(image.height),
-    width: Number(image.width),
-    src: {
-      thumb: image.pathThumb,
-      small: image.pathSmall,
-      medium: image.pathSmall,
-      large: image.pathLarge,
-      xlarge: image.pathXlarge,
-      full: image.pathXxlarge,
-    },
-  }))
-
-  return {
-    props: {
-      items,
-    },
-    revalidate: 10,
-  }
-}
-
 const useDisableBodyScroll = (open: boolean) => {
   useIsomorphicLayoutEffect(() => {
     if (open) {
@@ -278,5 +208,3 @@ const useDisableBodyScroll = (open: boolean) => {
     }
   }, [open])
 }
-
-export default PhotosPage

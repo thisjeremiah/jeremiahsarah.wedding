@@ -6,7 +6,7 @@ import {
   useTransform,
 } from 'framer-motion'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 import { useMemo, useState } from 'react'
 import Tile from './Tile/Tile'
 
@@ -17,7 +17,9 @@ export function Nav(props: {
   navClassName?: string
   className?: string
 }) {
-  const router = useRouter()
+  // TODO
+  // const router = useRouter()
+  const router = { pathname: '/' }
   const [isOpen, setOpen] = useState(false)
   useDisableBodyScroll(isOpen)
 

@@ -1,11 +1,12 @@
-import type { NextPage } from 'next'
+'use client'
+
 import Image from 'next/image'
 import Layout from '../components/Layout'
 import PetalAnimation from '../components/PetalAnimation'
 import SarahAndJeremiahTitle from '../components/SarahAndJeremiahTitle'
 import { theme } from '../tailwind.config.js'
 
-const Home: NextPage = () => {
+export default function Home() {
   return (
     <Layout
       navBackdropClassName="bg-cobalt-600/50"
@@ -48,5 +49,3 @@ const Home: NextPage = () => {
     </Layout>
   )
 }
-
-export default Home
