@@ -127,7 +127,7 @@ export function Nav(props: {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex justify-between">
-                <div className="relative gap-4 flex flex-col text-xl relative w-fit pt-2">
+                <div className="relative gap-4 flex flex-col text-xl w-fit pt-2">
                   {links.map((link) => (
                     <Link key={link.href} href={link.href}>
                       <a
