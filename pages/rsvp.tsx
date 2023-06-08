@@ -63,9 +63,7 @@ const Rehearsal: NextPage = () => {
                 Thanks for letting us know!
               </div>
               <Link href="/">
-                <a>
-                  <div>Visit the home page ↗</div>
-                </a>
+                <div>Visit the home page ↗</div>
               </Link>
             </div>
           ) : (

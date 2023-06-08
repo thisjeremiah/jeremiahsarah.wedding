@@ -37,15 +37,13 @@ export function Nav(props: {
     <>
       <div className="sm:flex relative hidden z-10 w-full justify-between items-center p-6">
         <Link href="/">
-          <a>
-            <Tile className="w-9 text-center" tile={currentTile} />
-          </a>
+          <Tile className="w-9 text-center" tile={currentTile} />
         </Link>
         <nav className="flex text-md gap-6 h-[1.6rem]">
           {links
             .filter((_, i) => i > 0)
             .map((link) => (
-              <Link key={link.href} href={link.href}>
+              <Link legacyBehavior key={link.href} href={link.href}>
                 <a
                   className={cx(
                     'w-fit border-current',
@@ -129,7 +127,7 @@ export function Nav(props: {
               <div className="flex justify-between">
                 <div className="relative gap-4 flex flex-col text-xl w-fit pt-2">
                   {links.map((link) => (
-                    <Link key={link.href} href={link.href}>
+                    <Link legacyBehavior key={link.href} href={link.href}>
                       <a
                         className={cx(
                           'w-fit border-current',

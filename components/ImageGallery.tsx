@@ -35,6 +35,7 @@ export function ImageGallery(props: {
         )}
       >
         <Image
+          alt=""
           className={cx(
             'pointer-events-none select-none',
             props.disabled && 'opacity-70 grayscale contrast-75',
