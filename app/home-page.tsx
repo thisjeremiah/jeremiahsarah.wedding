@@ -41,6 +41,10 @@ export default function Home() {
                 quality={90}
                 priority
                 placeholder="blur"
+                style={{
+                  maxWidth: '100%',
+                  height: 'auto',
+                }}
               />
             </div>
           </div>

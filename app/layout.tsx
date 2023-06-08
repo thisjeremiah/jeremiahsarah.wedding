@@ -6,7 +6,6 @@ export const metadata: Metadata = {
   description: 'Welcome to Next.js',
 }
 
-//
 export default function RootLayout({
   children,
 }: {
@@ -14,11 +13,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
-    </html>
-  )
-}
-/*
       <head>
         <link rel="icon" href="/favicon.svg" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -33,4 +27,7 @@ export default function RootLayout({
         />
         <link rel="stylesheet" href="https://use.typekit.net/tkq2evd.css" />
       </head>
-      */
+      <body>{children}</body>
+    </html>
+  )
+}
