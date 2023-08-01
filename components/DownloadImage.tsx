@@ -1,5 +1,5 @@
 import cx from 'classnames'
-import { DownloadIcon } from './DownloadIcon'
+// import { DownloadIcon } from './DownloadIcon'
 
 export function DownloadImage(props: {
   imageUrl: string
@@ -16,6 +16,7 @@ export function DownloadImage(props: {
         width={props.width}
         height={props.height}
       />
+      {/*
       <div
         className={cx(
           'group-hover:opacity-100 opacity-0',
@@ -32,6 +33,7 @@ export function DownloadImage(props: {
           <DownloadIcon />
         </a>
       </div>
+        */}
     </div>
   )
 }

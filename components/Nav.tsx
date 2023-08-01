@@ -6,7 +6,7 @@ import {
   useTransform,
 } from 'framer-motion'
 import Link from 'next/link'
-// import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 import { useMemo, useState } from 'react'
 import Tile from './Tile/Tile'
 
@@ -17,20 +17,19 @@ export function Nav(props: {
   navClassName?: string
   className?: string
 }) {
-  // TODO
-  // const router = useRouter()
-  const router = { pathname: '/' }
+  const pathname = usePathname()
+
   const [isOpen, setOpen] = useState(false)
   useDisableBodyScroll(isOpen)
 
   const currentTile: any = useMemo(() => {
-    const link = links.find((link) => link.href === router.pathname)
+    const link = links.find((link) => link.href === pathname)
     if (!link) {
-      if (router.pathname.includes('rsvp')) return '2'
+      if (pathname?.includes('rsvp')) return '2'
       return '1'
     }
     return link.icon
-  }, [router.pathname])
+  }, [pathname])
 
   const { scrollY } = useScroll()
   const opacity = useTransform(scrollY, (latest) => latest / 100)
@@ -49,9 +48,7 @@ export function Nav(props: {
                 <a
                   className={cx(
                     'w-fit border-current',
-                    router.pathname === link.href &&
-                      !link.button &&
-                      'border-b-2',
+                    pathname === link.href && !link.button && 'border-b-2',
                     link.button && 'py-1 px-3.5 rounded-full text-sm',
                     link.button && props.buttonClassName,
                   )}
@@ -133,7 +130,7 @@ export function Nav(props: {
                       <a
                         className={cx(
                           'w-fit border-current',
-                          router.pathname === link.href &&
+                          pathname === link.href &&
                             !link.button &&
                             'border-b-2',
                           link.button &&

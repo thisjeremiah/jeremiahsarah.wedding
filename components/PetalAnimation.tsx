@@ -1,3 +1,5 @@
+'use client'
+
 import cx from 'classnames'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import Particles from 'react-particles'

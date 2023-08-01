@@ -1,3 +1,4 @@
+import { getAllPhotoBoothPhotos } from './get-photobooth-photos'
 import PhotosPage, { Photo } from './photos-page'
 
 export default async function Page() {
@@ -6,29 +7,22 @@ export default async function Page() {
   return <PhotosPage photos={photos} />
 }
 
-export async function getPhotos(): Promise<Photo[]> {
-  const images = await getAllPhotos()
+const engagementArgs = 'cuk=sarahandjeremiah&cid=46818157&fk=20693267'
+const weddingArgs = 'cuk=sarahjeremiah&cid=60298401&fk=26956988'
 
-  return images.map((image) => ({
-    id: image.id,
-    isPrivate: image.isPrivate,
-    height: Number(image.height),
-    width: Number(image.width),
-    src: {
-      thumb: image.pathThumb,
-      small: image.pathSmall,
-      medium: image.pathSmall,
-      large: image.pathLarge,
-      xlarge: image.pathXlarge,
-      full: image.pathXxlarge,
-    },
-  }))
+export async function getPhotos(): Promise<Photo[]> {
+  const engagementImages = await getAllPhotos(engagementArgs)
+  const engagementPhotos = serverPhotosToPhotos(engagementImages, 'engagement')
+
+  const weddingImages = await getAllPhotos(weddingArgs)
+  const weddingPhotos = serverPhotosToPhotos(weddingImages, 'wedding')
+
+  const photoBoothPhotos = getAllPhotoBoothPhotos()
+
+  return [...engagementPhotos, ...photoBoothPhotos, ...weddingPhotos]
 }
 
-const rootUrl =
-  'https://wildwhimphotography.pixieset.com/client/loadphotos/?cuk=sarahandjeremiah&cid=46818157'
-
-const favoritesUrl = rootUrl + '&fk=20693267'
+const rootUrl = 'https://wildwhimphotography.pixieset.com/client/loadphotos/?'
 
 type ServerPhoto = {
   id: string
@@ -47,11 +41,28 @@ type ServerPhoto = {
   pathXxlarge: string
 }
 
+function serverPhotosToPhotos(
+  photos: ServerPhoto[],
+  type: Photo['type'],
+): Photo[] {
+  return photos.map((photo) => ({
+    id: photo.id,
+    type: type,
+    height: Number(photo.height),
+    width: Number(photo.width),
+    src: {
+      large: photo.pathLarge,
+      full: photo.pathXxlarge,
+    },
+  }))
+}
+
 async function getAllPhotos(
+  args: string,
   page: number = 1,
   images: ServerPhoto[] = [],
 ): Promise<ServerPhoto[]> {
-  const res = await fetch(favoritesUrl + `&page=${page}`, {
+  const res = await fetch(rootUrl + `${args}&page=${page}`, {
     headers: {
       accept: '*/*',
       'x-requested-with': 'XMLHttpRequest',
@@ -60,12 +71,13 @@ async function getAllPhotos(
     method: 'GET',
     next: { revalidate: 10 },
   })
+
   const data = await res.json()
 
   images.push(...JSON.parse(data.content))
 
   if (!data.isLastPage) {
-    return getAllPhotos(page + 1, images)
+    return getAllPhotos(args, page + 1, images)
   }
 
   return images

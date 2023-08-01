@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import PetalAnimation from '../components/PetalAnimation'
+import PetalAnimation from '../../components/PetalAnimation'
 
 const Pattern: NextPage = () => {
   return (

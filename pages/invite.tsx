@@ -3,10 +3,6 @@ import Link from 'next/link'
 import { useState } from 'react'
 import Layout from '../components/Layout'
 
-async function sleep(ms: number) {
-  return new Promise((res) => setTimeout(res, ms))
-}
-
 const WeddingInvite: NextPage = () => {
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)

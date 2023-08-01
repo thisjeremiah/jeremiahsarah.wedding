@@ -7,8 +7,7 @@ import {
   useIsomorphicLayoutEffect,
 } from 'framer-motion'
 import { useEffect, useMemo, useState } from 'react'
-import { DownloadIcon } from '../../components/DownloadIcon'
-import { downloadFilename, DownloadImage } from '../../components/DownloadImage'
+import { DownloadImage } from '../../components/DownloadImage'
 import Layout from '../../components/Layout'
 import { theme } from '../../tailwind.config.js'
 
@@ -16,12 +15,36 @@ type PhotosPageProps = {
   photos: Photo[]
 }
 
-export default function PhotosPage(props: PhotosPageProps) {
-  const { setSelectedId, selectedItem, nextItemId, prevItemId } = usePhotos(
-    props.photos,
-  )
+const filters: {
+  label: string
+  type: Photo['type']
+}[] = [
+  {
+    label: 'Wedding',
+    type: 'wedding',
+  },
+  {
+    label: 'Photo Booth',
+    type: 'photobooth',
+  },
+  {
+    label: 'Engagement',
+    type: 'engagement',
+  },
+]
 
-  useDisableBodyScroll(!!selectedItem)
+export default function PhotosPage(props: PhotosPageProps) {
+  const {
+    photos,
+    selectedType,
+    setSelectedType,
+    setSelectedId,
+    selectedItem,
+    nextItemId,
+    prevItemId,
+  } = usePhotos(props.photos)
+
+  useDisableBodyScroll(Boolean(selectedItem))
 
   return (
     <Layout
@@ -34,7 +57,7 @@ export default function PhotosPage(props: PhotosPageProps) {
     >
       <div>
         <p className="text-center text-sm pt-2 lowercase">
-          by{' '}
+          Photos by{' '}
           <a
             className="border-b border-current border-solid"
             href="https://www.wildwhim.com/"
@@ -44,12 +67,29 @@ export default function PhotosPage(props: PhotosPageProps) {
             Wild Whim
           </a>
         </p>
+        <div className="mt-6 text-sm lowercase flex gap-5 w-full justify-center">
+          {filters.map((filter) => (
+            <button
+              key={filter.type}
+              className={cx(
+                'lowercase underline-offset-4',
+                filter.type === selectedType ? 'underline' : '',
+              )}
+              onClick={() => setSelectedType(filter.type)}
+            >
+              {filter.label}
+            </button>
+          ))}
+        </div>
         <div
           className={cx(
-            'masonry sm:masonry-sm md:masonry-md lg:masonry-lg p-8',
+            'p-8',
+            selectedType === 'photobooth'
+              ? 'grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'
+              : 'masonry sm:masonry-sm md:masonry-md lg:masonry-lg',
           )}
         >
-          {props.photos.map((item) => (
+          {photos.map((item) => (
             <div key={item.id} onClick={() => setSelectedId(item.id)}>
               <DownloadImage
                 className="mb-6"
@@ -111,6 +151,7 @@ export default function PhotosPage(props: PhotosPageProps) {
                 <div className="select-none cursor-pointer absolute text-3xl top-3 right-3 sm:top-4 sm:right-4 h-8 w-8 rounded-full text-center bg-fuschia-50 leading-8">
                   ×
                 </div>
+                {/*
                 <div className="select-none cursor-pointer absolute text-3xl bottom-3 left-3 sm:bottom-4 sm:left-4 bg-fuschia-50 rounded-full pl-3 pr-4 py-1 ">
                   <a
                     className="flex items-center gap-1"
@@ -122,6 +163,7 @@ export default function PhotosPage(props: PhotosPageProps) {
                     <p className="inline text-base ml-1">Download</p>
                   </a>
                 </div>
+                  */}
               </motion.div>
             </div>
           )}
@@ -131,13 +173,16 @@ export default function PhotosPage(props: PhotosPageProps) {
   )
 }
 
-function usePhotos(items: Photo[]) {
+function usePhotos(initialPhotos: Photo[]) {
   const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [selectedType, setSelectedType] = useState<
+    'engagement' | 'photobooth' | 'wedding'
+  >('wedding')
 
   // preload photos
   useEffect(() => {
     Promise.all(
-      items.map((item) => {
+      initialPhotos.map((item) => {
         return new Promise((resolve, reject) => {
           const img = new Image()
           img.onload = () => resolve(img)
@@ -148,53 +193,62 @@ function usePhotos(items: Photo[]) {
     )
       .then(() => {})
       .catch(() => {})
-  }, [items])
+  }, [initialPhotos])
+
+  const photos = useMemo(() => {
+    setSelectedId(null)
+    return initialPhotos.filter((item) => item.type === selectedType)
+  }, [initialPhotos, selectedType])
 
   const selectedItem = useMemo(() => {
     if (selectedId) {
-      return items.find((item) => item.id === selectedId)!
+      return photos.find((item) => item.id === selectedId)!
     }
     return null
-  }, [selectedId, items])
+  }, [selectedId, photos])
 
   const nextItemId = useMemo(() => {
     if (selectedId) {
-      let index = items.findIndex((item) => item.id === selectedId)! + 1
-      if (index >= items.length) {
-        return items[0].id
+      let index = photos.findIndex((item) => item.id === selectedId)! + 1
+      if (index >= photos.length) {
+        return photos[0].id
       } else {
-        return items[index].id
+        return photos[index].id
       }
     }
     return null
-  }, [selectedId, items])
+  }, [selectedId, photos])
 
   const prevItemId = useMemo(() => {
     if (selectedId) {
-      let index = items.findIndex((item) => item.id === selectedId)! - 1
+      let index = photos.findIndex((item) => item.id === selectedId)! - 1
       if (index < 0) {
-        return items[items.length - 1].id
+        return photos[photos.length - 1].id
       } else {
-        return items[index].id
+        return photos[index].id
       }
     }
     return null
-  }, [selectedId, items])
+  }, [selectedId, photos])
 
-  return { selectedItem, nextItemId, prevItemId, setSelectedId }
+  return {
+    photos,
+    selectedItem,
+    nextItemId,
+    prevItemId,
+    setSelectedId,
+    selectedType,
+    setSelectedType,
+  }
 }
 
 export type Photo = {
   id: string
-  isPrivate: boolean
+  type: 'engagement' | 'photobooth' | 'wedding'
   height: number
   width: number
   src: {
-    thumb: string
-    small: string
-    medium: string
     large: string
-    xlarge: string
     full: string
   }
 }
