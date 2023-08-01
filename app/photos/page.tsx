@@ -10,7 +10,7 @@ export default async function Page() {
 const engagementArgs = 'cuk=sarahandjeremiah&cid=46818157&fk=20693267'
 const weddingArgs = 'cuk=sarahjeremiah&cid=60298401&fk=26956988'
 
-export async function getPhotos(): Promise<Photo[]> {
+async function getPhotos(): Promise<Photo[]> {
   const engagementImages = await getAllPhotos(engagementArgs)
   const engagementPhotos = serverPhotosToPhotos(engagementImages, 'engagement')
 
