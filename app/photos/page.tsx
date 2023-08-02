@@ -1,5 +1,11 @@
+import { Metadata } from 'next'
 import { getAllPhotoBoothPhotos } from './get-photobooth-photos'
 import PhotosPage, { Photo } from './photos-page'
+import { theme } from '../../tailwind.config.js'
+
+export const metadata: Metadata = {
+  themeColor: theme.extend.colors.blossom[400],
+}
 
 export default async function Page() {
   const photos = await getPhotos()
